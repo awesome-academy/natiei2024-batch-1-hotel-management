@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Kala Hotel | Trang chủ</title>
+
+    <!-- CSS Links -->
+    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/assets/css/style.css}" />
+</head>
+<body>
+
+<div class="wrapper">
+    <aside id="sidebar" class="expand vh-100 sticky-top">
+        <div class="d-flex">
+            <button class="toggle-btn" type="button">
+                <i class="lni lni-grid-alt"></i>
+            </button>
+            <div class="sidebar-logo">
+                <a th:href="@{/home}">Kala Hotel</a>
+            </div>
+        </div>
+
+        <ul class="sidebar-nav">
+            <!-- Lặp qua danh sách quyền hạn -->
+            <li th:each="auth : ${session.listAuths}"
+                th:if="${auth.authorizationId == session.user.authorizationID}">
+                
+                <!-- Kiểm tra quyền hạn và hiển thị liên kết tương ứng -->
+                <a th:if="${auth.roomCategoryScreen == 1}" th:href="@{/room-category}" class="sidebar-link">
+                    <i class="lni lni-tab"></i>
+                    <span>Danh mục phòng</span>
+                </a>
+                <a th:if="${auth.billForRentScreen == 1}" th:href="@{/bill-for-rent}" class="sidebar-link">
+                    <i class="lni lni-agenda"></i>
+                    <span>Phiếu thuê phòng</span>
+                </a>
+                <a th:if="${auth.searchScreen == 1}" th:href="@{/search}" class="sidebar-link">
+                    <i class="lni lni-search-alt"></i>
+                    <span>Tra cứu phòng</span>
+                </a>
+                <a th:if="${auth.recieptScreen == 1}" th:href="@{/reciept}" class="sidebar-link">
+                    <i class="lni lni-postcard"></i>
+                    <span>Hóa đơn thanh toán</span>
+                </a>
+                <a th:if="${auth.revenueScreen == 1}" th:href="@{/revenue}" class="sidebar-link">
+                    <i class="lni lni-target-revenue"></i>
+                    <span>Báo cáo doanh thu</span>
+                </a>
+                <a th:if="${auth.authorizationScreen == 1}" th:href="@{/authorization}" class="sidebar-link">
+                    <i class="lni lni-users"></i>
+                    <span>Phân quyền tài khoản</span>
+                </a>
+                <a th:if="${auth.settingScreen == 1}" th:href="@{/setting}" class="sidebar-link">
+                    <i class="lni lni-cogs"></i>
+                    <span>Quy định</span>
+                </a>
+            </li>
+        </ul>
+
+        <div class="sidebar-footer">
+            <a th:href="@{/logout}" class="sidebar-link">
+                <i class="lni lni-exit"></i>
+                <span>Đăng xuất</span>
+            </a>
+        </div>
+    </aside>
+
+    <div class="main bg-white-1 home-main">
+        <!-- Nội dung chính của trang sẽ được chèn ở đây -->
+    </div>
+</div>
+
+<!-- JS Links -->
+<script th:src="@{/assets/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/assets/js/script.js}"></script>
+
+</body>
+</html>
