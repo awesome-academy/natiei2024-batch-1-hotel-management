@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="vi" th:replace="~{templates/layout :: layout(~{::title}, ~{::body}, ~{})}" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="utf-8">
+    <title th:text="#{session.login.title}">Kala Hotel | Đăng nhập</title>
+</head>
+
+<body th:style="'background-image: url(' + @{/resources/img/hero-3.jpg} + ');'">
+    <div id="container" class="container-fluid d-flex justify-content-center align-items-center">
+        <div class="row align-items-center" style="width: 100%;">
+            <div class="col-lg-6 d-none d-lg-block text-white">
+                <h5 id="title" class="h2">Kala Hotel</h5>
+                <p class="card-text h5">Cùng khám phá và lưu giữ từng khoảnh khắc trong cuộc sống.</p>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-8 col-10">
+                <form action="#" method="post" class="rounded px-8 bg-white form">
+                    <div id="titleLogin" class="h1 text-center">Đăng nhập</div>
+                    <input type="hidden" name="ACTION" value="login">
+
+                    <p id="message">
+                        <!-- Sử dụng Thymeleaf để hiển thị thông báo nếu có -->
+                        <span th:if="${message}" th:text="${message}"></span>
+                    </p>
+                    <div id="emailGroup" class="form-group">
+                        <label for="exampleInputEmail1">Địa chỉ email</label>
+                        <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Nhập email...">
+                    </div>
+                    <div class="form-group mb-3 position-relative">
+                        <label for="passwordLogin">Mật khẩu</label>
+                        <input type="password" name="password" class="form-control" id="passwordLogin" placeholder="Nhập mật khẩu...">
+                        <i class="fa-solid fa-eye position-absolute" id="togglePassword" style="right: 10px; top: 35px; cursor: pointer;"></i>
+                    </div>
+                    <div class="form-group d-block text-center">
+                        <input type="submit" value="Đăng nhập" class="btn btn-info text-white">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script th:src="@{/resources/js/bootstrap.bundle.min.js}"></script>
+    <script>
+        var togglePassword = document.getElementById('togglePassword');
+        var passwordLogin = document.getElementById('passwordLogin');
+
+        togglePassword.addEventListener('click', function () {
+            // Toggle the type attribute using getAttribute() and setAttribute()
+            var type = passwordLogin.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordLogin.setAttribute('type', type);
+
+            // Toggle the eye slash icon
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
+        });
+    </script>
+</body>
+
+</html>
