@@ -11,13 +11,11 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Controller
 @EnableWebMvc
-public class SessionsController {
-	private static final Logger logger = LoggerFactory.getLogger(SessionsController.class);
-
+public class LoginController {
+	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 	@GetMapping(value = "/login")
 	public String add(Locale locale, Model model) {
 		logger.info("Requesting login form");
-		return "sessions/login";
+		return "sessions/login/Login";
 	}
-
 }

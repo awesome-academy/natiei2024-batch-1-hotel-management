@@ -1,0 +1,89 @@
+/* login.css */
+body {
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: "Lora", sans-serif;
+}
+
+#container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#title {
+    font-size: 6rem !important;  /* Giảm kích thước chữ để phù hợp với khung hình hơn */
+    color: #fff; /* Màu chữ trắng */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Thêm bóng cho chữ để dễ đọc hơn */
+}
+
+.card-text {
+    width: 80%;
+    color: #fff; /* Màu chữ trắng */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Thêm bóng cho chữ để dễ đọc hơn */
+}
+
+.form {
+    padding: 2rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Thêm bóng cho khung đăng nhập */
+    background-color: rgba(255, 255, 255, 0.9); /* Màu nền trắng với độ trong suốt nhẹ */
+    border-radius: 10px; /* Bo tròn các góc của khung đăng nhập */
+}
+
+#titleLogin {
+    padding-bottom: 1rem;
+    margin-bottom: 0;
+    font-weight: bold; /* Đậm chữ tiêu đề đăng nhập */
+}
+
+#emailGroup {
+    padding-bottom: 1rem;
+}
+
+#message {
+    margin-top: 0;
+    margin-bottom: 0rem;
+    color: red;
+    font-size: 0.8rem;
+}
+
+.fa-solid {
+    right: 10px;
+    cursor: pointer;
+    top: 58%;
+}
+
+.fa-eye {
+    display: none;
+}
+
+p.card-text.h5{
+    font-size: 18px;
+    color: white;
+}
+
+input[type="email"], input[type="password"] {
+    border: 1px solid #ced4da; /* Màu viền nhẹ cho các ô nhập liệu */
+    border-radius: 5px; /* Bo tròn các góc của ô nhập liệu */
+    padding: 10px; /* Tăng khoảng cách bên trong ô nhập liệu */
+}
+
+input[type="submit"] {
+    background-color: #17a2b8; /* Màu nền xanh nhạt */
+    border: none;
+    border-radius: 5px; /* Bo tròn các góc của nút */
+    padding: 10px 20px; /* Tăng kích thước nút */
+    font-weight: bold; /* Đậm chữ trên nút */
+    transition: background-color 0.3s; /* Hiệu ứng chuyển đổi màu nền */
+}
+
+input[type="submit"]:hover {
+    background-color: #138496; /* Màu nền khi hover */
+}
