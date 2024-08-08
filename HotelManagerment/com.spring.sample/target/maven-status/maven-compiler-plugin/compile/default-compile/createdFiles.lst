@@ -8,6 +8,7 @@ com\spring\sample\util\ViewSupportDialect$1.class
 com\spring\sample\validator\NullOrNotBlankValidator.class
 com\spring\sample\validator\FieldMatchValidator.class
 com\spring\sample\configuration\SecurityConfig.class
+com\spring\sample\controller\RoomCategoryController.class
 com\spring\sample\dao\imp\UserDAOImp$1.class
 com\spring\sample\service\UserService.class
 com\spring\sample\dao\UserDAO.class

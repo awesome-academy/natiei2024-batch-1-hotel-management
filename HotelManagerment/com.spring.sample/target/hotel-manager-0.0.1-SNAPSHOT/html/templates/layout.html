@@ -1,26 +1,28 @@
 <!DOCTYPE html>
 <?xml version="1.0" encoding="UTF-8"?>
 <html th:fragment="layout (title, content, links)" 
-
   xmlns:th="http://www.thymeleaf.org" 
   xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
+	<meta charset="UTF-8">
   <title th:replace="${title}">[[#{meta.title}]]</title>
   <meta name="description" th:attr="content=#{meta.description}" />
   <meta name="keywords" th:attr="content=#{meta.keywords}" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
   <!-- Common styles and scripts -->
-  <link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/login.css}">
     <script th:src="@{/resources/js/bootstrap.bundle.min.js}"></script>
     <link rel="stylesheet" th:href="@{/resources/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/resources/css/all.min.css}">
+    <link rel="stylesheet" th:href="@{/resources/css/style.css}">
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/login.css}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" >
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
 </head>
 <body>
-  
-     
   <div class="container">
     <div th:replace="${content}">
         <p>Layout content</p>
