@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <?xml version="1.0" encoding="UTF-8"?>
 <html th:fragment="layout (title, content, links)" 
-
   xmlns:th="http://www.thymeleaf.org" 
   xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
@@ -10,17 +9,15 @@
   <meta name="keywords" th:attr="content=#{meta.keywords}" />
 
   <!-- Common styles and scripts -->
-  <link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/login.css}">
     <script th:src="@{/resources/js/bootstrap.bundle.min.js}"></script>
     <link rel="stylesheet" th:href="@{/resources/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/resources/css/all.min.css}">
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/login.css}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" >
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  
-     
   <div class="container">
     <div th:replace="${content}">
         <p>Layout content</p>
