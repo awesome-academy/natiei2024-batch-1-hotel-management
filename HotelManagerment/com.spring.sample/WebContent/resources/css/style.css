@@ -1,3 +1,4 @@
+
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
 
 ::after,
@@ -17,15 +18,22 @@ li {
 
 h1 {
     font-weight: 600;
-    font-size: 1.5rem;
+    font-size: 40px;
 }
 
-body {
+body,html {
     font-family: "Lora", sans-serif;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	overflow: hidden;
+	height: 100%;
+	
 }
 
 .wrapper {
     display: flex;
+	
 }
 
 .main {
@@ -34,8 +42,9 @@ body {
     overflow: hidden;
     transition: all 0.35s ease-in-out;
     background-color: #fafbfe;
+	
 }
-
+/*css for sidebar*/
 #sidebar {
     width: 70px;
     min-width: 70px;
@@ -170,6 +179,8 @@ a.sidebar-link:hover {
 .table th {
     text-align: center;
     vertical-align: middle;
+	/* Đường viền xung quanh bảng */
+	
 }
 
 .h-full {
@@ -214,6 +225,7 @@ a.sidebar-link:hover {
 	background-image: url("./img/hero-3.jpg");
     background-repeat: no-repeat;
     background-size: cover;
+	
 }
 
 .fa-solid{
@@ -250,6 +262,7 @@ button, select {
     width: 100%;
 }
 
+
 .addAccount{
 	margin-left:70px
 }
@@ -276,3 +289,43 @@ button, select {
     .table {
         width: 100%;
     }
+
+.row{
+	margin-left: 10px;
+	width: 2100px;
+	margin-top: -10px;
+}
+input.addBill{
+	width: 30%;
+}
+#rentForm{
+	margin-top: 10px;
+}
+#bill-rent-setting{
+	padding-bottom: 5px;
+	padding-top: 5px;
+}
+
+/*status button */
+.status {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 500;
+}
+.status.unpaid {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.status.pending {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.status.paid {
+    background-color: #d4edda;
+    color: #155724;
+}
+
