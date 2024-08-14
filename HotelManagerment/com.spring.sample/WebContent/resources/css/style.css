@@ -225,3 +225,27 @@ a.sidebar-link:hover {
 .fa-eye{
 	display: none;
 }
+
+.text-white {
+    color: #fff !important;
+    margin-right: 123px;
+}
+
+input.btn.btn-info.text-white {
+    margin-right: 0px;
+}
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 100%;
+        padding: 0px;
+    }
+}
+
+button, select {
+    text-transform: none;
+}
+
+.mb-3 #label-room-category {
+    width: 100%;
+}

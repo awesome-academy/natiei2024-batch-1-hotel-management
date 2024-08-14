@@ -4,13 +4,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="
-        http://www.springframework.org/schema/beans
-        https://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/context
-        https://www.springframework.org/schema/context/spring-context.xsd
-        http://www.springframework.org/schema/mvc
-        https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
+						http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing 
 		infrastructure -->
@@ -54,15 +50,12 @@
 	<context:component-scan
 		base-package="com.spring.sample.controller" />
 
-	<bean id="contentNegotiationManager"
+	<!-- <bean id="contentNegotiationManager"
 		class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
 		<property name="mediaTypes">
-			<value>
-				json=application/json
-				xml=application/xml
-			</value>
+			<value> json=application/json xml=application/xml </value>
 		</property>
-	</bean>
+	</bean> -->
 
 	<!-- <security:http auto-config="true" disable-url-rewriting="true" use-expressions="true"> 
 		<security:csrf /> </security:http> -->
@@ -124,6 +117,7 @@
 		<property name="suffix" value=".html" />
 		<!-- HTML is the default value, added here for the sake of clarity. -->
 		<property name="templateMode" value="HTML" />
+		<property name="characterEncoding" value="UTF-8" />
 		<!-- Template cache is true by default. Set to false if you want -->
 		<!-- templates to be automatically updated when modified. -->
 		<property name="cacheable" value="false" />
@@ -156,6 +150,8 @@
 	<bean id="viewResolver"
 		class="org.thymeleaf.spring5.view.ThymeleafViewResolver">
 		<property name="templateEngine" ref="templateEngine" />
+		<property name="characterEncoding" value="UTF-8" />
+		<property name="contentType" value="text/html;charset=UTF-8" />
 		<property name="order" value="1" />
 	</bean>
 
