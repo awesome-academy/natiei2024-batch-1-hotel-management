@@ -14,4 +14,12 @@
 			</bean>
 		</property>
 	</bean>
+	
+	<bean id="roomService" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.spring.sample.service.imp.RoomServiceImp">
+				<property name="roomDAO" ref="roomDAO" />
+			</bean>
+		</property>
+	</bean>
 </beans>

@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>  
+<!DOCTYPE hibernate-mapping PUBLIC  
+ "-//Hibernate/Hibernate Mapping DTD 5.3//EN"  
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.spring.sample.entity.Room"
+		table="ROOMS">
+		<id name="roomID" column="RoomID" type="string">
+			<generator class="assigned" />
+		</id>
+
+		<property name="roomName" column="RoomName" type="string"
+			unique="true" not-null="true" length="20" />
+
+		<property name="note" column="Note" type="string"
+			length="100" />
+
+		<property name="status" column="Status" type="integer"
+			not-null="true" />
+
+		<!-- <many-to-one name="roomType" column="RoomTypeID" class="com.example.hotelmanagement.entity.RoomType" 
+			not-null="true" /> -->
+	</class>
+</hibernate-mapping>
