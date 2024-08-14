@@ -52,6 +52,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/resources/**").permitAll().antMatchers("/webjars/**").permitAll()
 				.antMatchers("/home").permitAll().antMatchers("/login").permitAll().antMatchers("/signup").permitAll()
+				// --------------------------------------
+				.antMatchers("/room-categories").permitAll() // Cho phép truy cập công khai vào /room-category để kiểu
+																// tra html
+				.antMatchers("/count-room").permitAll()
+				// ---------------------------------------
 //	        .antMatchers("/users/add").permitAll()
 				.antMatchers(HttpMethod.POST, "/users").permitAll().antMatchers("/error").permitAll()
 				.antMatchers("/access_denied").permitAll().antMatchers("/admin/**").hasAuthority(Role.ADMIN.name())
