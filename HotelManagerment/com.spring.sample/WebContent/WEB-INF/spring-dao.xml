@@ -10,4 +10,9 @@
 	<bean id="userDAO" class="com.spring.sample.dao.imp.UserDAOImp">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+	
+	<bean id="micropostDAO"
+		class="com.spring.sample.dao.imp.MicropostDAOImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 </beans>
