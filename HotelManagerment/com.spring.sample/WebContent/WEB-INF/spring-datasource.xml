@@ -31,8 +31,12 @@
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSourceBean" />
-		<property name="packagesToScan"
-			value="com.spring.sample.entity" />
+			<property name="mappingResources">
+			<list>
+				<value>com/spring/sample/entity/user.hbm.xml</value>
+				<value>com/spring/sample/entity/room.hbm.xml</value>
+			</list>
+		</property>
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">${jdbc.dialect}</prop>
