@@ -56,7 +56,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/signup").permitAll()
 				//--------------------------------------
 				 .antMatchers("/room-categories").permitAll() // Cho phép truy cập công khai vào /room-category để kiểu tra html 
-				//---------------------------------------
+				 .antMatchers("/authorizations").permitAll()
+				 //---------------------------------------
 //	        .antMatchers("/users/add").permitAll()
 				.antMatchers(HttpMethod.POST, "/users").permitAll()
 				.antMatchers("/error").permitAll()
