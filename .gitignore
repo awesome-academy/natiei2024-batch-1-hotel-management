@@ -175,3 +175,7 @@ $RECYCLE.BIN/
 hs_err_pid*
 replay_pid*
 
+
+HotelManagerment/com.spring.sample/resources/datasource.properties
+HotelManagerment/com.spring.sample/target
+
