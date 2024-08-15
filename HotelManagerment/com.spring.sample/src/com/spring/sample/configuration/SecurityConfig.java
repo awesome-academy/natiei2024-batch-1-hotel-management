@@ -47,34 +47,51 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		// TODO Auto-generated method stub
 		super.setContentNegotationStrategy(contentNegotiationStrategy);
 	}
-
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/resources/**").permitAll().antMatchers("/webjars/**").permitAll()
-				.antMatchers("/home").permitAll()
-				.antMatchers("/login").permitAll()
-				.antMatchers("/signup").permitAll()
-				//--------------------------------------
-				 .antMatchers("/room-categories").permitAll() // Cho phép truy cập công khai vào /room-category để kiểu tra html 
-				 .antMatchers("/authorizations").permitAll()
-				 //---------------------------------------
-//	        .antMatchers("/users/add").permitAll()
-				.antMatchers(HttpMethod.POST, "/users").permitAll()
-				.antMatchers("/error").permitAll()
-				.antMatchers("/access_denied").permitAll()
-				.antMatchers("/admin/**").hasAuthority(Role.ADMIN.name())
-				.antMatchers(HttpMethod.GET, "/users").hasAnyAuthority(Role.USER.name(), Role.ADMIN.name()).anyRequest()
-				.hasAnyAuthority(Role.USER.name(), Role.ADMIN.name()).and().formLogin().loginPage("/login")
-				.failureUrl("/login?error=true").usernameParameter("email").passwordParameter("password")
-				.successHandler(authenticationSuccessHandler).loginProcessingUrl("/login").defaultSuccessUrl("/users")
-				.permitAll().and().logout().invalidateHttpSession(true).clearAuthentication(true)
-				.deleteCookies("JSESSIONID").logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-				.logoutSuccessUrl("/login?logout").permitAll().and().rememberMe().rememberMeParameter("remember-me")
-				.tokenValiditySeconds(60 * 60).useSecureCookie(true).tokenRepository(userService)
-				.userDetailsService(userService).and().exceptionHandling().accessDeniedHandler(accessDeniedHandler)
-				.and().csrf().and().headers().contentSecurityPolicy("script-src 'self' https://trustedscripts.example.com; object-src https://trustedplugins.example.com; report-uri /csp-report-endpoint/");
-//			.httpBasic();
+		http.authorizeRequests()
+	    .antMatchers("/resources/**").permitAll()
+	    .antMatchers("/webjars/**").permitAll()
+	    .antMatchers("/home").permitAll()
+	    .antMatchers("/login").permitAll()
+	    .antMatchers("/signup").permitAll()
+	    .antMatchers("/room-categories").permitAll() // Cho phép truy cập công khai vào /room-category để kiểm tra HTML
+	    .antMatchers("/revenues").permitAll() // Thay đổi từ HEAD
+	    .antMatchers(HttpMethod.POST, "/users").permitAll()
+	    .antMatchers("/error").permitAll()
+	    .antMatchers("/access_denied").permitAll()
+	    .antMatchers("/admin/**").hasAuthority(Role.ADMIN.name())
+	    .antMatchers(HttpMethod.GET, "/users").hasAnyAuthority(Role.USER.name(), Role.ADMIN.name())
+	    .anyRequest().hasAnyAuthority(Role.USER.name(), Role.ADMIN.name())
+	    .and().formLogin()
+	    .loginPage("/login")
+	    .failureUrl("/login?error=true")
+	    .usernameParameter("email")
+	    .passwordParameter("password")
+	    .successHandler(authenticationSuccessHandler)
+	    .loginProcessingUrl("/login")
+	    .defaultSuccessUrl("/users")
+	    .permitAll()
+	    .and().logout()
+	    .invalidateHttpSession(true)
+	    .clearAuthentication(true)
+	    .deleteCookies("JSESSIONID")
+	    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+	    .logoutSuccessUrl("/login?logout")
+	    .permitAll()
+	    .and().rememberMe()
+	    .rememberMeParameter("remember-me")
+	    .tokenValiditySeconds(60 * 60)
+	    .useSecureCookie(true)
+	    .tokenRepository(userService)
+	    .userDetailsService(userService)
+	    .and().exceptionHandling()
+	    .accessDeniedHandler(accessDeniedHandler)
+	    .and().csrf()
+	    .and().headers()
+	    .contentSecurityPolicy("script-src 'self' https://trustedscripts.example.com; object-src https://trustedplugins.example.com; report-uri /csp-report-endpoint/");
 	}
+
 
 	// Khi muốn custom handle access denied
 	@Bean
