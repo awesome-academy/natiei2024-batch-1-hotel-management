@@ -14,4 +14,12 @@
 			</bean>
 		</property>
 	</bean>
+	
+	<bean id="micropostService" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.spring.sample.service.imp.MicropostServiceImp">
+				<property name="micropostDAO" ref="micropostDAO" />
+			</bean>
+		</property>
+	</bean>
 </beans>

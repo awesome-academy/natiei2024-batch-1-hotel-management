@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.sample.interceptor.Flash;
 import com.spring.sample.model.CustomUserDetails;
+import com.spring.sample.service.MicropostService;
 
 @Controller
 public class StaticPagesController {
@@ -25,7 +27,6 @@ public class StaticPagesController {
 
 	@Resource
 	private Flash flash;
-	
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -41,11 +42,12 @@ public class StaticPagesController {
 		return "redirect: " + request.getContextPath() + "/users";
 	}
 
-	@GetMapping(value = {"/", "/home"})
-	public String home(@RequestParam(name = "page", required = false) Optional<Integer> page, Locale locale, Model model, Authentication authentication, HttpServletRequest request) {
+	@GetMapping(value = { "/", "/home" })
+	public String home(@RequestParam(name = "page", required = false) Optional<Integer> page, Locale locale,
+			Model model, Authentication authentication, HttpServletRequest request) {
 		logger.info("Home Page Requested, locale = " + locale);
-		if(authentication != null && authentication.isAuthenticated()) {
-			CustomUserDetails userDetails= (CustomUserDetails)authentication.getPrincipal();			
+		if (authentication != null && authentication.isAuthenticated()) {
+			CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
 		}
 		return "static_pages/home";
 	}
