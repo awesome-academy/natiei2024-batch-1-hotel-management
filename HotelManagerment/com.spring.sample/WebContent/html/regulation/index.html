@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="vi" th:replace="~{templates/layout :: layout(~{::title}, ~{::body}, ~{})}"
+    xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="utf-8">
+    <title th:text="#{session.login.title}">Kala Hotel | Quy định</title>
+</head>
+
+<body>
+    <div class="wrapper position-relative">
+        <aside id="sidebar" class="expand vh-100 sticky-top">
+            <div class="d-flex">
+                <button class="toggle-btn" type="button">
+                    <i class="lni lni-grid-alt"></i>
+                </button>
+                <div class="sidebar-logo">
+                    <a href="/home">Kala Hotel</a>
+                </div>
+            </div>
+            <ul class="sidebar-nav">
+                <li><a href="/room-category" class="sidebar-link"> <i class="lni lni-tab"></i> <span>Danh mục
+                            phòng</span>
+                    </a></li>
+                <li><a href="/bill-for-rent" class="sidebar-link"> <i class="lni lni-agenda"></i> <span>Phiếu thuê
+                            phòng</span>
+                    </a></li>
+                <li><a href="/search" class="sidebar-link"> <i class="lni lni-search-alt"></i> <span>Tra cứu
+                            phòng</span>
+                    </a></li>
+                <li><a href="/reciept" class="sidebar-link"> <i class="lni lni-postcard"></i> <span>Hóa đơn thanh
+                            toán</span>
+                    </a></li>
+                <li><a href="/revenue" class="sidebar-link"> <i class="lni lni-target-revenue"></i> <span>Báo cáo doanh
+                            thu</span>
+                    </a></li>
+                <li><a href="/authorization" class="sidebar-link"> <i class="lni lni-users"></i> <span>Phân quyền tài
+                            khoản</span>
+                    </a></li>
+                <li><a href="/setting" class="sidebar-link"> <i class="lni lni-cogs"></i> <span>Quy định</span>
+                    </a></li>
+            </ul>
+            <div class="sidebar-footer">
+                <a href="/logout" class="sidebar-link"> <i class="lni lni-exit"></i>
+                    <span>Đăng xuất</span>
+                </a>
+            </div>
+        </aside>
+        <div class="main p-3 bg-white-1">
+            <div
+                class="shadowCustom overflow-hidden rounded d-flex justify-content-between align-items-center mb-4 p-3 bg-white">
+                <h1 style="margin: 0;">Quy định</h1>
+                <h1 style="margin: 0;">Xin chào,
+                    Tester
+                </h1>
+            </div>
+            <div class="row mx-0 mb-3">
+                <div class="col-6 p-0">
+                    <div id="room-category"
+                        class="position-relative authorization-table-1 rounded overflow-auto shadowCustom bg-white rounded-3 mb-3">
+                        <h1 class="text-center py-2">Danh sách loại phòng</h1>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">STT</th>
+                                    <th scope="col">Loại phòng</th>
+                                    <th scope="col">Đơn giá</th>
+                                    <th scope="col">Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Room Name</td>
+                                    <td>Price</td>
+                                    <td>
+                                        <button data-bs-toggle="modal" id="fix-btn" class="btn btn-info">
+                                            <i class="lni lni-pencil-alt"></i>
+                                        </button> |
+                                        <button data-bs-toggle="modal" class="btn btn-danger">
+                                            <i class="lni lni-trash-can"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div>
+                            <button data-bs-toggle="modal" data-bs-target="#addModalTypeRoom" id="fix-btn"
+                                class="btn btn-info mb-3 mx-3 fw-bold">Thêm loại phòng</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-1"></div>
+
+                <div class="col-5 p-0">
+                    <div id="room-category"
+                        class="position-relative authorization-table-1 rounded overflow-auto shadowCustom bg-white rounded-3 mb-3">
+                        <h1 class="text-center py-2">Danh sách loại khách</h1>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">STT</th>
+                                    <th scope="col">Loại khách</th>
+                                    <th scope="col">Tỉ lệ phụ thu</th>
+                                    <th scope="col">Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Loại khách 1</td>
+                                    <td>10%</td>
+                                    <td>
+                                        <button data-bs-toggle="modal" id="fix-btn" class="btn btn-info">
+                                            <i class="lni lni-pencil-alt"></i>
+                                        </button> |
+                                        <button data-bs-toggle="modal" class="btn btn-danger">
+                                            <i class="lni lni-trash-can"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div>
+                            <button data-bs-toggle="modal" data-bs-target="#addModalTypeCustomer" id="fix-btn"
+                                class="btn btn-info mb-3 mx-3 fw-bold">Thêm loại khách</button>
+                        </div>
+
+                        <!-- Add Modal -->
+                        <div class="modal fade" id="addModalTypeCustomer" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Thêm loại khách</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form th:action="@{/setting}" method="get">
+                                            <input type="hidden" name="ACTION" value="ADD_TYPE_CUSTOMER">
+                                            <div class="mb-3">
+                                                <label for="recipient-name" class="col-form-label">Loại khách:</label>
+                                                <input type="text" name="typeCustomerName" class="form-control"
+                                                    id="recipient-name">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="recipient-name" class="col-form-label">Tỉ lệ phụ
+                                                    thu:</label>
+                                                <input type="number" min="0" max="10" step="0.01"
+                                                    name="typeCustomerChargeRate" class="form-control"
+                                                    id="recipient-name">
+                                            </div>
+                                            <div class="modal-footer p-0">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Đóng</button>
+                                                <button type="submit" class="btn btn-info fw-bold">Thêm</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row mx-0">
+                <div class="col-6 p-0">
+                    <div id="room-category"
+                        class="position-relative authorization-table-1 rounded overflow-auto shadowCustom bg-white rounded-3 mb-3">
+                        <h1 class="text-center py-2">Tỉ lệ phụ thu</h1>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Khách thứ</th>
+                                    <th scope="col">Tỉ lệ</th>
+                                    <th scope="col">Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>100%</td>
+                                    <td>
+                                        <button data-bs-toggle="modal" id="fix-btn" class="btn btn-info">
+                                            <i class="lni lni-pencil-alt"></i>
+                                        </button> |
+                                        <button data-bs-toggle="modal" class="btn btn-danger">
+                                            <i class="lni lni-trash-can"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                        <div>
+                            <button data-bs-toggle="modal" data-bs-target="#addModalSurcharge" id="fix-btn"
+                                class="btn btn-info mb-3 mx-3 fw-bold">Thêm</button>
+                        </div>
+
+                        <div class="modal fade" id="addModalSurcharge" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Thêm phụ thu khách</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form th:action="@{/setting}" method="get">
+                                            <input type="hidden" name="ACTION" value="ADD_SURCHARGE_RATE" />
+                                            <div class="mb-3">
+                                                <label for="orderOfCustomer" class="col-form-label">Khách thứ: </label>
+                                                <input type="number" min="1" max="100" step="1" class="form-control"
+                                                    name="orderOfCustomer" id="orderOfCustomer">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="surchargeRate" class="col-form-label">Tỉ lệ: </label>
+                                                <input type="number" min="0" max="100" step="0.01" class="form-control"
+                                                    name="surchargeRate" id="surchargeRate">
+                                            </div>
+
+                                            <div class="modal-footer p-0">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Đóng</button>
+                                                <button type="submit" class="btn btn-info fw-bold">Thêm</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-1"></div>
+
+                <div class="col-5 p-0">
+                    <div id="room-category"
+                        class="position-relative authorization-table-1 rounded overflow-auto shadowCustom bg-white rounded-3 mb-3">
+                        <h1 class="text-center py-2">Tham số</h1>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Tham số</th>
+                                    <th scope="col">Giá trị</th>
+                                    <th scope="col">Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>test</td>
+                                    <td>test</td>
+                                    <td>
+                                        <button data-bs-toggle="modal" id="fix-btn" class="btn btn-info">
+                                            <i class="lni lni-pencil-alt"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
