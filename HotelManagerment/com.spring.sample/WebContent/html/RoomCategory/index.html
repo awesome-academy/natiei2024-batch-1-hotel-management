@@ -18,45 +18,42 @@
 					<i class="lni lni-grid-alt"></i>
 				</button>
 				<div class="sidebar-logo">
-					<a href="/home">Kala Hotel</a>
+					<a th:href="@{/home}">Kala Hotel</a>
 				</div>
 			</div>
 			<ul class="sidebar-nav">
-				<li><a href="/room-category" class="sidebar-link"> <i
-						class="lni lni-tab"></i> <span>Danh mục phòng</span>
-				</a></li>
-				<li><a href="/bill-for-rent" class="sidebar-link"> <i
+				<!-- Liệt kê tất cả các liên kết mà không cần phân quyền -->
+				<li><a th:href="@{/room-category}" class="sidebar-link active">
+						<i class="lni lni-tab"></i> <span>Danh mục phòng</span>
+				</a> <a th:href="@{/bill-for-rent}" class="sidebar-link"> <i
 						class="lni lni-agenda"></i> <span>Phiếu thuê phòng</span>
-				</a></li>
-				<li><a href="/search" class="sidebar-link"> <i
+				</a> <a th:href="@{/search}" class="sidebar-link"> <i
 						class="lni lni-search-alt"></i> <span>Tra cứu phòng</span>
-				</a></li>
-				<li><a href="/reciept" class="sidebar-link"> <i
+				</a> <a th:href="@{/reciept}" class="sidebar-link"> <i
 						class="lni lni-postcard"></i> <span>Hóa đơn thanh toán</span>
-				</a></li>
-				<li><a href="/revenue" class="sidebar-link"> <i
+				</a> <a th:href="@{/revenue}" class="sidebar-link"> <i
 						class="lni lni-target-revenue"></i> <span>Báo cáo doanh thu</span>
-				</a></li>
-				<li><a href="/authorization" class="sidebar-link"> <i
+				</a> <a th:href="@{/authorization}" class="sidebar-link"> <i
 						class="lni lni-users"></i> <span>Phân quyền tài khoản</span>
-				</a></li>
-				<li><a href="/setting" class="sidebar-link"> <i
+				</a> <a th:href="@{/setting}" class="sidebar-link"> <i
 						class="lni lni-cogs"></i> <span>Quy định</span>
 				</a></li>
 			</ul>
 			<div class="sidebar-footer">
-				<a href="/logout" class="sidebar-link"> <i class="lni lni-exit"></i>
-					<span>Đăng xuất</span>
+				<a th:href="@{/logout}" class="sidebar-link"> <i
+					class="lni lni-exit"></i> <span>Đăng xuất</span>
 				</a>
 			</div>
 		</aside>
-	<!-- Thanh nav end -->
+
 		<div class="main p-3 bg-white-1">
 			<div
 				class="shadowCustom overflow-hidden rounded d-flex justify-content-between align-items-center mb-4 p-3 bg-white">
 				<h1 style="margin: 0;">Danh mục phòng</h1>
 				<h1 style="margin: 0;">
-					Xin chào, <span>[Tên người dùng]</span>
+					Xin chào,
+					<!--<span th:text="${session.user.fullName}">  -->
+					</span>
 				</h1>
 			</div>
 
@@ -75,31 +72,31 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<th scope="row">1</th>
-								<td>Phòng 101</td>
-								<td>Loại A</td>
-								<td>500,000 VND</td>
+							<tr th:each="room, iterStat : ${listRooms}">
+								<th scope="row" th:text="${iterStat.count}"></th>
+								<td th:text="${room.roomName}"></td>
+								<td th:text="${room.roomType.roomTypeName}"></td>
+								<td th:text="${room.roomType.price}"></td>
 								<td class="ghi-chu" data-bs-toggle="tooltip"
-									data-bs-title="Ghi chú về phòng">Ghi chú về phòng</td>
+									th:data-bs-title="${room.note}" th:text="${room.note}"></td>
 								<td>
+									<!-- Nút sửa -->
 									<button type="button" class="btn btn-info"
-										data-bs-toggle="modal"
-										data-bs-target="#1updateModalRoomCategory">
+										th:data-bs-toggle="'modal'"
+										th:data-bs-target="'#' + ${iterStat.count} + 'updateModalRoomCategory'">
 										<i class="lni lni-pencil-alt"></i>
-									</button>
+									</button> | <!-- Nút xóa -->
 									<button type="button" class="btn btn-danger"
-										data-bs-toggle="modal"
-										data-bs-target="#1deleteModalRoomCategory">
+										th:data-bs-toggle="'modal'"
+										th:data-bs-target="'#' + ${iterStat.count} + 'deleteModalRoomCategory'">
 										<i class="lni lni-trash-can"></i>
 									</button>
 								</td>
 							</tr>
 
 							<!-- Modal Xóa -->
-							<div class="modal fade" id="deleteModalRoomCategory"
-								tabindex="-1" aria-labelledby="exampleModalLabel"
-								aria-hidden="true">
+							<!--  
+							<div class="modal fade" id="deleteModalRoomCategory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 								<div class="modal-dialog">
 									<div class="modal-content">
 										<div class="modal-header">
@@ -108,89 +105,104 @@
 											<button type="button" class="btn-close"
 												data-bs-dismiss="modal" aria-label="Close"></button>
 										</div>
-										<div class="modal-body">Bạn có chắc chắn muốn xóa phòng
-											Phòng 101?</div>
+										<div class="modal-body">
+											Bạn có chắc chắn muốn xóa phòng <span
+												th:text="${room.roomName}"></span>?
+										</div>
 										<div class="modal-footer">
 											<button type="button" class="btn btn-secondary"
 												data-bs-dismiss="modal">Đóng</button>
-											<a href="/room-category?ACTION=DELETE&roomId=1"
+											<a
+												th:href="@{/room-category}?ACTION=DELETE&amp;roomId=${room.roomId}"
 												class="btn btn-danger">Xóa</a>
 										</div>
 									</div>
 								</div>
 							</div>
-
+							-->
 							<!-- Modal Sửa -->
-							<div class="modal fade" id="1updateModalRoomCategory"
+							<!--  
+							<div class="modal fade"
+								th:id="${iterStat.count} + 'updateModalRoomCategory'"
 								tabindex="-1" aria-labelledby="exampleModalLabel"
 								aria-hidden="true">
 								<div class="modal-dialog">
 									<div class="modal-content">
 										<div class="modal-header">
-											<h1 class="modal-title fs-5" id="exampleModalLabel">Sửa
-												phòng</h1>
-											<button type="button" class="btn-close"
-												data-bs-dismiss="modal" aria-label="Close"></button>
+											<h1 class="modal-title fs-5" id="exampleModalLabel">
+												Sửa phòng
+											</h1>
+											<button type="button" class="btn-close" ata-bs-dismiss="modal" aria-label="Close"></button>
 										</div>
 										<div class="modal-body">
-											<form action="/room-category" method="get">
-												<input type="hidden" name="ACTION" value="UPDATE" /> <input
-													type="hidden" name="roomId" value="1" />
+											<form th:action="@{/room-category}" method="get">
+												<input type="hidden" name="ACTION" value="UPDATE" /><input
+													type="hidden" name="roomId" th:value="${room.roomId}" />
 												<div class="mb-3">
-													<label for="exampleInputPassword1" class="form-label">Tên
-														phòng</label> <input type="text" required class="form-control"
-														name="nameRoom" value="Phòng 101"
+													<label for="exampleInputPassword1" class="form-label">
+														Tên phòng
+													</label> 
+													<input type="text" required class="form-control"
+														name="nameRoom" th:value="${room.roomName}"
 														id="exampleInputPassword1">
 												</div>
 												<div class="mb-3">
-													<label for="label-room-category" class="form-label">Loại
-														phòng</label> <select id="label-room-category" name="typeRoom"
+													<label for="label-room-category" class="form-label">
+														Loại phòng
+													</label> 
+													<select id="label-room-category" name="typeRoom"
 														class="form-select">
-														<option value="1">Loại A - 500,000 VND</option>
+														<option th:each="typeRoom : ${listTypeRooms}"
+															th:value="${typeRoom.typeRoomID}"
+															th:selected="${room.typeOfRoom == typeRoom.typeRoomID}">
+															<span th:text="${typeRoom.nameTypeRoom} + ' - ' + ${typeRoom.price}"></span>
+														</option>
 													</select>
 												</div>
 												<div class="mb-3">
-													<label for="exampleInputPassword1" class="form-label">Ghi
-														chú</label>
-													<textarea class="w-100" name="noteRoom">Ghi chú về phòng</textarea>
+													<label for="exampleInputPassword1" class="form-label">
+														Ghi chú</label>
+													<textarea class="w-100" name="noteRoom" th:text="${room.noteRoom}"></textarea>
 												</div>
 												<div class="modal-footer">
-													<button type="button" class="btn btn-secondary"
-														data-bs-dismiss="modal">Đóng</button>
+													<button type="button" class="btn btn-secondary"data-bs-dismiss="modal">Đóng</button>
 													<input type="submit" class="btn btn-info" value="Cập nhật" />
 												</div>
 											</form>
 										</div>
 									</div>
 								</div>
-							</div>
+							</div> 
+							-->
 						</tbody>
 					</table>
 				</div>
-				<div class="col-1"></div>
-				<div
-					class="col-3 p-0 d-flex flex-column justify-content-between mh-100">
-					<h5 class="text-center mb-2 bg-white p-2 rounded-3 shadowCustom">Thêm
-						phòng mới</h5>
-					<form action="/room-category"
-						class="white bg- p-2 rounded-3 shadowCustom bg-white" method="get">
+
+		
+				<!-- Add new room -->
+				<div class="col-3 p-0 d-flex flex-column justify-content-between" style="margin-left: 60px;">
+					<h5 class="text-center mb-2 bg-white p-2 rounded-3 shadow-custom">
+					Thêm phòng mới
+					</h5>
+					<form th:action="@{/room-category}"
+						class="bg-white p-2 rounded-3 shadow-custom" method="get">
 						<input type="hidden" name="ACTION" value="ADD" />
 						<div class="mb-3">
-							<label for="exampleInputPassword1" class="form-label">Tên
-								phòng</label> <input type="text" required class="form-control"
+							<label for="exampleInputPassword1" class="form-label">Tên phòng</label> <input type="text" required class="form-control"
 								name="nameRoom" id="exampleInputPassword1">
 						</div>
 						<div class="mb-3">
-							<label for="label-room-category" class="form-label">Loại
-								phòng</label> <select id="label-room-category" name="typeRoom"
+							<label for="label-room-category" class="form-label">Loại phòng</label> <select id="label-room-category" name="typeRoom"
 								class="form-select">
-								<option value="1">Loại A - 500,000 VND</option>
+								<option th:each="typeRoom : ${listTypeRooms}"
+									th:value="${typeRoom.roomTypeID}"
+									th:text="${typeRoom.roomTypeName} + ' - ' + ${typeRoom.price}">
+								</option>
 							</select>
 						</div>
 						<div class="mb-3">
-							<label for="exampleInputPassword1" class="form-label">Ghi
-								chú</label>
-							<textarea class="w-100" name="noteRoom" id="" rows="8"></textarea>
+							<label for="exampleInputPassword1" class="form-label">Ghi chú</label>
+							<textarea class="w-100" name="noteRoom" rows="8"></textarea>
 						</div>
 						<input type="submit" class="btn btn-info d-block w-100"
 							style="font-weight: bold;" value="Thêm">

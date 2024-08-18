@@ -10,4 +10,16 @@
 	<bean id="userDAO" class="com.spring.sample.dao.imp.UserDAOImp">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+	
+	<bean id="roomDAO"
+		class="com.spring.sample.dao.imp.RoomDAOImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="roomTypeDAO"
+		class="com.spring.sample.dao.imp.RoomTypeDAOImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	 
+	
 </beans>
