@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>  
+<!DOCTYPE hibernate-mapping PUBLIC  
+ "-//Hibernate/Hibernate Mapping DTD 5.3//EN"  
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.spring.sample.entity.RoomType"
+		table="ROOM_TYPES">
+		<id name="roomTypeID" column="RoomTypeID" type="string">
+			<generator class="assigned" />
+		</id>
+		<property name="roomTypeName" column="RoomTypeName" type="string" not-null="true" unique="true" />
+		<property name="price" column="Price" type="integer" not-null="true" />
+		<set name="rooms" table="ROOMS" fetch="select">
+			<key>
+				<column name="RoomTypeID" not-null="true"></column>
+			</key>
+			<one-to-many class="com.spring.sample.entity.Room" />
+		</set>
+	</class>
+</hibernate-mapping>  
