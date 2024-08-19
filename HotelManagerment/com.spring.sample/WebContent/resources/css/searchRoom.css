@@ -22,7 +22,6 @@ body {
     margin: 0;
 }
 .search-bar {
-    padding: 0 10px;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -32,13 +31,13 @@ body {
     background-color: white;
 }
 .search-bar input {
-	margin-bottom: 0;
-    min-width: 200px;
-    display: block;
+	margin: 0;
+    min-width: 100px;
     border: none;
     outline: none;
-    padding: 8px 0;
-    font-size: 16px;
+/*     padding: 8px 0;
+ */    
+ 	font-size: 16px;
     caret-color: var(--primary-blue);
     background-color: transparent;
 }
@@ -57,7 +56,6 @@ body {
     gap: 30px;
 }
 .room-table {
-    border: 1px solid black;
     border-radius: 6px;
     overflow: hidden;
 }
@@ -104,4 +102,20 @@ nav.sidebar-nav {
 .inner-container main .title-and-search-bar {
     position: sticky;
     top: 0;
+}
+.room-info-detail{
+	display:flex;
+	gap: 30px;
+}
+.sub-room-search{
+	display:flex;
+	flex-direction: column;
+	gap: 20px;
+}
+.form-select select{
+	height: 30px;
+}
+select{
+	height: 30px;
+	border-radius: 5px;
 }

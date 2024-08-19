@@ -11,122 +11,115 @@
 </head>
     <body>
         <div class="inner-container">
-            <nav class="sidebar-nav">
-        <div class="navbar-header">
-            <div class="sidebar-logo">
-                <a style="color: white;">
-                	<i class="fa-solid fa-hotel"></i>
-                	<span>Kala Hotel</span>
+       	<aside id="sidebar" class="expand vh-100 sticky-top">
+            <div class="d-flex">
+                <button class="toggle-btn" type="button">
+                    <i class="lni lni-grid-alt"></i>
+                </button>
+                <div class="sidebar-logo">
+                    <a th:href="@{/room-category}">Kala Hotel</a>
+                </div>
+            </div>
+            <ul class="sidebar-nav">
+                <li class="sidebar-item"><a th:href="@{/room-category}" class="sidebar-link"> <i class="lni lni-tab"></i> <span>Danh mục phòng</span> </a></li>
+                <li class="sidebar-item"><a th:href="@{/BillForRent}" class="sidebar-link"> <i class="lni lni-agenda"></i> <span>Phiếu thuê phòng</span> </a></li>
+                <li class="sidebar-item"><a th:href="@{/searchRoom}" class="sidebar-link active"> <i class="lni lni-search-alt"></i> <span>Tra cứu phòng</span> </a></li>
+                <li class="sidebar-item"><a th:href="@{/reciept}" class="sidebar-link"> <i class="lni lni-postcard"></i> <span>Hóa đơn thanh toán</span> </a></li>
+                <li class="sidebar-item"><a th:href="@{/revenue}" class="sidebar-link"> <i class="lni lni-target-revenue"></i> <span>Báo cáo doanh thu</span> </a></li>
+                <li class="sidebar-item"><a th:href="@{/authorization}" class="sidebar-link"> <i class="lni lni-users"></i> <span>Phân quyền tài khoản</span> </a></li>
+                <li class="sidebar-item"><a th:href="@{/setting}" class="sidebar-link"> <i class="lni lni-cogs"></i> <span>Quy định</span> </a></li>
+            </ul>
+            <div class="sidebar-footer">
+                <a th:href="@{/logout}" class="sidebar-link">
+                    <i class="lni lni-exit"></i> <span>Đăng xuất</span>
                 </a>
             </div>
-        </div>
-
-        <div class="sidebar">
-            <a href="@{/room-category}">
-                <i class="fa-solid fa-list" style="color: red"></i>
-                <span>Danh mục phòng</span>
-            </a>
-            <a href="@{/bill-for-rent}">
-                <i class="fa-solid fa-bed" style="color: yellow"></i>
-                <span>Phiếu thuê phòng</span>
-            </a>
-            <a href="@{/search}">
-                <i class="fa-solid fa-magnifying-glass" style="color: green"></i>
-                <span>Tra cứu phòng</span>
-            </a>
-            <a href="@{/reciept}">
-                <i class="fa-solid fa-receipt" style="color: purple"></i>
-                <span>Hóa đơn thanh toán</span>
-            </a>
-            <a href="@{/revenue}">
-                <i class="fa-solid fa-chart-simple" style="color: brown"></i>
-                <span>Báo cáo doanh thu</span>
-            </a>
-            <a href="@{/authorization}">
-                <i class="fa-solid fa-person" style="color: aqua"></i>
-                <span>Phân quyền</span>
-            </a>
-            <a href="@{/setting}">
-                <i class="fa-solid fa-gear" style="color: grey"></i>
-                <span>Quy định</span>
-            </a>
-        </div>
-        <div class="sidebar-footer">
-        	<a th:href="@{/logout}" class="sidebar-link">
-            	<i class="fa-solid fa-right-from-bracket"></i>
-                <span>Đăng xuất</span>
-            </a>
-        </div>
-    </nav>
+        </aside>
      <main>
                 <div class="title-and-search-bar">
                     <div class="name-page">
                         <h2>Tra cứu phòng</h2>
                     </div>
                     <div class="search-bar-container">
-                        <div class="search-bar">
-                            <input type="text" placeholder="Tìm kiếm..." />
-                            <div class="kinhlup">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                            </div>
+                        <div class="name-admin"> 
+                        		<h2>Xin chào, Admin</h2>
                         </div>
+     
+                 
                     </div>
                 </div>
                 <div class="room-container">
                     <div class="room-info">
-                        <div class="room-name">
-                            <h3>Số phòng: 401</h3>
-                            <div class="room-name-sub">
-                                <p>Loại: VIP</p>
-                                <p>Trạng thái: Đang thuê</p>
-                                <p>Giá phòng: 200.000/ ngày</p>
-                            </div>
+                      
+                        <div class="room-info-detail">
+                        <div class = " sub-room-search">
+                        	<label class="" for="autoSizingSelect">Tìm kiếm phòng</label>
+                        	<div class="search-bar">
+                            <input type="text" placeholder="Mã phòng..." />
+                          
+                        	</div>
                         </div>
-                        <div class="room-info-detail"></div>
-                    </div>
-                    <div class="room-table">
-                        <table>
-                            <tr>
-                                <th>Ngày lập</th>
-                                <th>Khách hàng</th>
-                                <th>Ngày thuê</th>
-                                <th>Ngày trả</th>
-                                <th>Trạng thái thanh toán</th>
-                                <th>Thành tiền</th>
-                            </tr>
-                            <tr>
-                                <td>12/08/2024</td>
-                                <td>Maria Anders</td>
-                                <td>13/08/2024</td>
-                                <td>15/08/2024</td>
-                                <td>Chưa thanh toán</td>
-                                <td>400.000</td>
-                            </tr>
-                            <tr>
-                                <td>12/08/2024</td>
-                                <td>Maria Anders</td>
-                                <td>13/08/2024</td>
-                                <td>15/08/2024</td>
-                                <td>Đã thanh toán</td>
-                                <td>400.000</td>
-                            </tr>
-                            <tr>
-                                <td>12/08/2024</td>
-                                <td>Maria Anders</td>
-                                <td>13/08/2024</td>
-                                <td>15/08/2024</td>
-                                <td>Đã thanh toán</td>
-                                <td>400.000</td>
-                            </tr>
-                            <tr>
-                                <td>12/08/2024</td>
-                                <td>Maria Anders</td>
-                                <td>13/08/2024</td>
-                                <td>15/08/2024</td>
-                                <td>Đã thanh toán</td>
-                                <td>400.000</td>
-                            </tr>
-                        </table>
+                  
+                          
+                       	<div  class = "sub-room-search">
+                       		<label class="" for="autoSizingSelect">Đơn giá</label>
+						    <select class="form-select" name="status" id="autoSizingSelect">
+						        <option value="-1">Tất cả</option>
+						        <option value="-1">1500000</option>
+						        <option value="0">1700000</option>
+						        <option value="1">2000000</option>
+						    </select>
+                        </div>
+                        <div class = "sub-room-search">
+                       		<label class="" for="autoSizingSelect">Loại phòng</label>
+						    <select class="form-select" name="status" id="autoSizingSelect">
+						        <option value="-1">Tất cả</option>
+						        <option value="-1">A</option>
+						        <option value="0">B</option>
+						        <option value="1">C</option>
+						    </select>
+                        </div>
+                        <div class = "sub-room-search">
+                       		<label class="" for="autoSizingSelect">Tình trạng</label>
+						    <select class="form-select" name="status" id="autoSizingSelect">
+						        <option value="-1">Tất cả</option>
+						        <option value="0">Trống</option>
+						        <option value="1">Đã thuê</option>
+						    </select>
+                        </div>
+                     </div>
+              </div>
+	<div class="room-table">
+     <div id="room-search" class="h-full rounded overflow-auto shadowCustom bg-white rounded-3">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">STT</th>
+                    <th scope="col">Phòng</th>
+                    <th scope="col">Loại Phòng</th>
+                    <th scope="col">Đơn giá</th>
+                    <th scope="col">Tình trạng</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="fw-bold">1</td>
+                    <td>Phòng 101</td>
+                    <td>A</td>
+                    <td>1,500,000 VND</td>
+                    <td><span class="text-success fw-bold"><i class="lni lni-checkmark" style="color: green; font-weight: bold;"></i> Trống</span></td>
+                </tr>
+                <tr>
+                    <td class="fw-bold">2</td>
+                    <td>Phòng 102</td>
+                    <td>B</td>
+                    <td>1,700,000 VND</td>
+                    <td><span class="text-danger fw-bold"><i class="lni lni-close" style="color: red; font-weight: bold;"></i> Đã thuê</span></td>
+                </tr>
+                <!-- Thêm các hàng khác tương tự -->
+            </tbody>
+        </table>
+    </div>
                     </div>
                 </div>
             </main>
