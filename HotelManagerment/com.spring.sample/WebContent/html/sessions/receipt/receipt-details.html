@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="vi"
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết hóa đơn</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @page {
+            size: A4;
+            margin: 20mm;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        .container {
+            width: 100%;
+            max-width: 210mm; /* Width of A4 */
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .invoice-header {
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
+        }
+        .invoice-header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .invoice-details {
+            margin-bottom: 20px;
+            border: 1px solid #dee2e6;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        .invoice-details td {
+            padding: 8px;
+            border: 1px solid #dee2e6;
+        }
+        .invoice-details .title {
+            background-color: #f8f9fa;
+            font-weight: bold;
+            width: 30%;
+            text-align: right;
+        }
+        .invoice-details .content {
+            width: 70%;
+        }
+        .invoice-table {
+            margin: 20px 0;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        .invoice-table th, .invoice-table td {
+            padding: 8px;
+            border: 1px solid #dee2e6;
+            text-align: left;
+        }
+        .invoice-table th {
+            background-color: #f8f9fa;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 12px;
+        }
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+            }
+            .invoice-header {
+                border-bottom: none;
+            }
+            .invoice-table {
+                page-break-inside: auto;
+            }
+            .invoice-table thead {
+                display: table-header-group;
+            }
+            .invoice-table tbody {
+                display: table-row-group;
+            }
+            .invoice-table tr {
+                page-break-inside: avoid;
+                page-break-after: auto;
+            }
+            .footer {
+                page-break-before: always;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="invoice-header">
+            <h1>HÓA ĐƠN</h1>
+        </div>
+
+        <!-- Thông tin hóa đơn -->
+        <table class="invoice-details">
+            <tbody>
+                <tr>
+                    <td class="title">Mã hóa đơn:</td>
+                    <td class="content"><span th:text="${rentalReceiptID}"></span></td>
+                </tr>
+                <tr>
+                    <td class="title">Ngày lập hóa đơn:</td>
+                    <td class="content"><span th:text="${issueDate}"></span></td>
+                </tr>
+                <tr>
+                    <td class="title">Ngày thanh toán:</td>
+                    <td class="content"><span th:text="${paymentDate}"></span></td>
+                </tr>
+                <tr>
+                    <td class="title">Tổng số tiền:</td>
+                    <td class="content"><span th:text="${totalAmount}"></span></td>
+                </tr>
+                <tr>
+                    <td class="title">Trạng thái thanh toán:</td>
+                    <td class="content"><span th:text="${invoicePaymentStatusText}"></span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Danh sách chi tiết hóa đơn thanh toán -->
+        <div class="card">
+            <div class="card-body">
+                <div class="invoice-details">
+                    <div class="row">
+                        <div class="col-4 title">STT:</div>
+                        <div class="col-8 content">1</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4 title">Tên khách hàng:</div>
+                        <div class="col-8 content" th:text="${rentalReceiptDetails.rentalCustomerName}"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4 title">Địa chỉ:</div>
+                        <div class="col-8 content" th:text="${rentalReceiptDetails.rentalCustomerAddress}"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4 title">Số CMND:</div>
+                        <div class="col-8 content" th:text="${rentalReceiptDetails.rentalCustomerIDNumber}"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4 title">Mã loại khách hàng:</div>
+                        <div class="col-8 content" th:text="${rentalReceiptDetails.customerTypeName}"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4 title">Ngày nhận phòng:</div>
+                        <div class="col-8 content" th:text="${rentalReceiptDetails.checkInDate}"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4 title">Ngày trả phòng:</div>
+                        <div class="col-8 content" th:text="${rentalReceiptDetails.checkOutDate}"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4 title">Giá thuê/ngày:</div>
+                        <div class="col-8 content" th:text="${rentalReceiptDetails.dailyRate}"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4 title">Tổng số ngày thuê:</div>
+                        <div class="col-8 content" th:text="${rentalReceiptDetails.totalRentalDays}"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4 title">Tổng số tiền hóa đơn:</div>
+                        <div class="col-8 content" th:text="${rentalReceiptDetails.totalInvoiceAmount}"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi!</p>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>  
+<!DOCTYPE hibernate-mapping PUBLIC  
+ "-//Hibernate/Hibernate Mapping DTD 5.3//EN"  
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+  <hibernate-mapping>
+    <class name="com.spring.sample.entity.RentalReceiptDetail" table="RentalReceiptSummary">
+        <id name="rentalReceiptID" column="RentalReceiptID">
+            <generator class="assigned"/>
+        </id>
+        <property name="customerName" column="CustomerName"/>
+        <property name="issueDate" column="IssueDate"/>
+        <property name="paymentDate" column="PaymentDate"/>
+        <property name="totalAmount" column="TotalAmount"/>
+        <property name="invoicePaymentStatusText" column="InvoicePaymentStatusText"/>
+        <property name="checkInDate" column="CheckInDate"/>
+        <property name="checkOutDate" column="CheckOutDate"/>
+        <property name="dailyRate" column="DailyRate"/>
+        <property name="rentalPaymentStatusText" column="RentalPaymentStatusText"/>
+        <property name="rentalCustomerName" column="RentalCustomerName"/>
+        <property name="rentalCustomerAddress" column="RentalCustomerAddress"/>
+        <property name="rentalCustomerIDNumber" column="RentalCustomerIDNumber"/>
+        <property name="customerTypeName" column="CustomerTypeName"/>
+        <property name="surchargeRate" column="SurchargeRate"/>
+        <property name="totalInvoiceAmount" column="TotalInvoiceAmount"/>
+        <property name="totalRentalDays" column="TotalRentalDays"/>
+    </class>
+</hibernate-mapping>

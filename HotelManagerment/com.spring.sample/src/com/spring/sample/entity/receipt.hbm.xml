@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8'?>  
+<!DOCTYPE hibernate-mapping PUBLIC  
+ "-//Hibernate/Hibernate Mapping DTD 5.3//EN"  
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+  <hibernate-mapping>
+    <class name="com.spring.sample.entity.Receipt" table="RECEIPTS">
+        <id name="rentalReceiptID" column="RentalReceiptID">
+            <generator class="identity"/>
+        </id>
+        <property name="roomID" column="RoomID" type="string"/>
+        <property name="checkInDate" column="CheckInDate" type="timestamp"/>
+        <property name="checkOutDate" column="CheckOutDate" type="timestamp"/>
+        <property name="dailyRate" column="DailyRate" type="float"/>
+        <property name="paymentStatus" column="PaymentStatus" type="integer"/>
+    </class>
+</hibernate-mapping>

@@ -36,6 +36,9 @@
 				<value>com/spring/sample/entity/user.hbm.xml</value>
 				<value>com/spring/sample/entity/roomtype.hbm.xml</value> 
 				<value>com/spring/sample/entity/room.hbm.xml</value>
+				<value>com/spring/sample/entity/receipt.hbm.xml</value>
+				<value>com/spring/sample/entity/rental_receipt_detail.hbm.xml</value>
+				
 			</list>
 		</property>
 		<property name="hibernateProperties">

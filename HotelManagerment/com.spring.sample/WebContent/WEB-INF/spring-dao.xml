@@ -21,5 +21,13 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	 
-	
+	<bean id="receiptDAO"
+		class="com.spring.sample.dao.imp.ReceiptDAOImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="rentalReceiptDetailDAO"
+		class="com.spring.sample.dao.imp.RentalReceiptDetailDAOImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>	 
 </beans>
