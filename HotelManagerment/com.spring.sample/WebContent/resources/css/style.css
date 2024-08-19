@@ -304,3 +304,53 @@ input.addBill{
     background-color: #d4edda;
     color: #155724;
 }
+.text-white {
+    color: #fff !important;
+    margin-right: 123px;
+}
+
+input.btn.btn-info.text-white {
+    margin-right: 0px;
+}
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 100%;
+        padding: 0px;
+    }
+}
+
+button, select {
+    text-transform: none;
+}
+
+.mb-3 #label-room-category {
+    width: 100%;
+}
+
+.addAccount{
+	margin-left:70px
+}
+
+.tablePermit {
+    width: 100%;
+}
+
+.wrapper {
+        display: flex;
+    }
+    #sidebar {
+        width: 250px;
+    }
+    .main {
+        flex: 1;
+    }
+    .full-width {
+        width: 100%;
+    }
+    .authorization-table {
+        width: 100%;
+    }
+    .table {
+        width: 100%;
+    }

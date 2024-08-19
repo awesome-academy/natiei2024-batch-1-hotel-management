@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="vi"
+	th:replace="~{templates/layout :: layout(~{::title}, ~{::body}, ~{})}"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<title th:text="#{session.login.title}">Trang phân quyền</title>
+<title>Trang phân quyền</title>
+</head>
+
+<body>
+	<div class="wrapper">
+		<aside id="sidebar" class="expand vh-100 sticky-top">
+			<div class="d-flex">
+				<button class="toggle-btn" type="button">
+					<i class="lni lni-grid-alt"></i>
+				</button>
+				<div class="sidebar-logo">
+					<a href="/home">Kala Hotel</a>
+				</div>
+			</div>
+			<ul class="sidebar-nav">
+				<li><a href="/room-category" class="sidebar-link"> <i
+						class="lni lni-tab"></i> <span>Danh mục phòng</span>
+				</a></li>
+				<li><a href="/bill-for-rent" class="sidebar-link"> <i
+						class="lni lni-agenda"></i> <span>Phiếu thuê phòng</span>
+				</a></li>
+				<li><a href="/search" class="sidebar-link"> <i
+						class="lni lni-search-alt"></i> <span>Tra cứu phòng</span>
+				</a></li>
+				<li><a href="/reciept" class="sidebar-link"> <i
+						class="lni lni-postcard"></i> <span>Hóa đơn thanh toán</span>
+				</a></li>
+				<li><a href="/revenue" class="sidebar-link"> <i
+						class="lni lni-target-revenue"></i> <span>Báo cáo doanh thu</span>
+				</a></li>
+				<li><a href="/authorization" class="sidebar-link"> <i
+						class="lni lni-users"></i> <span>Phân quyền tài khoản</span>
+				</a></li>
+				<li><a href="/setting" class="sidebar-link"> <i
+						class="lni lni-cogs"></i> <span>Quy định</span>
+				</a></li>
+			</ul>
+			<div class="sidebar-footer">
+				<a href="/logout" class="sidebar-link"> <i class="lni lni-exit"></i>
+					<span>Đăng xuất</span>
+				</a>
+			</div>
+		</aside>
+		<!-- Thanh nav end -->
+		<div class="main p-3 bg-white-1">
+			<div class="shadowCustom overflow-hidden rounded d-flex justify-content-between align-items-center mb-4 p-3 bg-white">
+				<h1 style="margin: 0;">Quy định</h1>
+				<h1 style="margin: 0;">Xin chào, Nguyễn Văn A</h1>
+			</div>
+
+			<div class="row mx-0 mb-4 full-width">
+				<div id="room-category" class="authorization-table rounded overflow-auto shadowCustom bg-white rounded-3 mb-3">
+					<table class="table table-hover position-sticky sticky-top top-0">
+						<thead>
+							<tr>
+								<th scope="col">Nhóm quyền</th>
+								<th scope="col">Danh mục phòng</th>
+								<th scope="col">Lập phiếu thuê</th>
+								<th scope="col">Tra cứu</th>
+								<th scope="col">Lập hóa đơn</th>
+								<th scope="col">Xem doanh thu</th>
+								<th scope="col">Phân quyền</th>
+								<th scope="col">Quy định</th>
+								<th scope="col">Thao tác</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th scope="row">Quản trị viên</th>
+								<td><img src="#" th:src="@{/resources/img/check.png}" width="20px" alt=""></td>
+								<td><img src="#" th:src="@{/resources/img/check.png}" width="20px" alt=""></td>
+								<td><img src="#" th:src="@{/resources/img/check.png}" width="20px" alt=""></td>
+								<td><img src="#" th:src="@{/resources/img/check.png}" width="20px" alt=""></td>
+								<td><img src="#" th:src="@{/resources/img/uncheck.png}" width="20px" alt=""></td>
+								<td><img src="#" th:src="@{/resources/img/check.png}" width="20px" alt=""></td>
+								<td><img src="#" th:src="@{/resources/img/check.png}" width="20px" alt=""></td>
+								<td><button class="btn btn-info">
+										<i class="lni lni-pencil-alt"></i>
+									</button></td>
+							</tr>
+							<tr>
+								<th scope="row">Nhân viên</th>
+								<td><img src="#" th:src="@{/resources/img/uncheck.png}" width="20px" alt=""></td>
+								<td><img src="#" th:src="@{/resources/img/uncheck.png}" width="20px" alt=""></td>
+								<td><img src="#" th:src="@{/resources/img/uncheck.png}" width="20px" alt=""></td>
+								<td><img src="#" th:src="@{/resources/img/check.png}" width="20px" alt=""></td>
+								<td><img src="#" th:src="@{/resources/img/check.png}" width="20px" alt=""></td>
+								<td><img src="#" th:src="@{/resources/img/uncheck.png}" width="20px" alt=""></td>
+								<td><img src="#" th:src="@{/resources/img/uncheck.png}" width="20px" alt=""></td>
+								<td><button class="btn btn-info">
+										<i class="lni lni-pencil-alt"></i>
+									</button></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<div class="row mx-0">
+				<div class="col-7 p-0">
+					<div id="room-category"
+						class="position-relative authorization-table-1 rounded overflow-auto shadowCustom bg-white rounded-3 mb-3">
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th scope="col">Họ tên</th>
+									<th scope="col">Email</th>
+									<th scope="col">Nhóm quyền</th>
+									<th scope="col">Thao tác</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<th scope="row">Nguyễn Văn A</th>
+									<td>nguyenvana@example.com</td>
+									<td>Quản trị viên</td>
+									<td>
+										<button class="btn btn-info">
+											<i class="lni lni-pencil-alt"></i>
+										</button>
+										<button class="btn btn-danger">
+											<i class="lni lni-trash-can"></i>
+										</button>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">Trần Văn B</th>
+									<td>tranvanb@example.com</td>
+									<td>Nhân viên</td>
+									<td>
+										<button class="btn btn-info">
+											<i class="lni lni-pencil-alt"></i>
+										</button>
+										<button class="btn btn-danger">
+											<i class="lni lni-trash-can"></i>
+										</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<!-- Thêm giao diện thêm tài khoản -->
+				<div
+					class="col-4 p-0 d-flex flex-column justify-content-between mh-100 addAccount">
+					<h5 class="text-center mb-2 bg-white p-2 rounded-3 shadowCustom">Thêm
+						tài khoản</h5>
+					<form action="#"
+						class="white bg- p-2 rounded-3 shadowCustom bg-white" method="get">
+						<!-- Hidden input to store the action type -->
+						<input type="hidden" name="ACTION" value="ADD_USER" />
+
+						<!-- Input field for Full Name -->
+						<div class="mb-3">
+							<label for="fullName" class="form-label">Họ và tên</label> <input
+								type="text" class="form-control" name="fullName" id="fullName"
+								required>
+						</div>
+
+						<!-- Input field for Email -->
+						<div class="mb-3">
+							<label for="userName" class="form-label">Email</label> <input
+								type="email" class="form-control" name="userName" id="userName"
+								required> <small class="text-danger">
+								<!-- Error message placeholder -->
+							</small>
+						</div>
+
+						<!-- Input field for Password -->
+						<div class="mb-3 position-relative">
+							<label for="passwordLogin" class="form-label">Mật khẩu</label> <input
+								type="password" class="form-control" name="password"
+								id="passwordLogin" required> <i
+								class="fa-solid fa-eye position-absolute"></i> <i
+								class="fa-solid fa-eye-slash position-absolute"></i>
+						</div>
+
+						<!-- Select field for Role -->
+						<div class="mb-3">
+							<label for="roleId" class="form-label">Nhóm quyền</label> <select
+								id="roleId" name="roleId" class="form-select" required>
+								<option value="">--Chọn nhóm quyền--</option>
+								<option value="1">Quản trị viên</option>
+								<option value="2">Nhân viên</option>
+							</select>
+						</div>
+
+						<!-- Submit button centered -->
+						<div class="d-flex justify-content-center">
+							<button type="submit" class="btn btn-primary">Thêm tài
+								khoản</button>
+						</div>
+					</form>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Thêm script Bootstrap ở đây -->
+	<script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
