@@ -3,15 +3,32 @@ package com.spring.sample.entity;
 import java.io.Serializable;
 import java.util.Set;
 
-@SuppressWarnings("serial")
-public class RoomType extends BaseEntity implements Serializable{
-	private String roomTypeID;
-    private String roomTypeName;
-    private Integer price;
-    Set<Room> rooms;
-    
-    
- public Set<Room> getRooms() {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity(name = "ROOM_TYPES")
+public class RoomType extends BaseEntity implements Serializable {
+	@Id
+	@Column(name = "RoomTypeID")
+	@GenericGenerator(name = "assigned-generator", strategy = "assigned")
+	@GeneratedValue(generator = "assigned-generator")
+	private String id;
+
+	@Column(name = "RoomTypeName", unique = true, nullable = false)
+	private String name;
+
+	@Column(name = "Price", nullable = false)
+	private Integer price;
+
+	@OneToMany(mappedBy = "roomType")
+	Set<Room> rooms;
+
+	public Set<Room> getRooms() {
 		return rooms;
 	}
 
@@ -20,34 +37,39 @@ public class RoomType extends BaseEntity implements Serializable{
 	}
 
 	// Constructors
-    public RoomType() {
-    	System.out.println("Da khoi tao thanh cong roomtype");
-    }
-    
-    public RoomType(String roomTypeID,String roomTypeName,Integer price) {
-    	this.roomTypeID = roomTypeID;
-    	this.roomTypeName = roomTypeName;
-    	this.price = price;
-    }
-    
-    // Getters and Setters
+	public RoomType() {
+		System.out.println("Da khoi tao thanh cong roomtype");
+	}
+
+	public RoomType(String roomTypeID, String roomTypeName, Integer price) {
+		this.id = roomTypeID;
+		this.name = roomTypeName;
+		this.price = price;
+	}
+
+	// Getters and Setters
 	public String getRoomTypeID() {
-		return roomTypeID;
+		return id;
 	}
+
 	public void setRoomTypeID(String roomTypeID) {
-		this.roomTypeID = roomTypeID;
+		this.id = roomTypeID;
 	}
+
 	public String getRoomTypeName() {
-		return roomTypeName;
+		return name;
 	}
+
 	public void setRoomTypeName(String roomTypeName) {
-		this.roomTypeName = roomTypeName;
+		this.name = roomTypeName;
 	}
+
 	public Integer getPrice() {
 		return price;
 	}
+
 	public void setPrice(Integer price) {
 		this.price = price;
 	}
-	
+
 }

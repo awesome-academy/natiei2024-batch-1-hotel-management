@@ -3,16 +3,40 @@ package com.spring.sample.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-@SuppressWarnings("serial")
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity(name = "user")
 public class User extends BaseEntity implements Serializable {
 
+	@Id
+	@GenericGenerator(name = "native-generator", strategy = "native")
+	@GeneratedValue(generator = "native-generator")
 	private Integer id;
+
+	@Column
 	private String name;
+
+	@Column(unique = true)
 	private String email;
+
+	@Column(length = 128)
 	private String password;
+
+	@Column
 	private String series;
+
+	@Column
 	private String token;
+
+	@Column
 	private Date lastUsed;
+
+	@Column
 	private Integer role;
 
 	public User() {

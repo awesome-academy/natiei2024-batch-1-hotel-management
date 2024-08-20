@@ -2,23 +2,45 @@ package com.spring.sample.entity;
 
 import java.io.Serializable;
 
-@SuppressWarnings("serial")
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity(name = "ROOMS")
 public class Room extends BaseEntity implements Serializable {
 
-    private String roomID;
-    private String roomName;
+    @Id
+    @Column(name = "RoomID")
+    @GenericGenerator(name = "assigned-generator", strategy = "assigned")
+    @GeneratedValue(generator = "assigned-generator")
+    private String id;
+
+    @Column(name = "RoomName", unique = true, nullable = false, length = 20)
+    private String name;
+
+    @Column(name = "Note", length = 100)
     private String note;
+
+    @Column(name = "Status", nullable = false)
     private int status;
-    private RoomType roomType; 
+
+    @ManyToOne
+    @JoinColumn(name = "RoomTypeID", nullable = false)
+    private RoomType roomType;
 
     // Constructors
     public Room() {
-    	System.out.println("Da khoi tao thanh cong room");
+        System.out.println("Da khoi tao thanh cong room");
     }
 
     public Room(String roomID, String roomName, String note, int status, RoomType roomType) {
-        this.roomID = roomID;
-        this.roomName = roomName;
+        this.id = roomID;
+        this.name = roomName;
         this.note = note;
         this.status = status;
         this.roomType = roomType;
@@ -26,19 +48,19 @@ public class Room extends BaseEntity implements Serializable {
 
     // Getters and Setters
     public String getRoomID() {
-        return roomID;
+        return id;
     }
 
     public void setRoomID(String roomID) {
-        this.roomID = roomID;
+        this.id = roomID;
     }
 
     public String getRoomName() {
-        return roomName;
+        return name;
     }
 
     public void setRoomName(String roomName) {
-        this.roomName = roomName;
+        this.name = roomName;
     }
 
     public String getNote() {
