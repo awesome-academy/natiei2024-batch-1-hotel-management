@@ -2,43 +2,63 @@ package com.spring.sample.entity;
 
 import java.io.Serializable;
 
-@SuppressWarnings("serial")
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity(name = "ROOMS")
 public class Room extends BaseEntity implements Serializable {
 
-    private String roomID;
-    private String roomName;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "RoomID")
+    private Integer id;
+
+    @Column(name = "RoomName", unique = true, nullable = false, length = 20)
+    private String name;
+
+    @Column(name = "Note", length = 100)
     private String note;
+
+    @Column(name = "Status", nullable = false)
     private int status;
-    private RoomType roomType; 
+
+    @ManyToOne
+    @JoinColumn(name = "RoomTypeID", nullable = false)
+    private RoomType roomType;
 
     // Constructors
     public Room() {
-    	System.out.println("Da khoi tao thanh cong room");
+        System.out.println("Da khoi tao thanh cong room");
     }
 
-    public Room(String roomID, String roomName, String note, int status, RoomType roomType) {
-        this.roomID = roomID;
-        this.roomName = roomName;
+    public Room(Integer roomID, String roomName, String note, int status, RoomType roomType) {
+        this.id = roomID;
+        this.name = roomName;
         this.note = note;
         this.status = status;
         this.roomType = roomType;
     }
 
     // Getters and Setters
-    public String getRoomID() {
-        return roomID;
+    public Integer getRoomID() {
+        return id;
     }
 
-    public void setRoomID(String roomID) {
-        this.roomID = roomID;
+    public void setRoomID(Integer roomID) {
+        this.id = roomID;
     }
 
     public String getRoomName() {
-        return roomName;
+        return name;
     }
 
     public void setRoomName(String roomName) {
-        this.roomName = roomName;
+        this.name = roomName;
     }
 
     public String getNote() {
@@ -57,11 +77,11 @@ public class Room extends BaseEntity implements Serializable {
         this.status = status;
     }
 
-    public RoomType getRoomType() { // Thay đổi kiểu trả về thành RoomType
+    public RoomType getRoomType() {
         return roomType;
     }
 
-    public void setRoomType(RoomType roomType) { // Thay đổi kiểu tham số thành RoomType
+    public void setRoomType(RoomType roomType) {
         this.roomType = roomType;
     }
 }
