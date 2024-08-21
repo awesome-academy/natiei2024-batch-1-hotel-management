@@ -13,4 +13,10 @@ public class RoomTypeServiceImp extends BaseServiceImpl implements RoomTypeServi
 	public List<RoomType> getAllTypeRooms() {
 		return roomTypeDAO.getAllTypeRooms();
 	}
-}	
+
+	@Override
+	public RoomType findById(Integer typeRoomId) {
+		return roomTypeDAO.findById(typeRoomId);
+	}
+
+}

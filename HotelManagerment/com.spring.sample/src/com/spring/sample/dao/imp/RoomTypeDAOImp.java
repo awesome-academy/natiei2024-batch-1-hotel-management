@@ -12,11 +12,20 @@ public class RoomTypeDAOImp extends GenericDAOImp<RoomType, Integer> implements 
 	public RoomTypeDAOImp() {
 		super(RoomType.class);
 	}
+
 	@Override
 	public List<RoomType> getAllTypeRooms() {
-		String hql = "SELECT r FROM RoomType r";
+		String hql = "SELECT r FROM ROOM_TYPES r";
 		Query<RoomType> query = getSession().createQuery(hql, RoomType.class);
 		return query.getResultList();
+	}
+
+	@Override
+	public RoomType findById(Integer roomTypeID) {
+		String hql = "FROM ROOM_TYPES r WHERE r.id = :roomTypeID";
+		Query<RoomType> query = getSession().createQuery(hql, RoomType.class);
+		query.setParameter("roomTypeID", roomTypeID);
+		return query.uniqueResult();
 	}
 
 }
