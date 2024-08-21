@@ -1,5 +1,6 @@
 package com.spring.sample.entity;
 
+
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -86,4 +87,5 @@ public class Room extends BaseEntity implements Serializable {
     public void setRoomType(RoomType roomType) { // Thay đổi kiểu tham số thành RoomType
         this.roomType = roomType;
     }
+
 }
