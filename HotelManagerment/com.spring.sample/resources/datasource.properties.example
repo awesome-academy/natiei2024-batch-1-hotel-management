@@ -1,8 +1,0 @@
-jdbc.driverClassName=
-jdbc.url=
-jdbc.username=
-jdbc.password=
-
-jdbc.dialect=
-jdbc.show_sql=
-jdbc.format_sql=

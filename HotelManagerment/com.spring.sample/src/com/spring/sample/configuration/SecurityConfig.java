@@ -58,7 +58,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/signup").permitAll()
 				.antMatchers("/regulations").permitAll()
 				.antMatchers("/room-categories").permitAll() // Cho phép truy cập công khai vào /room-category để kiểm
-																// tra HTML
+																// tra HTM
+				.antMatchers("/bill-for-rents").permitAll() // Cho phép truy cập công khai vào /room-category để kiểm
+
 				.antMatchers("/revenues").permitAll() // Thay đổi từ HEAD
 				.antMatchers("/authorizations").permitAll()
 				.antMatchers(HttpMethod.POST, "/users").permitAll()
@@ -96,7 +98,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.contentSecurityPolicy(
 						"script-src 'self' https://trustedscripts.example.com; object-src https://trustedplugins.example.com; report-uri /csp-report-endpoint/");
 	}
-
 	// Khi muốn custom handle access denied
 	@Bean
 	public AccessDeniedHandler accessDeniedHandler() {
