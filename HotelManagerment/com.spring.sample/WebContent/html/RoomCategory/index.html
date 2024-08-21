@@ -52,8 +52,7 @@
 				<h1 style="margin: 0;">Danh mục phòng</h1>
 				<h1 style="margin: 0;">
 					Xin chào,
-					<!--<span th:text="${session.user.fullName}">  -->
-					</span>
+					<!--<span th:text="${session.user.fullName}"> </span> -->
 				</h1>
 			</div>
 
@@ -72,128 +71,134 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="room, iterStat : ${listRooms}">
-								<th scope="row" th:text="${iterStat.count}"></th>
-								<td th:text="${room.roomName}"></td>
-								<td th:text="${room.roomType.roomTypeName}"></td>
-								<td th:text="${room.roomType.price}"></td>
-								<td class="ghi-chu" data-bs-toggle="tooltip"
-									th:data-bs-title="${room.note}" th:text="${room.note}"></td>
-								<td>
-									<!-- Nút sửa -->
-									<button type="button" class="btn btn-info"
-										th:data-bs-toggle="'modal'"
-										th:data-bs-target="'#' + ${iterStat.count} + 'updateModalRoomCategory'">
-										<i class="lni lni-pencil-alt"></i>
-									</button> | <!-- Nút xóa -->
-									<button type="button" class="btn btn-danger"
-										th:data-bs-toggle="'modal'"
-										th:data-bs-target="'#' + ${iterStat.count} + 'deleteModalRoomCategory'">
-										<i class="lni lni-trash-can"></i>
-									</button>
-								</td>
-							</tr>
+							<th:block th:each="room, iterStat : ${listRooms}">
+								<tr>
+									<th scope="row" th:text="${iterStat.count}"></th>
+									<td th:text="${room.roomName}"></td>
+									<td th:text="${room.roomType.roomTypeName}"></td>
+									<td th:text="${room.roomType.price}"></td>
+									<td class="ghi-chu" data-bs-toggle="tooltip"
+										th:data-bs-title="${room.note}" th:text="${room.note}"></td>
+									<td>
+										<!-- Nút sửa -->
+										<button type="button" class="btn btn-info"
+											data-bs-toggle="modal"
+											th:data-bs-target="'#updateModalRoomCategory' + ${iterStat.count}">
+											<i class="lni lni-pencil-alt"></i>
+										</button> | <!-- Nút xóa -->
+										<button type="button" class="btn btn-danger"
+											data-bs-toggle="modal"
+											th:data-bs-target="'#deleteModalRoomCategory' + ${iterStat.count}">
+											<i class="lni lni-trash-can"></i>
+										</button>
+									</td>
+								</tr>
 
-							<!-- Modal Xóa -->
-							<!--  
-							<div class="modal fade" id="deleteModalRoomCategory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h1 class="modal-title fs-5" id="exampleModalLabel">Xóa
-												phòng</h1>
-											<button type="button" class="btn-close"
-												data-bs-dismiss="modal" aria-label="Close"></button>
-										</div>
-										<div class="modal-body">
-											Bạn có chắc chắn muốn xóa phòng <span
-												th:text="${room.roomName}"></span>?
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-secondary"
-												data-bs-dismiss="modal">Đóng</button>
-											<a
-												th:href="@{/room-category}?ACTION=DELETE&amp;roomId=${room.roomId}"
-												class="btn btn-danger">Xóa</a>
-										</div>
-									</div>
-								</div>
-							</div>
-							-->
-							<!-- Modal Sửa -->
-							<!--  
-							<div class="modal fade"
-								th:id="${iterStat.count} + 'updateModalRoomCategory'"
-								tabindex="-1" aria-labelledby="exampleModalLabel"
-								aria-hidden="true">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h1 class="modal-title fs-5" id="exampleModalLabel">
-												Sửa phòng
-											</h1>
-											<button type="button" class="btn-close" ata-bs-dismiss="modal" aria-label="Close"></button>
-										</div>
-										<div class="modal-body">
-											<form th:action="@{/room-category}" method="get">
-												<input type="hidden" name="ACTION" value="UPDATE" /><input
-													type="hidden" name="roomId" th:value="${room.roomId}" />
-												<div class="mb-3">
-													<label for="exampleInputPassword1" class="form-label">
-														Tên phòng
-													</label> 
-													<input type="text" required class="form-control"
-														name="nameRoom" th:value="${room.roomName}"
-														id="exampleInputPassword1">
-												</div>
-												<div class="mb-3">
-													<label for="label-room-category" class="form-label">
-														Loại phòng
-													</label> 
-													<select id="label-room-category" name="typeRoom"
-														class="form-select">
-														<option th:each="typeRoom : ${listTypeRooms}"
-															th:value="${typeRoom.typeRoomID}"
-															th:selected="${room.typeOfRoom == typeRoom.typeRoomID}">
-															<span th:text="${typeRoom.nameTypeRoom} + ' - ' + ${typeRoom.price}"></span>
-														</option>
-													</select>
-												</div>
-												<div class="mb-3">
-													<label for="exampleInputPassword1" class="form-label">
-														Ghi chú</label>
-													<textarea class="w-100" name="noteRoom" th:text="${room.noteRoom}"></textarea>
-												</div>
-												<div class="modal-footer">
-													<button type="button" class="btn btn-secondary"data-bs-dismiss="modal">Đóng</button>
-													<input type="submit" class="btn btn-info" value="Cập nhật" />
-												</div>
-											</form>
+								<!-- Modal Xóa -->
+
+								<div class="modal fade"
+									th:id="'deleteModalRoomCategory' + ${iterStat.count}"
+									tabindex="-1" aria-labelledby="exampleModalLabel"
+									aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h1 class="modal-title fs-5" id="exampleModalLabel">Xóa
+													phòng</h1>
+												<button type="button" class="btn-close"
+													data-bs-dismiss="modal" aria-label="Close"></button>
+											</div>
+											<div class="modal-body">
+												Bạn có chắc chắn muốn xóa phòng <span
+													th:text="${room.roomName}"></span>?
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary"
+													data-bs-dismiss="modal">Đóng</button>
+												<form th:action="@{/room-categories/delete}" method="post"
+													style="display: inline;">
+													<input type="hidden" name="roomID"
+														th:value="${room.roomID}" />
+													<button type="submit" class="btn btn-danger">Xóa</button>
+												</form>
+											</div>
 										</div>
 									</div>
 								</div>
-							</div> 
-							-->
+
+								<!-- Modal Sửa -->
+								<div class="modal fade"
+									th:id="'updateModalRoomCategory' + ${iterStat.count}"
+									tabindex="-1" aria-labelledby="exampleModalLabel"
+									aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h1 class="modal-title fs-5" id="exampleModalLabel">
+													Sửa phòng</h1>
+												<button type="button" class="btn-close"
+													data-bs-dismiss="modal" aria-label="Close"></button>
+											</div>
+											<div class="modal-body">
+												<form th:action="@{/room-categories/update}" method="post">
+													<input type="hidden" name="roomID"
+														th:value="${room.roomID}" />
+													<div class="mb-3">
+														<label for="exampleInputPassword1" class="form-label">Tên
+															phòng</label> <input type="text" required class="form-control"
+															name="nameRoom" th:value="${room.roomName}"
+															id="exampleInputPassword1">
+													</div>
+													<div class="mb-3">
+														<label for="label-room-category" class="form-label">Loại
+															phòng</label> <select id="label-room-category" name="typeRoom"
+															class="form-select">
+															<option th:each="typeRoom : ${listTypeRooms}"
+																th:value="${typeRoom.roomTypeID}"
+																th:text="${typeRoom.roomTypeName} + ' - ' + ${typeRoom.price}">
+															</option>
+														</select>
+													</div>
+													<div class="mb-3">
+														<label for="exampleInputPassword1" class="form-label">Ghi
+															chú</label>
+														<textarea class="w-100" name="noteRoom"
+															th:text="${room.note}"></textarea>
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-secondary"
+															data-bs-dismiss="modal">Đóng</button>
+														<input type="submit" class="btn btn-info" value="Cập nhật" />
+													</div>
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+
+
+								<!--  -->
+							</th:block>
 						</tbody>
 					</table>
 				</div>
 
-		
+
 				<!-- Add new room -->
-				<div class="col-3 p-0 d-flex flex-column justify-content-between" style="margin-left: 60px;">
+				<div class="col-3 p-0 d-flex flex-column justify-content-between"
+					style="margin-left: 60px;">
 					<h5 class="text-center mb-2 bg-white p-2 rounded-3 shadow-custom">
-					Thêm phòng mới
-					</h5>
-					<form th:action="@{/room-category}"
-						class="bg-white p-2 rounded-3 shadow-custom" method="get">
-						<input type="hidden" name="ACTION" value="ADD" />
+						Thêm phòng mới</h5>
+					<form th:action="@{/room-categories/add}"
+						class="bg-white p-2 rounded-3 shadow-custom" method="post">
 						<div class="mb-3">
-							<label for="exampleInputPassword1" class="form-label">Tên phòng</label> <input type="text" required class="form-control"
-								name="nameRoom" id="exampleInputPassword1">
+							<label for="nameRoom" class="form-label">Tên phòng</label> <input
+								type="text" required class="form-control" name="nameRoom"
+								id="nameRoom">
 						</div>
 						<div class="mb-3">
-							<label for="label-room-category" class="form-label">Loại phòng</label> <select id="label-room-category" name="typeRoom"
-								class="form-select">
+							<label for="typeRoom" class="form-label">Loại phòng</label> <select
+								id="typeRoom" name="typeRoom" class="form-select">
 								<option th:each="typeRoom : ${listTypeRooms}"
 									th:value="${typeRoom.roomTypeID}"
 									th:text="${typeRoom.roomTypeName} + ' - ' + ${typeRoom.price}">
@@ -201,65 +206,18 @@
 							</select>
 						</div>
 						<div class="mb-3">
-							<label for="exampleInputPassword1" class="form-label">Ghi chú</label>
-							<textarea class="w-100" name="noteRoom" rows="8"></textarea>
+							<label for="noteRoom" class="form-label">Ghi chú</label>
+							<textarea class="form-control" name="noteRoom" id="noteRoom"
+								rows="4"></textarea>
 						</div>
-						<input type="submit" class="btn btn-info d-block w-100"
-							style="font-weight: bold;" value="Thêm">
+						<button type="submit" class="btn btn-info d-block w-100"
+							style="font-weight: bold;">Thêm</button>
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<script>
-	document.addEventListener("DOMContentLoaded", function() {
-	    // Hàm debug để kiểm tra sự kiện click của các nút sửa và xóa
-	    function debugButtons() {
-	        // Lắng nghe sự kiện nhấn nút sửa
-	        document.querySelectorAll('.btn-info').forEach(button => {
-	            button.addEventListener('click', function(event) {
-	                event.preventDefault(); // Ngăn chặn hành động mặc định để dễ dàng kiểm tra
-	                const targetId = this.getAttribute('data-bs-target');
-	                console.log("Nút sửa được nhấn");
-	                console.log("ID của modal cần mở:", targetId);
-	                console.log("Thẻ HTML của nút nhấn:", this.outerHTML);
-	                
-	                // Kiểm tra sự tồn tại của modal
-	                const modal = document.querySelector(targetId);
-	                if (modal) {
-	                    console.log("Modal tồn tại:", targetId);
-	                } else {
-	                    console.error("Modal không tồn tại:", targetId);
-	                }
-	            });
-	        });
-
-	        // Lắng nghe sự kiện nhấn nút xóa
-	        document.querySelectorAll('.btn-danger').forEach(button => {
-	            button.addEventListener('click', function(event) {
-	                event.preventDefault(); // Ngăn chặn hành động mặc định để dễ dàng kiểm tra
-	                const targetId = this.getAttribute('data-bs-target');
-	                console.log("Nút xóa được nhấn");
-	                console.log("ID của modal cần mở:", targetId);
-	                console.log("Thẻ HTML của nút nhấn:", this.outerHTML);
-	                
-	                // Kiểm tra sự tồn tại của modal
-	                const modal = document.querySelector(targetId);
-	                if (modal) {
-	                    console.log("Modal tồn tại:", targetId);
-	                } else {
-	                    console.error("Modal không tồn tại:", targetId);
-	                }
-	            });
-	        });
-	    }
-
-	    // Gọi hàm debug
-	    debugButtons();
-	});
-
-</script>
 </body>
 
 </html>
