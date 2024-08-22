@@ -58,10 +58,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/signup").permitAll()
 				.antMatchers("/regulations").permitAll()
 				.antMatchers("/room-categories").permitAll() // Cho phép truy cập công khai vào /room-category để kiểm
-																// tra HTM
 				.antMatchers("/room-categories/**").permitAll()
-				.antMatchers("/bill-for-rents").permitAll() // Cho phép truy cập công khai vào /room-category để kiểm
 				.antMatchers("/rooms").permitAll()	
+				.antMatchers("/bill-for-rents").permitAll()
 				.antMatchers("/revenues").permitAll() // Thay đổi từ HEAD
 				.antMatchers("/authorizations").permitAll()
 				.antMatchers("/authorizations/**").permitAll()

@@ -35,14 +35,14 @@
  		<div class="main p-3 bg-white-1">
  			<div class="shadowCustom overflow-hidden rounded d-flex justify-content-between align-items-center mb-4 p-3 bg-white ">
  				<h1 style="margin: 0; font-size: 30px">Phiếu thuê phòng</h1>
-            	<!--<h1 style="margin: 0;">Xin chào, <c:out value="${sessionScope.user.fullName}" /></h1>-->
+            	<h1 style="margin: 0;">Xin chào,</h1>
  			</div>
  			<div class="container">
  				<div class="row">
- 					<div class="col-7 h-100 mx-0 px-0">
+ 					<div class="col-7 h-100">
  						<div id="bill-rent-setting" class="h-100 rounded overflow-auto shadowCustom bg-white rounded-3 px-1">
  							<h1 class="p-2" style="font-size: 25px; margin-bottom: 5px">Thông tin phiếu thuê phòng</h1>
- 							<form id="rentForm" th:action="@{/bill-for-rent}">
+ 							<form id="rentForm" th:action="@{/bill-for-rents}">
  								<input type="hidden" th:name="ACTION" th:value="INSERT_ROOMBILL"/>
 
  								<div class="mx-3">
@@ -61,7 +61,7 @@
  									<input type="datetime-local" class="form-control" name="roomDateReturn" id="dateReturnTextField" th:value="${roomBill?.roomDateReturn}" required>
  								</div>
  							</form>
- 							<input type="submit" value="Thêm phiếu thuê" class="btn btn-info d-block m-3 addBill">
+ 							<input type="submit" value="Thêm phiếu thuê" class="btn btn-info d-block m-3">
  						</div>
  						<div id="bill-rent-display" class="rounded overflow-auto shadowCustom bg-white rounded-3 px-1 mt-3">
  							<h1 class="p-2" style="font-size: 25px;">Danh sách phiếu thuê phòng</h1>
@@ -104,6 +104,41 @@
  							</div>
  						</div>
  					</div>
+ 					<div class="col-5">
+						<div id="room-category-info"
+							class="rounded overflow-auto shadowCustom bg-white rounded-3 px-1">
+							<h1 class="p-3" style="font-size: 20px">Danh sách phòng</h1>
+							<div style="height: 400px; overflow: auto;">
+								<table class="table table-hover overflow-y">
+									<thead>
+										<tr>
+											<th scope="col">STT</th>
+											<th scope="col">Phòng</th>
+											<th scope="col">Loại Phòng</th>
+											<th scope="col">Đơn giá</th>
+											<th scope="col">Ghi chú</th>
+											<th scope="col">Tình trạng</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<th scope="row">1</th>
+											<td>Room Name</td>
+											<td>Type of Room</td>
+											<td>Price</td>
+											<td class="ghi-chu" data-bs-toggle="tooltip" title=""
+												data-bs-original-title="Note">Note
+											</td>
+											<td data-bs-toggle="tooltip">
+												<i class="lni lni-close" style="color: red; font-weight: bold;"></i> Đã thuê
+												<i class="lni lni-checkmark" style="color: green; font-weight: bold;"></i> Trống 
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
  				</div>
  			</div>
  		</div>
