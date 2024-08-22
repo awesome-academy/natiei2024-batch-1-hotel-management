@@ -17,7 +17,7 @@ public class RoomType extends BaseEntity implements Serializable {
 	@Column(name = "RoomTypeID")
 	@GenericGenerator(name = "assigned-generator", strategy = "assigned")
 	@GeneratedValue(generator = "assigned-generator")
-	private String id;
+	private Integer id;
 
 	@Column(name = "RoomTypeName", unique = true, nullable = false)
 	private String name;
@@ -41,18 +41,18 @@ public class RoomType extends BaseEntity implements Serializable {
 		System.out.println("Da khoi tao thanh cong roomtype");
 	}
 
-	public RoomType(String roomTypeID, String roomTypeName, Integer price) {
+	public RoomType(Integer roomTypeID, String roomTypeName, Integer price) {
 		this.id = roomTypeID;
 		this.name = roomTypeName;
 		this.price = price;
 	}
 
 	// Getters and Setters
-	public String getRoomTypeID() {
+	public Integer getRoomTypeID() {
 		return id;
 	}
 
-	public void setRoomTypeID(String roomTypeID) {
+	public void setRoomTypeID(Integer roomTypeID) {
 		this.id = roomTypeID;
 	}
 

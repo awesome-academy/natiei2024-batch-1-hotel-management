@@ -25,8 +25,8 @@
 
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
-		<!-- <property name="dataSource" ref="dataSourceBean" />
-			<property name="mappingResources">
+		 <property name="dataSource" ref="dataSourceBean" />
+		<!--	<property name="mappingResources">
 			<list>
 				<value>com/spring/sample/entity/user.hbm.xml</value>
 				<value>com/spring/sample/entity/roomtype.hbm.xml</value> 
@@ -43,7 +43,6 @@
 			</props>
 		</property>
 	</bean>
-
 	<!-- <bean
 	class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" 
 		/> -->

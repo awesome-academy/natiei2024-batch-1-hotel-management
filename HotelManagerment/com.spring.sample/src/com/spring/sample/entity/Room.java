@@ -1,25 +1,22 @@
 package com.spring.sample.entity;
 
-
 import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
-import org.hibernate.annotations.GenericGenerator;
 
 @Entity(name = "ROOMS")
 public class Room extends BaseEntity implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "RoomID")
-    @GenericGenerator(name = "assigned-generator", strategy = "assigned")
-    @GeneratedValue(generator = "assigned-generator")
-    private String id;
+    private Integer id;
 
     @Column(name = "RoomName", unique = true, nullable = false, length = 20)
     private String name;
@@ -39,7 +36,7 @@ public class Room extends BaseEntity implements Serializable {
         System.out.println("Da khoi tao thanh cong room");
     }
 
-    public Room(String roomID, String roomName, String note, int status, RoomType roomType) {
+    public Room(Integer roomID, String roomName, String note, int status, RoomType roomType) {
         this.id = roomID;
         this.name = roomName;
         this.note = note;
@@ -48,11 +45,11 @@ public class Room extends BaseEntity implements Serializable {
     }
 
     // Getters and Setters
-    public String getRoomID() {
+    public Integer getRoomID() {
         return id;
     }
 
-    public void setRoomID(String roomID) {
+    public void setRoomID(Integer roomID) {
         this.id = roomID;
     }
 
@@ -80,12 +77,11 @@ public class Room extends BaseEntity implements Serializable {
         this.status = status;
     }
 
-    public RoomType getRoomType() { // Thay đổi kiểu trả về thành RoomType
+    public RoomType getRoomType() {
         return roomType;
     }
 
-    public void setRoomType(RoomType roomType) { // Thay đổi kiểu tham số thành RoomType
+    public void setRoomType(RoomType roomType) {
         this.roomType = roomType;
     }
-
 }
