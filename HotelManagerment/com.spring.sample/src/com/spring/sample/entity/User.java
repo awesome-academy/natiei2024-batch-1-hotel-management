@@ -10,110 +10,110 @@ import javax.persistence.Id;
 
 import org.hibernate.annotations.GenericGenerator;
 
-@Entity(name = "user")
+@Entity(name = "user") // DUMMY ENTITY, DO NOT USE
 public class User extends BaseEntity implements Serializable {
 
-	@Id
-	@GenericGenerator(name = "native-generator", strategy = "native")
-	@GeneratedValue(generator = "native-generator")
-	private Integer id;
+    @Id
+    @GenericGenerator(name = "native-generator", strategy = "native")
+    @GeneratedValue(generator = "native-generator")
+    private Integer id;
 
-	@Column
-	private String name;
+    @Column
+    private String name;
 
-	@Column(unique = true)
-	private String email;
+    @Column(unique = true, length = 20)
+    private String email;
 
-	@Column(length = 128)
-	private String password;
+    @Column(length = 20)
+    private String password;
 
-	@Column
-	private String series;
+    @Column
+    private String series;
 
-	@Column
-	private String token;
+    @Column
+    private String token;
 
-	@Column
-	private Date lastUsed;
+    @Column
+    private Date lastUsed;
 
-	@Column
-	private Integer role;
+    @Column
+    private Integer role;
 
-	public User() {
+    public User() {
 
-	}
+    }
 
-	public User(Integer id) {
-		this.id = id;
-	}
+    public User(Integer id) {
+        this.id = id;
+    }
 
-	public User(String email, String password) {
-		this.email = email;
-		this.password = password;
-	}
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
 
-	public Integer getId() {
-		return id;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public String getSeries() {
-		return series;
-	}
+    public String getSeries() {
+        return series;
+    }
 
-	public void setSeries(String series) {
-		this.series = series;
-	}
+    public void setSeries(String series) {
+        this.series = series;
+    }
 
-	public String getToken() {
-		return token;
-	}
+    public String getToken() {
+        return token;
+    }
 
-	public void setToken(String token) {
-		this.token = token;
-	}
+    public void setToken(String token) {
+        this.token = token;
+    }
 
-	public Date getLastUsed() {
-		return lastUsed;
-	}
+    public Date getLastUsed() {
+        return lastUsed;
+    }
 
-	public void setLastUsed(Date lastUsed) {
-		this.lastUsed = lastUsed;
-	}
+    public void setLastUsed(Date lastUsed) {
+        this.lastUsed = lastUsed;
+    }
 
-	public Integer getRole() {
-		return role;
-	}
+    public Integer getRole() {
+        return role;
+    }
 
-	public void setRole(Integer role) {
-		this.role = role;
-	}
+    public void setRole(Integer role) {
+        this.role = role;
+    }
 
 }

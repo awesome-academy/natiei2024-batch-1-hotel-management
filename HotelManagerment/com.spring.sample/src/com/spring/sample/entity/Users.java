@@ -5,17 +5,17 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "USERS")
-public class Users extends BaseEntity implements Serializable{
-    
+@Table(name = "USERS") // BANG TAI KHOAN NGUOI DUNG
+public class Users extends BaseEntity implements Serializable {
+
     @Id
-    @Column(name = "Username")
+    @Column(name = "Username", length = 50)
     private String username;
 
-    @Column(name = "Password")
+    @Column(name = "Password", length = 50)
     private String password;
 
-    @Column(name = "FullName")
+    @Column(name = "FullName", length = 50)
     private String fullName;
 
     @ManyToOne

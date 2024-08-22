@@ -18,26 +18,26 @@ public class RoomDAOImp extends GenericDAOImp<Room, Integer> implements RoomDAO 
 	@Override
 	public List<Room> getAllRooms() {
 		System.out.println("DA CHAY TOI DAY");
-		String hql = "SELECT r FROM ROOMS r LEFT JOIN FETCH r.roomType t";
+		String hql = "SELECT r FROM Room r LEFT JOIN FETCH r.roomType t";
 		Query<Room> query = getSession().createQuery(hql, Room.class);
 		return query.getResultList();
 	}
 
 	@Override
 	public void deleteRoomById(Integer roomID) {
-	    // Tải thực thể Room bằng ID
-	    Room room = getHibernateTemplate().get(Room.class, roomID);
-	    
-	    // Kiểm tra xem thực thể có tồn tại không
-	    if (room == null) {
-	        throw new RuntimeException("Room not found for ID: " + roomID);
-	    }
+		// Tải thực thể Room bằng ID
+		Room room = getHibernateTemplate().get(Room.class, roomID);
 
-	    // Khóa thực thể (có thể dùng LockMode nếu cần)
-	    getSession().buildLockRequest(LockOptions.NONE).lock(room);
+		// Kiểm tra xem thực thể có tồn tại không
+		if (room == null) {
+			throw new RuntimeException("Room not found for ID: " + roomID);
+		}
 
-	    // Xóa thực thể
-	    getHibernateTemplate().delete(room);
+		// Khóa thực thể (có thể dùng LockMode nếu cần)
+		getSession().buildLockRequest(LockOptions.NONE).lock(room);
+
+		// Xóa thực thể
+		getHibernateTemplate().delete(room);
 	}
 
 	@Override

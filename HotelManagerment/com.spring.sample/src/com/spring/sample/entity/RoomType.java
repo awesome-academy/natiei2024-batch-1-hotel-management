@@ -6,27 +6,38 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
-import org.hibernate.annotations.GenericGenerator;
-
-@Entity(name = "ROOM_TYPES")
+@Entity
+@Table(name = "ROOM_TYPES") // LOAI PHONG
 public class RoomType extends BaseEntity implements Serializable {
 	@Id
 	@Column(name = "RoomTypeID")
-	@GenericGenerator(name = "assigned-generator", strategy = "assigned")
-	@GeneratedValue(generator = "assigned-generator")
-	private Integer id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id; // MA LOAI PHONG
 
-	@Column(name = "RoomTypeName", unique = true, nullable = false)
-	private String name;
+	@Column(name = "RoomTypeName")
+	private String name; // TEN LOAI PHONG
 
-	@Column(name = "Price", nullable = false)
-	private Integer price;
+	@Column(name = "Price")
+	private Integer price; // GIA CA
 
 	@OneToMany(mappedBy = "roomType")
 	Set<Room> rooms;
+
+	@OneToMany(mappedBy = "roomType")
+	Set<Revenues> revenues;
+
+	public Set<Revenues> getRevenues() {
+		return revenues;
+	}
+
+	public void setRevenues(Set<Revenues> revenues) {
+		this.revenues = revenues;
+	}
 
 	public Set<Room> getRooms() {
 		return rooms;

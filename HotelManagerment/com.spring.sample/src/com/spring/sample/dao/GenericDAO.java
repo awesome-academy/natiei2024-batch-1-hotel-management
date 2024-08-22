@@ -31,10 +31,10 @@ public interface GenericDAO<E extends BaseEntity, Id extends Serializable> {
 	Timestamp getSystemTimestamp();
 
 	Page<E> paginate(Pageable pageable);
-//	int count(E exampleInstance, String[] excludeProperty, boolean isLike);
-//
-//	int count();
-//
-//	int count(Criterion... criterion);
+	// int count(E exampleInstance, String[] excludeProperty, boolean isLike);
+	//
+	// int count();
+	//
+	// int count(Criterion... criterion);
 
 }
