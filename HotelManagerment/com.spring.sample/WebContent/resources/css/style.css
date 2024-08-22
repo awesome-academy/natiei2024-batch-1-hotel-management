@@ -1,8 +1,7 @@
-@import
-	url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap")
-	;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
 
-::after, ::before {
+::after,
+::before {
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
@@ -74,8 +73,8 @@ body {
 	font-weight: 600;
 }
 
-#sidebar:not(.expand) .sidebar-logo, #sidebar:not(.expand) a.sidebar-link span
-	{
+#sidebar:not(.expand) .sidebar-logo,
+#sidebar:not(.expand) a.sidebar-link span {
 	display: none;
 }
 
@@ -127,8 +126,7 @@ a.sidebar-link:hover {
 	display: none;
 }
 
-#sidebar:not(.expand) .sidebar-item:hover .has-dropdown+.sidebar-dropdown
-	{
+#sidebar:not(.expand) .sidebar-item:hover .has-dropdown+.sidebar-dropdown {
 	display: block;
 	max-height: 15em;
 	width: 100%;
@@ -148,8 +146,7 @@ a.sidebar-link:hover {
 	transition: all 0.2s ease-out;
 }
 
-#sidebar.expand .sidebar-link[data-bs-toggle="collapse"].collapsed::after
-	{
+#sidebar.expand .sidebar-link[data-bs-toggle="collapse"].collapsed::after {
 	transform: rotate(45deg);
 	transition: all 0.2s ease-out;
 }
@@ -170,7 +167,8 @@ a.sidebar-link:hover {
 	max-height: 465.99px;
 }
 
-.table td, .table th {
+.table td,
+.table th {
 	text-align: center;
 	vertical-align: middle;
 }
@@ -238,14 +236,15 @@ input.btn.btn-info.text-white {
 	margin-right: 0px;
 }
 
-@media ( min-width : 1200px) {
+@media (min-width : 1200px) {
 	.container {
 		max-width: 100%;
 		padding: 0px;
 	}
 }
 
-button, select {
+button,
+select {
 	text-transform: none;
 }
 
@@ -284,41 +283,45 @@ button, select {
 .table {
 	width: 100%;
 }
-.row{
+
+/* .row{
 	margin-left: 10px;
 	width: 2100px;
 	margin-top: -10px;
 }
-input.addBill{
+input.addBill {
 	width: 30%;
 }
-#rentForm{
+
+#rentForm {
 	margin-top: 10px;
 }
-#bill-rent-setting{
+
+#bill-rent-setting {
 	padding-bottom: 5px;
 	padding-top: 5px;
 }
 
-/*status button */
+
 .status {
-    display: inline-block;
-    padding: 5px 10px;
-    border-radius: 12px;
-    font-size: 14px;
-    font-weight: 500;
+	display: inline-block;
+	padding: 5px 10px;
+	border-radius: 12px;
+	font-size: 14px;
+	font-weight: 500;
 }
+
 .status.unpaid {
-    background-color: #f8d7da;
-    color: #721c24;
+	background-color: #f8d7da;
+	color: #721c24;
 }
 
 .status.pending {
-    background-color: #fff3cd;
-    color: #856404;
+	background-color: #fff3cd;
+	color: #856404;
 }
 
 .status.paid {
-    background-color: #d4edda;
-    color: #155724;
-}
+	background-color: #d4edda;
+	color: #155724;
+} */

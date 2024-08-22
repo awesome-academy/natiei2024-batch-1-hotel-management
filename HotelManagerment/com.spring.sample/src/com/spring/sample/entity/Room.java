@@ -1,6 +1,7 @@
 package com.spring.sample.entity;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,27 +10,33 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
-@Entity(name = "ROOMS")
+@Entity
+@Table(name = "ROOMS") // PHONG
 public class Room extends BaseEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "RoomID")
-    private Integer id;
+    private Integer id; // MA PHONG
 
-    @Column(name = "RoomName", unique = true, nullable = false, length = 20)
-    private String name;
+    @Column(name = "RoomName", unique = true, length = 20)
+    private String name; // TEN PHONG
 
     @Column(name = "Note", length = 100)
-    private String note;
+    private String note; // GHI CHU
 
     @Column(name = "Status", nullable = false)
-    private int status;
+    private int status; // TINH TRANG (CO KHACH SU DUNG HAY KHONG)
 
     @ManyToOne
-    @JoinColumn(name = "RoomTypeID", nullable = false)
+    @JoinColumn(name = "RoomTypeID")
     private RoomType roomType;
+
+    @OneToMany(mappedBy = "corespondingRoom")
+    private Set<RentalReceipts> RentalReceipts;
 
     // Constructors
     public Room() {

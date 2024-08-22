@@ -25,21 +25,14 @@
 
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
-		 <property name="dataSource" ref="dataSourceBean" />
-		<!--	<property name="mappingResources">
-			<list>
-				<value>com/spring/sample/entity/user.hbm.xml</value>
-				<value>com/spring/sample/entity/roomtype.hbm.xml</value> 
-				<value>com/spring/sample/entity/room.hbm.xml</value>
-			</list>
-		</property> -->
+		<property name="dataSource" ref="dataSourceBean" />
 		<property name="packagesToScan" value="com.spring.sample.entity" />
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">${jdbc.dialect}</prop>
 				<prop key="hibernate.show_sql">${jdbc.show_sql}</prop>
 				<prop key="hibernate.format_sql">${jdbc.format_sql}</prop>
-				<prop key="hibernate.hbm2ddl.auto">none</prop>
+				<prop key="hibernate.hbm2ddl.auto">${jdbc.hbm2ddl.auto}</prop>
 			</props>
 		</property>
 	</bean>

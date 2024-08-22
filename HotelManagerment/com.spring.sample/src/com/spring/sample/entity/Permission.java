@@ -6,36 +6,36 @@ import java.io.Serializable;
 import java.util.Set;
 
 @Entity
-@Table(name = "PERMISSIONS")
+@Table(name = "PERMISSIONS") // PHAN QUYEN
 public class Permission extends BaseEntity implements Serializable {
 
     @Id
     @Column(name = "PermissionID")
-    private int permissionID;
+    private int permissionID; // MA PHAN QUYEN
 
     @Column(name = "PermissionName")
-    private String permissionName;
+    private String permissionName; // TEN PHAN QUYEN
 
     @Column(name = "RoomManagement")
-    private int roomManagement;
+    private int roomManagement; // QUYEN QUAN LY DANH MUC PHONG
 
     @Column(name = "RentalReceiptManagement")
-    private int rentalReceiptManagement;
+    private int rentalReceiptManagement; // QUYEN QUAN LY PHIEU THUE PHONG
 
     @Column(name = "RoomLookup")
-    private int roomLookup;
+    private int roomLookup; // QUYEN TRA CUU PHONG
 
     @Column(name = "InvoiceManagement")
-    private int invoiceManagement;
+    private int invoiceManagement; // QUYEN LAP HOA DON THANH TOAN
 
     @Column(name = "RevenueReport")
-    private int revenueReport;
+    private int revenueReport; // QUYEN LAP BAO CAO DOANH THU
 
     @Column(name = "UserManagement")
-    private int userManagement;
+    private int userManagement; // QUYEN QUAN LY TAI KHOAN
 
     @Column(name = "RegulationManagement")
-    private int regulationManagement;
+    private int regulationManagement; // QUYEN LAP QUY DINH
 
     @OneToMany(mappedBy = "permission")
     private Set<Users> users;
