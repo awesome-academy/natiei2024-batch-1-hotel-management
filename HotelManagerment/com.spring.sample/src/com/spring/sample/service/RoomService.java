@@ -10,7 +10,7 @@ public interface RoomService {
 
 	void deleteRoomById(Integer roomID);
 
-	void UpdateRoom(Integer roomID, String nameRoom, String note, RoomType roomType);
+	void updateRoom(Integer roomID, String nameRoom, String note, RoomType roomType);
 
 	void save(Room newRoom);
 }

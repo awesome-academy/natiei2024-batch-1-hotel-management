@@ -5,8 +5,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
 
-@Entity
-@Table(name = "PERMISSIONS") // PHAN QUYEN
+@Entity(name = "PERMISSIONS")
 public class Permission extends BaseEntity implements Serializable {
 
     @Id
@@ -39,6 +38,11 @@ public class Permission extends BaseEntity implements Serializable {
 
     @OneToMany(mappedBy = "permission")
     private Set<Users> users;
+    
+ // Constructors
+    public Permission() {
+        System.out.println("Da khoi tao thanh cong permission");
+    }
 
     // Getters and Setters
 

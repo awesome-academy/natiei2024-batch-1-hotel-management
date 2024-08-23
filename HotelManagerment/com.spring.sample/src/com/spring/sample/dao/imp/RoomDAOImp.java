@@ -41,7 +41,7 @@ public class RoomDAOImp extends GenericDAOImp<Room, Integer> implements RoomDAO 
 	}
 
 	@Override
-	public void UpdateRoom(Integer roomID, String nameRoom, String note, RoomType roomType) {
+	public void updateRoom(Integer roomID, String nameRoom, String note, RoomType roomType) {
 		// Tìm entity bằng ID
 		Room room = getHibernateTemplate().get(Room.class, roomID);
 		if (room == null) {
