@@ -32,4 +32,10 @@ public class RoomServiceImp extends BaseServiceImpl implements RoomService {
 	public void save(Room newRoom) {
 		roomDAO.save(newRoom);
 	}
+	
+	@Override
+	public List<Room> filterRoom(Integer roomID, String roomType, Integer roomStatus){
+		return roomDAO.filterRoom(roomID, roomType, roomStatus);
+	}
+	
 }
