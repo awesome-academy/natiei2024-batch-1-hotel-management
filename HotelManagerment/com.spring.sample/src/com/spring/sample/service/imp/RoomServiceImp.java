@@ -24,8 +24,8 @@ public class RoomServiceImp extends BaseServiceImpl implements RoomService {
 	}
 
 	@Override
-	public void UpdateRoom(Integer roomID, String nameRoom, String note, RoomType roomType) {
-		roomDAO.UpdateRoom(roomID, nameRoom, note, roomType);
+	public void updateRoom(Integer roomID, String nameRoom, String note, RoomType roomType) {
+		roomDAO.updateRoom(roomID, nameRoom, note, roomType);
 	}
 
 	@Override

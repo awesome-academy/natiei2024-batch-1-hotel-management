@@ -63,7 +63,7 @@ public class RoomCategoriesController {
 		// Tìm RoomType bằng ID
 		RoomType roomType = roomTypeService.findById(typeRoomId);
 		// Cập nhật phòng
-		roomService.UpdateRoom(roomID, nameRoom, note, roomType);
+		roomService.updateRoom(roomID, nameRoom, note, roomType);
 		return "redirect:/room-categories";
 	}
 

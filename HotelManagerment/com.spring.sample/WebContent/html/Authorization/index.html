@@ -51,13 +51,15 @@
 		</aside>
 		<!-- Thanh nav end -->
 		<div class="main p-3 bg-white-1">
-			<div class="shadowCustom overflow-hidden rounded d-flex justify-content-between align-items-center mb-4 p-3 bg-white">
+			<div
+				class="shadowCustom overflow-hidden rounded d-flex justify-content-between align-items-center mb-4 p-3 bg-white">
 				<h1 style="margin: 0;">Quy định</h1>
 				<h1 style="margin: 0;">Xin chào, Nguyễn Văn A</h1>
 			</div>
 
 			<div class="row mx-0 mb-4 full-width">
-				<div id="room-category" class="authorization-table rounded overflow-auto shadowCustom bg-white rounded-3 mb-3">
+				<div id="room-category"
+					class="authorization-table rounded overflow-auto shadowCustom bg-white rounded-3 mb-3">
 					<table class="table table-hover position-sticky sticky-top top-0">
 						<thead>
 							<tr>
@@ -73,32 +75,151 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<th scope="row">Quản trị viên</th>
-								<td><img src="#" th:src="@{/resources/img/check.png}" width="20px" alt=""></td>
-								<td><img src="#" th:src="@{/resources/img/check.png}" width="20px" alt=""></td>
-								<td><img src="#" th:src="@{/resources/img/check.png}" width="20px" alt=""></td>
-								<td><img src="#" th:src="@{/resources/img/check.png}" width="20px" alt=""></td>
-								<td><img src="#" th:src="@{/resources/img/uncheck.png}" width="20px" alt=""></td>
-								<td><img src="#" th:src="@{/resources/img/check.png}" width="20px" alt=""></td>
-								<td><img src="#" th:src="@{/resources/img/check.png}" width="20px" alt=""></td>
-								<td><button class="btn btn-info">
-										<i class="lni lni-pencil-alt"></i>
-									</button></td>
-							</tr>
-							<tr>
-								<th scope="row">Nhân viên</th>
-								<td><img src="#" th:src="@{/resources/img/uncheck.png}" width="20px" alt=""></td>
-								<td><img src="#" th:src="@{/resources/img/uncheck.png}" width="20px" alt=""></td>
-								<td><img src="#" th:src="@{/resources/img/uncheck.png}" width="20px" alt=""></td>
-								<td><img src="#" th:src="@{/resources/img/check.png}" width="20px" alt=""></td>
-								<td><img src="#" th:src="@{/resources/img/check.png}" width="20px" alt=""></td>
-								<td><img src="#" th:src="@{/resources/img/uncheck.png}" width="20px" alt=""></td>
-								<td><img src="#" th:src="@{/resources/img/uncheck.png}" width="20px" alt=""></td>
-								<td><button class="btn btn-info">
-										<i class="lni lni-pencil-alt"></i>
-									</button></td>
-							</tr>
+							<th:block th:each="permissions : ${permissions}">
+								<tr>
+									<th scope="row" th:text="${permissions.permissionName}"></th>
+									<td><img
+										th:src="@{${permissions.roomManagement} ? '/resources/img/check.png' : '/resources/img/uncheck.png'}"
+										width="20px" alt=""></td>
+									<td><img
+										th:src="@{${permissions.rentalReceiptManagement} ? '/resources/img/check.png' : '/resources/img/uncheck.png'}"
+										width="20px" alt=""></td>
+									<td><img
+										th:src="@{${permissions.roomLookup} ? '/resources/img/check.png' : '/resources/img/uncheck.png'}"
+										width="20px" alt=""></td>
+									<td><img
+										th:src="@{${permissions.invoiceManagement} ? '/resources/img/check.png' : '/resources/img/uncheck.png'}"
+										width="20px" alt=""></td>
+									<td><img
+										th:src="@{${permissions.RevenueReport} ? '/resources/img/check.png' : '/resources/img/uncheck.png'}"
+										width="20px" alt=""></td>
+									<td><img
+										th:src="@{${permissions.userManagement} ? '/resources/img/check.png' : '/resources/img/uncheck.png'}"
+										width="20px" alt=""></td>
+									<td><img
+										th:src="@{${permissions.regulationManagement} ? '/resources/img/check.png' : '/resources/img/uncheck.png'}"
+										width="20px" alt=""></td>
+									<td>
+										<!-- Nút sửa phân quyền -->
+										<button class="btn btn-info" data-bs-toggle="modal"
+											th:data-bs-target="'#updateAuthorizationModal' + ${permissions.permissionID}">
+											<i class="lni lni-pencil-alt"></i>
+										</button>
+									</td>
+								</tr>
+								<!-- Modal Sửa Thông Tin Phân Quyền -->
+								<div class="modal fade"
+									th:id="'updateAuthorizationModal' + ${permissions.permissionID}"
+									tabindex="-1" aria-labelledby="exampleModalLabel"
+									aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h1 class="modal-title fs-5" id="exampleModalLabel">Sửa
+													thông tin phân quyền</h1>
+												<button type="button" class="btn-close"
+													data-bs-dismiss="modal" aria-label="Close"></button>
+											</div>
+											<div class="modal-body">
+												<form th:action="@{/authorizations/updatePermissions}"
+													method="post">
+													<input type="hidden" name="ACTION" value="UPDATE_ROLE" />
+													<input type="hidden" name="permissionID"
+														th:value="${permissions.permissionID}" /> <input
+														type="hidden" name="permissionName"
+														th:value="${permissions.permissionName}" />
+
+													<div class="mb-3">
+														<label for="permissionName"
+															class="col-form-label fw-bold pt-0">Nhóm quyền:</label> <input
+															type="text" th:value="${permissions.permissionName}"
+															readonly class="form-control" id="permissionName">
+													</div>
+
+													<div
+														class="form-check form-switch mb-3 p-0 d-flex justify-content-between align-center">
+														<label class="form-check-label fw-bold"
+															for="roomManagement_<%=i%>">Màn hình danh mục
+															phòng:</label> <input class="form-check-input" type="checkbox"
+															name="roomManagement" role="switch"
+															th:id="'roomManagement_' + ${permissions.permissionID}"
+															th:checked="${permissions.roomManagement == 1}">
+													</div>
+
+													<div
+														class="form-check form-switch mb-3 p-0 d-flex justify-content-between align-center">
+														<label class="form-check-label fw-bold"
+															for="rentalReceiptManagement_<%=i%>">Màn hình lập
+															phiếu thuê phòng:</label> <input class="form-check-input"
+															type="checkbox" name="rentalReceiptManagement"
+															role="switch"
+															th:id="'rentalReceiptManagement_' + ${permissions.permissionID}"
+															th:checked="${permissions.rentalReceiptManagement == 1}">
+													</div>
+
+													<div
+														class="form-check form-switch mb-3 p-0 d-flex justify-content-between align-center">
+														<label class="form-check-label fw-bold"
+															for="roomLookup_<%=i%>">Màn hình tra cứu:</label> <input
+															class="form-check-input" type="checkbox"
+															name="roomLookup" role="switch"
+															th:id="'roomLookup_' + ${permissions.permissionID}"
+															th:checked="${permissions.roomLookup == 1}">
+													</div>
+
+													<!-- Thêm các trường phân quyền khác tương tự ở đây -->
+													<div
+														class="form-check form-switch mb-3 p-0 d-flex justify-content-between align-center">
+														<label class="form-check-label fw-bold"
+															for="invoiceManagement_<%=i%>">Màn hình lập hóa
+															đơn:</label> <input class="form-check-input" type="checkbox"
+															name="invoiceManagement" role="switch"
+															th:id="'invoiceManagement_' + ${permissions.permissionID}"
+															th:checked="${permissions.invoiceManagement == 1}">
+													</div>
+
+													<div
+														class="form-check form-switch mb-3 p-0 d-flex justify-content-between align-center">
+														<label class="form-check-label fw-bold"
+															for="revenueReport_<%=i%>">Màn hình báo cáo doanh
+															thu:</label> <input class="form-check-input" type="checkbox"
+															name="revenueReport" role="switch"
+															th:id="'revenueReport_' + ${permissions.permissionID}"
+															th:checked="${permissions.revenueReport == 1}">
+													</div>
+
+													<div
+														class="form-check form-switch mb-3 p-0 d-flex justify-content-between align-center">
+														<label class="form-check-label fw-bold"
+															for="userManagement_<%=i%>">Màn hình quản lý
+															người dùng:</label> <input class="form-check-input"
+															type="checkbox" name="userManagement" role="switch"
+															th:id="'userManagement_' + ${permissions.permissionID}"
+															th:checked="${permissions.userManagement == 1}">
+													</div>
+
+													<div
+														class="form-check form-switch mb-3 p-0 d-flex justify-content-between align-center">
+														<label class="form-check-label fw-bold"
+															for="regulationManagement_<%=i%>">Màn hình quản
+															lý quy định:</label> <input class="form-check-input"
+															type="checkbox" name="regulationManagement" role="switch"
+															th:id="'regulationManagement_' + ${permissions.permissionID}"
+															th:checked="${permissions.regulationManagement == 1}">
+													</div>
+
+													<div class="modal-footer p-0">
+														<button type="button" class="btn btn-secondary"
+															data-bs-dismiss="modal">Đóng</button>
+														<button type="submit" class="btn btn-info fw-bold">Cập
+															nhật</button>
+													</div>
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+							</th:block>
 						</tbody>
 					</table>
 				</div>
@@ -118,32 +239,112 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<th scope="row">Nguyễn Văn A</th>
-									<td>nguyenvana@example.com</td>
-									<td>Quản trị viên</td>
-									<td>
-										<button class="btn btn-info">
-											<i class="lni lni-pencil-alt"></i>
-										</button>
-										<button class="btn btn-danger">
-											<i class="lni lni-trash-can"></i>
-										</button>
-									</td>
-								</tr>
-								<tr>
-									<th scope="row">Trần Văn B</th>
-									<td>tranvanb@example.com</td>
-									<td>Nhân viên</td>
-									<td>
-										<button class="btn btn-info">
-											<i class="lni lni-pencil-alt"></i>
-										</button>
-										<button class="btn btn-danger">
-											<i class="lni lni-trash-can"></i>
-										</button>
-									</td>
-								</tr>
+								<th:block th:each="users, iterStat : ${users}">
+									<tr>
+										<th scope="row" th:text="${iterStat.count}"></th>
+										<td th:text="${users.username}"></td>
+										<td th:text="${users.permission.permissionName}"></td>
+										<td>
+											<!-- Nút sửa -->
+											<button type="button" class="btn btn-info"
+												data-bs-toggle="modal"
+												th:data-bs-target="'#updateModalUser' + ${iterStat.count}">
+												<i class="lni lni-pencil-alt"></i>
+											</button> | <!-- Nút xóa -->
+											<button type="button" class="btn btn-danger"
+												data-bs-toggle="modal"
+												th:data-bs-target="'#deleteModalUser' + ${iterStat.count}">
+												<i class="lni lni-trash-can"></i>
+											</button>
+										</td>
+									</tr>
+
+									<!-- Modal Sửa Thông Tin Người Dùng -->
+									<div class="modal fade"
+										th:id="'updateModalUser' + ${iterStat.count}" tabindex="-1"
+										aria-labelledby="exampleModalLabel" aria-hidden="true">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h1 class="modal-title fs-5" id="exampleModalLabel">
+														Sửa thông tin người dùng <span th:text="${users.fullName}"></span>
+													</h1>
+													<button type="button" class="btn-close"
+														data-bs-dismiss="modal" aria-label="Close"></button>
+												</div>
+												<div class="modal-body">
+													<form th:action="@{/authorizations/update}" method="post">
+														<div class="mb-3">
+															<label for="recipient-name" class="col-form-label">Tên
+																người dùng:</label> <input type="text" class="form-control"
+																name="fullName" id="recipient-name"
+																th:value="${users.fullName}">
+														</div>
+														<input type="hidden" name="ACTION" value="UPDATE_USER" />
+														<div class="mb-3">
+															<label for="recipient-email" class="col-form-label">Email:</label>
+															<input type="text" class="form-control" name="username"
+																id="recipient-email" th:value="${users.username}"
+																readonly>
+														</div>
+
+
+														<div class="mb-3">
+															<label for="RoleGroup" class="col-form-label">Nhóm
+																quyền:</label> <select id="RoleGroup" class="form-select"
+																name="roleId">
+																<option th:each="permissions : ${permissions}"
+																	th:value="${permissions.permissionID}"
+																	th:text="${permissions.permissionName}"
+																	th:selected="${permissions.permissionID== users.permission.permissionID}">
+																</option>
+															</select>
+														</div>
+
+
+														<div class="modal-footer p-0">
+															<button type="button" class="btn btn-secondary"
+																data-bs-dismiss="modal">Đóng</button>
+															<button type="submit" class="btn btn-info fw-bold">Cập
+																nhật</button>
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>
+									</div>
+
+
+									<!-- Modal Xóa -->
+									<div class="modal fade"
+										th:id="'deleteModalUser' + ${iterStat.count}" tabindex="-1"
+										aria-labelledby="exampleModalLabel" aria-hidden="true">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h1 class="modal-title fs-5" id="exampleModalLabel">Xóa
+														Tài Khoản</h1>
+													<button type="button" class="btn-close"
+														data-bs-dismiss="modal" aria-label="Close"></button>
+												</div>
+												<div class="modal-body">
+													Bạn có chắc chắn muốn xóa tài khoản <span
+														th:text="${users.username}"></span>?
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-secondary"
+														data-bs-dismiss="modal">Đóng</button>
+													<form th:action="@{/authorizations/delete}" method="post"
+														style="display: inline;">
+														<input type="hidden" name="username"
+															th:value="${users.username}" />
+														<button type="submit" class="btn btn-danger">Xóa</button>
+													</form>
+												</div>
+											</div>
+										</div>
+									</div>
+								</th:block>
 							</tbody>
 						</table>
 					</div>
@@ -154,8 +355,9 @@
 					class="col-4 p-0 d-flex flex-column justify-content-between mh-100 addAccount">
 					<h5 class="text-center mb-2 bg-white p-2 rounded-3 shadowCustom">Thêm
 						tài khoản</h5>
-					<form action="#"
-						class="white bg- p-2 rounded-3 shadowCustom bg-white" method="get">
+					<form th:action="@{/authorizations/add}" method="post"
+						class="white bg- p-2 rounded-3 shadowCustom bg-white">
+						<input type="hidden" name="ACTION" value="ADD_USER" />
 						<!-- Hidden input to store the action type -->
 						<input type="hidden" name="ACTION" value="ADD_USER" />
 
@@ -170,8 +372,7 @@
 						<div class="mb-3">
 							<label for="userName" class="form-label">Email</label> <input
 								type="email" class="form-control" name="userName" id="userName"
-								required> <small class="text-danger">
-								<!-- Error message placeholder -->
+								required> <small class="text-danger"> <!-- Error message placeholder -->
 							</small>
 						</div>
 
@@ -189,10 +390,12 @@
 							<label for="roleId" class="form-label">Nhóm quyền</label> <select
 								id="roleId" name="roleId" class="form-select" required>
 								<option value="">--Chọn nhóm quyền--</option>
-								<option value="1">Quản trị viên</option>
-								<option value="2">Nhân viên</option>
+								<option th:each="permissions : ${permissions}"
+									th:value="${permissions.permissionID}"
+									th:text="${permissions.permissionName}"></option>
 							</select>
 						</div>
+
 
 						<!-- Submit button centered -->
 						<div class="d-flex justify-content-center">

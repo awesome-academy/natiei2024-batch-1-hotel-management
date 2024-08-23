@@ -4,10 +4,9 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "USERS") // BANG TAI KHOAN NGUOI DUNG
-public class Users extends BaseEntity implements Serializable {
-
+@Entity(name = "USERS")
+public class Users extends BaseEntity implements Serializable{
+    
     @Id
     @Column(name = "Username", length = 50)
     private String username;
@@ -21,6 +20,11 @@ public class Users extends BaseEntity implements Serializable {
     @ManyToOne
     @JoinColumn(name = "PermissionID")
     private Permission permission;
+    
+ // Constructors
+    public Users() {
+        System.out.println("Da khoi tao thanh cong users");
+    }
 
     // Getters and Setters
 
