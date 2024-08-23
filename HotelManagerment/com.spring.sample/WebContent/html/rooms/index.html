@@ -96,7 +96,8 @@
                                         type="text"
                                         placeholder="Mã phòng..."
                                         id="roomId"
-                                        name="roomId"
+                                        th:name="roomId"
+                                        th:value="${searchedRoomId}"
                                     />
                                 </div>
                             </div>
@@ -110,7 +111,7 @@
                                     name="roomType"
                                     id="roomType"
                                 >
-                                    <option value="-1">Tất cả</option>
+                                    <option th:value="-1" th:selected="${searchedRoomType == -1}">Tất cả</option>
                                     <th:block
                                         th:if="${!#lists.isEmpty(roomTypes)}"
                                     >
@@ -118,6 +119,7 @@
                                             th:each="type : ${roomTypes}"
                                             th:value="${type.roomTypeName}"
                                             th:text="${type.roomTypeName}"
+                                            th:selected="${type.roomTypeName == searchedRoomType}"
                                         ></option>
                                     </th:block>
                                 </select>
@@ -132,16 +134,21 @@
                                     name="roomStatus"
                                     id="roomStatus"
                                 >
-                                    <option value="-1">Tất cả</option>
-                                    <option value="0">Trống</option>
-                                    <option value="1">Đã thuê</option>
+                                    <option th:value="-1" th:selected="${searchedRoomStatus == -1}">Tất cả</option>
+                                    <option th:value="0" th:selected="${searchedRoomStatus == 0}">Trống</option>
+                                    <option th:value="1" th:selected="${searchedRoomStatus == 1}">Đã thuê</option>
                                 </select>
                             </div>
 
-                            <div class="sub-room-search room-button">
+                            <div class="sub-room-search room-button flex-row small-gap">
                                 <button type="submit" class="btn btn-primary">
                                     Tìm kiếm
                                 </button>
+                                <a th:href="@{/rooms}">
+									<button type="button" class="btn btn-danger">
+	                                    Đặt lại
+	                                </button>
+                                </a>
                             </div>
                         </form>
                     </div>
@@ -162,9 +169,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <th:block
-                                        th:if="${#lists.isEmpty(rooms)}"
-                                    >
+                                    <th:block th:if="${#lists.isEmpty(rooms)}">
                                         <tr>
                                             <td
                                                 colspan="6"
@@ -175,6 +180,15 @@
                                                 "
                                             >
                                                 Không có kết quả nào
+
+                                                <div
+                                                    th:if="${errorMessage != null}"
+                                                >
+                                                    <p
+                                                        th:text="${errorMessage}"
+                                                        style="color: red"
+                                                    ></p>
+                                                </div>
                                             </td>
                                         </tr>
                                     </th:block>

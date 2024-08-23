@@ -31,28 +31,30 @@ public class RoomsController {
 	
 	@GetMapping(value ="/rooms")
 	public String index(ModelMap model, 
-	        @RequestParam(value = "roomId", required = false, defaultValue = "-1") String roomIdStr,
-	        @RequestParam(value = "roomType", required = false, defaultValue = "-1") String roomType,
-	        @RequestParam(value = "roomStatus", required = false, defaultValue = "-1") Integer roomStatus) {
+			@RequestParam(value = "roomId", required = false, defaultValue = "-1") String roomIdStr,
+			@RequestParam(value = "roomType", required = false, defaultValue = "-1") String roomType,
+			@RequestParam(value = "roomStatus", required = false, defaultValue = "-1") Integer roomStatus) {
+		List<Room> rooms = new ArrayList<>();
+		List<RoomType> roomTypes = new ArrayList();
+		Integer roomID = -1;
 		logger.info("Requesting login form");
-		List<Room> rooms = roomService.getAllRooms();
-		List<RoomType> roomTypes = roomTypeService.getAllTypeRooms();
-
-	    Integer roomID = -1;
-
-	    try {
-	        if (roomIdStr != null && !roomIdStr.isEmpty()) {
-	            roomID = Integer.parseInt(roomIdStr);
-	        }             
-	        rooms = roomService.filterRoom(roomID, roomType, roomStatus);
-	        roomTypes = roomTypeService.getAllTypeRooms();
-	    } catch (Exception e) {
-	        System.err.println("Error filtering rooms: " + e.getMessage());
-	    } finally {
-	        model.addAttribute("rooms", rooms);
-	        model.addAttribute("roomTypes", roomTypes);
-	    }
-	    return "rooms/index";
+		try {
+			roomTypes = roomTypeService.getAllTypeRooms();
+			if (roomIdStr != null && !roomIdStr.isEmpty()) {
+				roomID = Integer.parseInt(roomIdStr);
+			} 			 
+			rooms = roomService.filterRoom(roomID, roomType, roomStatus);
+		} catch (Exception e) {
+			model.addAttribute("errorMessage",
+					"Lưu ý: Mã phòng không bao gồm chữ và ký tự đặc biệt");
+		} finally {
+			model.addAttribute("rooms", rooms);
+			model.addAttribute("roomTypes", roomTypes);
+			model.addAttribute("searchedRoomId", roomIdStr.equals("-1") ? "" : roomIdStr);
+			model.addAttribute("searchedRoomType", roomType);
+			model.addAttribute("searchedRoomStatus", roomStatus);
+		}
+		return "rooms/index";
 	}
 
 }
