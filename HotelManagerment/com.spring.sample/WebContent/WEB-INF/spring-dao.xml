@@ -42,4 +42,8 @@
 	</bean>
 	 
 	
+	<bean id="revenuesDAO"
+		class="com.spring.sample.dao.imp.RevenuesDAOImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>	
 </beans>
