@@ -1,5 +1,4 @@
 package com.spring.sample.controller;
-
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -10,7 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import com.spring.sample.entity.Users;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import com.spring.sample.model.RevenuesModel;
 import com.spring.sample.service.RevenuesService;
 import com.spring.sample.service.RoomTypeService;
@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+
 @Controller
 @RequestMapping("/revenues")
 public class RevenuesController {
@@ -30,6 +31,18 @@ public class RevenuesController {
 
     @Autowired
     private RoomTypeService roomTypeService;
+
+    @ModelAttribute
+    public void checkLoggedIn(HttpSession session, Model model) {
+        Users usersSession = (Users) session.getAttribute("users");
+
+        // Kiểm tra xem người dùng đã đăng nhập chưa hoặc không có quyền truy cập
+        if (usersSession == null || usersSession.getPermission().getRevenueReport() == 0) {
+            model.addAttribute("errorMessage", "Vui lòng đăng nhập hoặc bạn không có quyền truy cập vào chức năng này.");
+            // Chuyển hướng về trang đăng nhập
+            throw new RuntimeException("Bạn chưa đăng nhập hoặc không có quyền truy cập vào trang này"); // Ném ngoại lệ để chuyển hướng
+        }
+    }
 
     @GetMapping
     public String index(Model model) {

@@ -28,4 +28,9 @@ public class UsersServiceImp extends BaseServiceImpl implements UsersService {
 	public Users findByUsername(String username) {
 		return usersDAO.findByUsername(username);
 	}
+
+	@Override
+	public Users isValidUser(String email, String password) {
+		return usersDAO.isValidUser(email, password);
+	}
 }	

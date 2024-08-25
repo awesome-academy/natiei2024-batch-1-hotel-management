@@ -9,50 +9,15 @@
 
 <body>
     <div class="wrapper position-relative">
-        <aside id="sidebar" class="expand vh-100 sticky-top">
-            <div class="d-flex">
-                <button class="toggle-btn" type="button">
-                    <i class="lni lni-grid-alt"></i>
-                </button>
-                <div class="sidebar-logo">
-                    <a href="/home">Kala Hotel</a>
-                </div>
-            </div>
-            <ul class="sidebar-nav">
-                <li><a href="/room-category" class="sidebar-link"> <i class="lni lni-tab"></i> <span>Danh mục
-                            phòng</span>
-                    </a></li>
-                <li><a href="/bill-for-rent" class="sidebar-link"> <i class="lni lni-agenda"></i> <span>Phiếu thuê
-                            phòng</span>
-                    </a></li>
-                <li><a href="/search" class="sidebar-link"> <i class="lni lni-search-alt"></i> <span>Tra cứu
-                            phòng</span>
-                    </a></li>
-                <li><a href="/reciept" class="sidebar-link"> <i class="lni lni-postcard"></i> <span>Hóa đơn thanh
-                            toán</span>
-                    </a></li>
-                <li><a href="/revenue" class="sidebar-link"> <i class="lni lni-target-revenue"></i> <span>Báo cáo doanh
-                            thu</span>
-                    </a></li>
-                <li><a href="/authorization" class="sidebar-link"> <i class="lni lni-users"></i> <span>Phân quyền tài
-                            khoản</span>
-                    </a></li>
-                <li><a href="/setting" class="sidebar-link"> <i class="lni lni-cogs"></i> <span>Quy định</span>
-                    </a></li>
-            </ul>
-            <div class="sidebar-footer">
-                <a href="/logout" class="sidebar-link"> <i class="lni lni-exit"></i>
-                    <span>Đăng xuất</span>
-                </a>
-            </div>
-        </aside>
+        <!-- aside page -->
+		<div th:replace="templates/sidebar"></div>
         <div class="main p-3 bg-white-1">
             <div
                 class="shadowCustom overflow-hidden rounded d-flex justify-content-between align-items-center mb-4 p-3 bg-white">
                 <h1 style="margin: 0;">Quy định</h1>
-                <h1 style="margin: 0;">Xin chào,
-                    Tester
-                </h1>
+               <h1 style="margin: 0;">
+					Xin chào, <span th:text="${session.users.fullName}"> </span>
+				</h1>
             </div>
             <div class="row mx-0 mb-3">
                 <div class="col-6 p-0">

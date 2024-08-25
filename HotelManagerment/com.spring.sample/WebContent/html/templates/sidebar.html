@@ -1,0 +1,70 @@
+<aside id="sidebar" class="expand vh-100 sticky-top">
+			<div class="d-flex">
+				<button class="toggle-btn" type="button">
+					<i class="lni lni-grid-alt"></i>
+				</button>
+				<div class="sidebar-logo">
+					<a th:href="@{/room-categories}">Kala Hotel</a>
+				</div>
+			</div>
+			<ul class="sidebar-nav">
+
+				<li th:if="${session.users.permission.roomManagement == 1}"
+				th:classappend="${#httpServletRequest.requestURI == '/hotel-manager/room-categories'} ? 'active'"
+				><a
+					th:href="@{/room-categories}" class="sidebar-link "> <i
+						class="lni lni-tab"></i> <span>Danh mục phòng</span>
+				</a></li>
+
+				<li th:if="${session.users.permission.rentalReceiptManagement == 1}"
+				th:classappend="${#httpServletRequest.requestURI == '/hotel-manager/bill-for-rents'} ? 'active'"
+				><a
+					th:href="@{/bill-for-rents}" class="sidebar-link"> <i
+						class="lni lni-agenda"></i> <span>Phiếu thuê phòng</span>
+				</a></li>
+
+
+				<li th:if="${session.users.permission.roomLookup == 1}"
+				th:classappend="${#httpServletRequest.requestURI == '/hotel-manager/search'} ? 'active'"
+				><a
+					th:href="@{/search}" class="sidebar-link"> <i
+						class="lni lni-search-alt"></i> <span>Tra cứu phòng</span>
+				</a></li>
+
+
+				<li th:if="${session.users.permission.invoiceManagement == 1}"
+				th:classappend="${#httpServletRequest.requestURI == '/hotel-manager/reciept'} ? 'active'"
+				><a
+					th:href="@{/reciept}" class="sidebar-link"> <i
+						class="lni lni-postcard"></i> <span>Hóa đơn thanh toán</span>
+				</a></li>
+
+
+				<li th:if="${session.users.permission.revenueReport == 1}"
+				th:classappend="${#httpServletRequest.requestURI == '/hotel-manager/revenues'} ? 'active'"
+				><a
+					th:href="@{/revenues}" class="sidebar-link"> <i
+						class="lni lni-target-revenue"></i> <span>Báo cáo doanh thu</span>
+				</a></li>
+
+
+				<li th:if="${session.users.permission.userManagement == 1}"
+				th:classappend="${#httpServletRequest.requestURI == '/hotel-manager/authorizations'} ? 'active'"
+				><a
+					th:href="@{/authorizations}" class="sidebar-link"> <i
+						class="lni lni-users"></i> <span>Phân quyền tài khoản</span>
+				</a></li>
+
+				<li th:if="${session.users.permission.regulationManagement == 1}"
+				th:classappend="${#httpServletRequest.requestURI == '/hotel-manager/regulations'} ? 'active'"
+				><a
+					th:href="@{/regulations}" class="sidebar-link"> <i
+						class="lni lni-cogs"></i> <span>Quy định</span>
+				</a></li>
+			</ul>
+			<div class="sidebar-footer">
+				<a th:href="@{/logout}" class="sidebar-link"> <i
+					class="lni lni-exit"></i> <span>Đăng xuất</span>
+				</a>
+			</div>
+		</aside>

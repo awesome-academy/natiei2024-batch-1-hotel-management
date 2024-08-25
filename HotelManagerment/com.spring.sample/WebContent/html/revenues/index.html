@@ -19,34 +19,15 @@
 </head>
 <body>
   <div class="wrapper">
-       <aside id="sidebar" class="expand vh-100 sticky-top">
-           <div class="d-flex">
-               <button class="toggle-btn" type="button">
-                   <i class="lni lni-grid-alt"></i>
-               </button>
-               <div class="sidebar-logo">
-                   <a href="/room-category">Kala Hotel</a>
-               </div>
-           </div>
-           <ul class="sidebar-nav">
-               <li class="sidebar-item"><a href="/room-category" class="sidebar-link"> <i class="lni lni-tab"></i> <span>Danh mục phòng</span> </a></li>
-               <li class="sidebar-item"><a href="/bill-for-rent" class="sidebar-link"> <i class="lni lni-agenda"></i> <span>Phiếu thuê phòng</span> </a></li>
-               <li class="sidebar-item"><a href="/search" class="sidebar-link"> <i class="lni lni-search-alt"></i> <span>Tra cứu phòng</span> </a></li>
-               <li class="sidebar-item"><a href="/reciept" class="sidebar-link"> <i class="lni lni-postcard"></i> <span>Hóa đơn thanh toán</span> </a></li>
-               <li class="sidebar-item"><a href="/revenues" class="sidebar-link active"> <i class="lni lni-target-revenue"></i> <span>Báo cáo doanh thu</span> </a></li>
-               <li class="sidebar-item"><a href="/authorization" class="sidebar-link"> <i class="lni lni-users"></i> <span>Phân quyền tài khoản</span> </a></li>
-               <li class="sidebar-item"><a href="/setting" class="sidebar-link"> <i class="lni lni-cogs"></i> <span>Quy định</span> </a></li>
-           </ul>
-           <div class="sidebar-footer">
-               <a href="/logout" class="sidebar-link">
-                   <i class="lni lni-exit"></i> <span>Đăng xuất</span>
-               </a>
-           </div>
-       </aside>
-       <div class="main p-3 bg-white-1">
-           <div class="shadowCustom overflow-hidden rounded d-flex justify-content-between align-items-center mb-4 p-3 bg-white">
-               <h1 style="margin: 0;">Báo cáo doanh thu tháng</h1>
-           </div>
+       <!-- aside page -->
+		<div th:replace="templates/sidebar"></div>
+        <div class="main p-3 bg-white-1">
+            <div class="shadowCustom overflow-hidden rounded d-flex justify-content-between align-items-center mb-4 p-3 bg-white">
+                <h1 style="margin: 0;">Báo cáo doanh thu tháng</h1>
+               <h1 style="margin: 0;">
+					Xin chào, <span th:text="${session.users.fullName}"> </span>
+				</h1>
+            </div>
            <!-- Hiển thị thông báo lỗi (nếu có) -->
            <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
                <span th:text="${errorMessage}"></span>
