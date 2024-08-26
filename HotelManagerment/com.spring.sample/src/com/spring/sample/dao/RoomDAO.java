@@ -13,4 +13,6 @@ public interface RoomDAO {
 	void updateRoom(Integer roomID, String nameRoom, String note, RoomType roomType);
 
 	void save(Room newRoom);
+	
+	List<Room> filterRoom(Integer roomID, String roomType, Integer roomStatus);
 }

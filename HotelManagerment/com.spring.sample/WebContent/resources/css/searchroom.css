@@ -26,18 +26,17 @@ body {
     align-items: center;
     gap: 10px;
     border: 3px solid var(--secondary-blue);
-    border-radius: 20px;
+    border-radius: 10px;
     overflow: hidden;
     background-color: white;
 }
 .search-bar input {
-	margin: 0;
+    margin: 0;
     min-width: 100px;
     border: none;
     outline: none;
-/*     padding: 8px 0;
- */    
- 	font-size: 16px;
+    padding: 0 12px;
+    font-size: 16px;
     caret-color: var(--primary-blue);
     background-color: transparent;
 }
@@ -47,6 +46,7 @@ body {
     color: grey;
 }
 .room-container {
+    flex: 1;
     background-color: rgba(194, 181, 181, 0.148);
     padding: 30px 12px;
     border-radius: 5px;
@@ -56,6 +56,7 @@ body {
     gap: 30px;
 }
 .room-table {
+    flex: 1;
     border-radius: 6px;
     overflow: hidden;
 }
@@ -64,7 +65,7 @@ table {
     border-spacing: 0;
     text-align: center;
 }
-table tr:first-child {
+thead tr:first-child {
     background-color: #bfcfdb;
 }
 table tr:nth-child(even) {
@@ -78,32 +79,38 @@ table td {
     display: flex;
     gap: 30px;
 }
-.room-info-detail{
-	display:flex;
-	gap: 30px;
+.room-info-detail {
+    display: flex;
+    gap: 30px;
 }
-.sub-room-search{
-	display:flex;
-	flex-direction: column;
-	gap: 20px;
+.sub-room-search {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
-.form-select select{
-	height: 30px;
+.form-select select {
+    height: 30px;
 }
-select{
-	height: 30px;
-	border-radius: 5px;
+select {
+    height: 30px;
+    border-radius: 5px;
 }
-main{
-	padding: 16px;
+main {
+    padding: 16px;
+}
+.room-button button {
+    margin-top: auto;
+}
+.room-button button{
+	margin-top:auto;
 }
 
 /* override css */
 .container {
-	max-width: unset !important;
-	padding: 0 !important;
-	margin: 0 !important;
-	height: 100%;
+    max-width: unset !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    height: 100%;
 }
 .inner-container {
     height: 100%;
@@ -112,12 +119,13 @@ main{
 nav.sidebar-nav {
     box-sizing: border-box;
     position: unset;
-    max-width:210px;
+    max-width: 210px;
 }
 .inner-container main {
     flex: 1;
     max-height: 100%;
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
 }
-
-		
