@@ -3,6 +3,7 @@ package com.spring.sample.entity;
 import java.io.Serializable;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,10 +26,10 @@ public class RoomType extends BaseEntity implements Serializable {
 	@Column(name = "Price")
 	private Integer price; // GIA CA
 
-	@OneToMany(mappedBy = "roomType")
+	@OneToMany(mappedBy = "roomType", cascade = CascadeType.ALL)
 	Set<Room> rooms;
 
-	@OneToMany(mappedBy = "roomType")
+	@OneToMany(mappedBy = "roomType", cascade = CascadeType.ALL)
 	Set<Revenues> revenues;
 
 	public Set<Revenues> getRevenues() {

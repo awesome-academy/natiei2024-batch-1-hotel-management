@@ -28,4 +28,28 @@ public class RoomTypeDAOImp extends GenericDAOImp<RoomType, Integer> implements 
 		return query.uniqueResult();
 	}
 
+	@Override
+	public void updateRoomType(Integer id, String name, Integer price) {
+		RoomType obj = getSession().get(RoomType.class, id);
+		if (obj != null) {
+
+			obj.setRoomTypeName(name);
+			obj.setPrice(price);
+		}
+	}
+
+	@Override
+	public void deleteRoomType(Integer id) {
+		RoomType obj = getSession().get(RoomType.class, id);
+		getSession().remove(obj);
+	}
+
+	@Override
+	public void createRoomType(String name, Integer price) {
+		RoomType newObj = new RoomType();
+		newObj.setRoomTypeName(name);
+		newObj.setPrice(price);
+		getSession().save(newObj);
+	}
+
 }

@@ -9,7 +9,7 @@
 
 <body>
     <div class="wrapper position-relative">
-        <aside id="sidebar" class="expand vh-100 sticky-top">
+        <aside id="sidebar" class="expand sticky-top" style="height: 100vh;">
             <div class="d-flex">
                 <button class="toggle-btn" type="button">
                     <i class="lni lni-grid-alt"></i>
@@ -59,34 +59,139 @@
                     <div id="room-category"
                         class="position-relative authorization-table-1 rounded overflow-auto shadowCustom bg-white rounded-3 mb-3">
                         <h1 class="text-center py-2">Danh sách loại phòng</h1>
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th scope="col">STT</th>
-                                    <th scope="col">Loại phòng</th>
-                                    <th scope="col">Đơn giá</th>
-                                    <th scope="col">Thao tác</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Room Name</td>
-                                    <td>Price</td>
-                                    <td>
-                                        <button data-bs-toggle="modal" id="fix-btn" class="btn btn-info">
-                                            <i class="lni lni-pencil-alt"></i>
-                                        </button> |
-                                        <button data-bs-toggle="modal" class="btn btn-danger">
-                                            <i class="lni lni-trash-can"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div style="height: 300px; max-height: 300px; overflow-y: scroll; position: relative;">
+                            <table class="table table" style="border-collapse: collapse;">
+                                <thead style="position: sticky; top: -1px; z-index: 2; background-color: white;">
+                                    <tr>
+                                        <th scope="col">STT</th>
+                                        <th scope="col">Loại phòng</th>
+                                        <th scope="col">Đơn giá</th>
+                                        <th scope="col">Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <th:block th:each="typeRoom, iterStat : ${roomTypes}">
+                                        <tr>
+                                            <th scope="row" th:text="${iterStat.count}">1</th>
+                                            <td th:text="${typeRoom.roomTypeName}">Room Name</td>
+                                            <td th:text="${typeRoom.price}">Price</td>
+                                            <td>
+                                                <button data-bs-toggle="modal"
+                                                    th:data-bs-target="'#updateModalTypeRoom-' + ${iterStat.count}"
+                                                    id="fix-btn" class="btn btn-info">
+                                                    <i class="lni lni-pencil-alt"></i>
+                                                </button> |
+                                                <button data-bs-toggle="modal"
+                                                    th:data-bs-target="'#deleteModalTypeRoom-' + ${iterStat.count}"
+                                                    class="btn btn-danger">
+                                                    <i class="lni lni-trash-can"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+
+                                        <div class="modal fade" th:id="'updateModalTypeRoom-' + ${iterStat.count}"
+                                            tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                                            Sửa thông tin loại phòng [[${typeRoom.roomTypeName}]]
+                                                        </h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form
+                                                            th:action="@{/regulations/room-types/{id}(id=${typeRoom.roomTypeID})}"
+                                                            method="post">
+                                                            <div class="mb-3">
+                                                                <label for="recipient-name" class="col-form-label">Loại
+                                                                    phòng:</label>
+                                                                <input type="text" class="form-control"
+                                                                    name="typeRoomName" id="recipient-name"
+                                                                    th:value="${typeRoom.roomTypeName}">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="recipient-name" class="col-form-label">Đơn
+                                                                    giá:</label>
+                                                                <input type="number" class="form-control"
+                                                                    name="typeRoomPrice" id="recipient-name"
+                                                                    th:value="${typeRoom.price}">
+                                                            </div>
+
+                                                            <div class="modal-footer p-0">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-bs-dismiss="modal">Đóng</button>
+                                                                <button type="submit" class="btn btn-info fw-bold">Cập
+                                                                    nhật</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="modal fade" th:id="'deleteModalTypeRoom-' + ${iterStat.count}"
+                                            tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Xóa phòng
+                                                        </h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Bạn có chắc chắn muốn xóa loại phòng
+                                                        [[${typeRoom.roomTypeName}]]?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Đóng</button>
+                                                        <a th:href="@{/regulations/room-types/{id}/delete(id=${typeRoom.roomTypeID})}"
+                                                            class="btn btn-danger">Xóa</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </th:block>
+                                </tbody>
+                            </table>
+                        </div>
                         <div>
                             <button data-bs-toggle="modal" data-bs-target="#addModalTypeRoom" id="fix-btn"
                                 class="btn btn-info mb-3 mx-3 fw-bold">Thêm loại phòng</button>
+                        </div>
+                        <div class="modal fade" id="addModalTypeRoom" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Thêm loại phòng</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form th:action="@{/regulations/room-types}" method="post">
+                                            <div class="mb-3">
+                                                <label for="recipient-name" class="col-form-label">Loại phòng:</label>
+                                                <input type="text" class="form-control" name="typeRoomName"
+                                                    id="recipient-name">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="recipient-name" class="col-form-label">Đơn giá:</label>
+                                                <input type="number" class="form-control" name="typeRoomPrice"
+                                                    id="recipient-name">
+                                            </div>
+                                            <div class="modal-footer p-0">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Đóng</button>
+                                                <button type="submit" class="btn btn-info fw-bold">Thêm</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -97,31 +202,106 @@
                     <div id="room-category"
                         class="position-relative authorization-table-1 rounded overflow-auto shadowCustom bg-white rounded-3 mb-3">
                         <h1 class="text-center py-2">Danh sách loại khách</h1>
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th scope="col">STT</th>
-                                    <th scope="col">Loại khách</th>
-                                    <th scope="col">Tỉ lệ phụ thu</th>
-                                    <th scope="col">Thao tác</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Loại khách 1</td>
-                                    <td>10%</td>
-                                    <td>
-                                        <button data-bs-toggle="modal" id="fix-btn" class="btn btn-info">
-                                            <i class="lni lni-pencil-alt"></i>
-                                        </button> |
-                                        <button data-bs-toggle="modal" class="btn btn-danger">
-                                            <i class="lni lni-trash-can"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div style="height: 300px; max-height: 300px; overflow-y: scroll; position: relative;">
+                            <table class="table table-hover">
+                                <thead style="position: sticky; top: -1px; z-index: 2; background-color: white;">
+                                    <tr>
+                                        <th scope="col">STT</th>
+                                        <th scope="col">Loại khách</th>
+                                        <th scope="col">Tỉ lệ phụ thu</th>
+                                        <th scope="col">Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <th:block th:each="guestType, iterStat : ${guestTypes}">
+                                        <tr>
+                                            <th scope="row" th:text="${iterStat.count}">1</th>
+                                            <td th:text="${guestType.typeName}">Loại khách 1</td>
+                                            <td th:text="${guestType.surchargeRate}">10%</td>
+                                            <td>
+                                                <button data-bs-toggle="modal"
+                                                    th:data-bs-target="'#'+ ${iterStat.count} + 'updateModalTypeCustomer'"
+                                                    id="fix-btn" class="btn btn-info">
+                                                    <i class="lni lni-pencil-alt"></i>
+                                                </button> |
+                                                <button data-bs-toggle="modal"
+                                                    th:data-bs-target="'#'+ ${iterStat.count} + 'deleteModalTypeCustomer'"
+                                                    class="btn btn-danger">
+                                                    <i class="lni lni-trash-can"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <div class="modal fade" th:id="${iterStat.count} + 'updateModalTypeCustomer'"
+                                            tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                                            Sửa thông tin loại khách
+                                                            <span th:text="${guestType.typeName}"></span>
+                                                        </h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form
+                                                            th:action="@{/regulations/guest-types/{id}(id=${guestType.id})}"
+                                                            method="post">
+                                                            <div class="mb-3">
+                                                                <label for="recipient-name" class="col-form-label">Loại
+                                                                    khách:</label>
+                                                                <input type="text" class="form-control"
+                                                                    name="guestTypeName" id="recipient-name"
+                                                                    th:value="${guestType.typeName}">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="recipient-name" class="col-form-label">Tỉ lệ
+                                                                    phụ
+                                                                    thu:</label>
+                                                                <input type="number" min="0" max="10" step="0.01"
+                                                                    class="form-control" name="surchargeRate"
+                                                                    id="recipient-name"
+                                                                    th:value="${guestType.surchargeRate}">
+                                                            </div>
+                                                            <div class="modal-footer p-0">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-bs-dismiss="modal">Đóng</button>
+                                                                <button type="submit" class="btn btn-info fw-bold">Cập
+                                                                    nhật</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="modal fade" th:id="${iterStat.count} + 'deleteModalTypeCustomer'"
+                                            tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Xóa loại
+                                                            khách</h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Bạn có chắc chắn muốn xóa loại khách <span
+                                                            th:text="${guestType.typeName}"></span>?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Đóng</button>
+                                                        <a th:href="@{/regulations/guest-types/{id}/delete(id=${guestType.id})}"
+                                                            class="btn btn-danger">Xóa</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </th:block>
+                                </tbody>
+                            </table>
+                        </div>
 
                         <div>
                             <button data-bs-toggle="modal" data-bs-target="#addModalTypeCustomer" id="fix-btn"
@@ -139,19 +319,17 @@
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form th:action="@{/setting}" method="get">
-                                            <input type="hidden" name="ACTION" value="ADD_TYPE_CUSTOMER">
+                                        <form th:action="@{/regulations/guest-types}" method="post">
                                             <div class="mb-3">
                                                 <label for="recipient-name" class="col-form-label">Loại khách:</label>
-                                                <input type="text" name="typeCustomerName" class="form-control"
+                                                <input type="text" name="typeName" class="form-control"
                                                     id="recipient-name">
                                             </div>
                                             <div class="mb-3">
                                                 <label for="recipient-name" class="col-form-label">Tỉ lệ phụ
                                                     thu:</label>
-                                                <input type="number" min="0" max="10" step="0.01"
-                                                    name="typeCustomerChargeRate" class="form-control"
-                                                    id="recipient-name">
+                                                <input type="number" min="0" max="10" step="0.01" name="surchargeRate"
+                                                    class="form-control" id="recipient-name">
                                             </div>
                                             <div class="modal-footer p-0">
                                                 <button type="button" class="btn btn-secondary"
@@ -173,30 +351,98 @@
                     <div id="room-category"
                         class="position-relative authorization-table-1 rounded overflow-auto shadowCustom bg-white rounded-3 mb-3">
                         <h1 class="text-center py-2">Tỉ lệ phụ thu</h1>
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Khách thứ</th>
-                                    <th scope="col">Tỉ lệ</th>
-                                    <th scope="col">Thao tác</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>100%</td>
-                                    <td>
-                                        <button data-bs-toggle="modal" id="fix-btn" class="btn btn-info">
-                                            <i class="lni lni-pencil-alt"></i>
-                                        </button> |
-                                        <button data-bs-toggle="modal" class="btn btn-danger">
-                                            <i class="lni lni-trash-can"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
+                        <div style="height: 300px; max-height: 300px; overflow-y: scroll; position: relative;">
+                            <table class="table table-hover">
+                                <thead style="position: sticky; top: -1px; z-index: 2; background-color: white;">
+                                    <tr>
+                                        <th scope="col">Khách thứ</th>
+                                        <th scope="col">Tỉ lệ</th>
+                                        <th scope="col">Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <th:block th:each="surcharge : ${surchargeRates}">
+                                        <tr>
+                                            <td th:text="${surcharge.extraGuestCount}"></td>
+                                            <td th:text="${surcharge.surchargeRate}"></td>
+                                            <td>
+                                                <button data-bs-toggle="modal"
+                                                    th:data-bs-target="'#' + ${surcharge.extraGuestCount} + 'updateModalSurcharge'"
+                                                    id="fix-btn" class="btn btn-info">
+                                                    <i class="lni lni-pencil-alt"></i>
+                                                </button> |
+                                                <button data-bs-toggle="modal"
+                                                    th:data-bs-target="'#' + ${surcharge.extraGuestCount} + 'deleteModalSurcharge'"
+                                                    class="btn btn-danger">
+                                                    <i class="lni lni-trash-can"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <div class="modal fade"
+                                            th:id="${surcharge.extraGuestCount} + 'updateModalSurcharge'" tabindex="-1"
+                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                                            Sửa thông tin phụ thu khách thứ
+                                                            <span th:text="${surcharge.extraGuestCount}"></span>
+                                                        </h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form
+                                                            th:action="@{/regulations/surcharge-rates/{id}(id=${surcharge.extraGuestCount})}"
+                                                            method="post">
+                                                            <div class="mb-3">
+                                                                <label for="recipient-name" class="col-form-label">Tỉ
+                                                                    lệ:</label>
+                                                                <input type="number" min="0" max="10" step="0.01"
+                                                                    class="form-control" name="surchargeRate"
+                                                                    id="recipient-name"
+                                                                    th:value="${surcharge.surchargeRate}">
+                                                            </div>
+                                                            <div class="modal-footer p-0">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-bs-dismiss="modal">Đóng</button>
+                                                                <button type="submit" class="btn btn-info fw-bold">Cập
+                                                                    nhật</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                        </table>
+                                        <div class="modal fade"
+                                            th:id="${surcharge.extraGuestCount} + 'deleteModalSurcharge'" tabindex="-1"
+                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Xóa phụ thu
+                                                        </h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Bạn có chắc chắn muốn xóa tỉ lệ phụ thu khách thứ
+                                                        <span th:text="${surcharge.extraGuestCount}"></span> ?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Đóng</button>
+                                                        <a th:href="@{/regulations/surcharge-rates/{id}/delete(id=${surcharge.extraGuestCount})}"
+                                                            class="btn btn-danger">Xóa</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </th:block>
+                                </tbody>
+                            </table>
+                        </div>
                         <div>
                             <button data-bs-toggle="modal" data-bs-target="#addModalSurcharge" id="fix-btn"
                                 class="btn btn-info mb-3 mx-3 fw-bold">Thêm</button>
@@ -212,17 +458,16 @@
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form th:action="@{/setting}" method="get">
-                                            <input type="hidden" name="ACTION" value="ADD_SURCHARGE_RATE" />
+                                        <form th:action="@{/regulations/surcharge-rates}" method="post">
                                             <div class="mb-3">
                                                 <label for="orderOfCustomer" class="col-form-label">Khách thứ: </label>
-                                                <input type="number" min="1" max="100" step="1" class="form-control"
-                                                    name="orderOfCustomer" id="orderOfCustomer">
+                                                <input type="number" min="3" max="100" step="1" class="form-control"
+                                                    name="id" id="orderOfCustomer" value="3">
                                             </div>
                                             <div class="mb-3">
                                                 <label for="surchargeRate" class="col-form-label">Tỉ lệ: </label>
-                                                <input type="number" min="0" max="100" step="0.01" class="form-control"
-                                                    name="surchargeRate" id="surchargeRate">
+                                                <input type="number" min="1" max="100" step="0.01" class="form-control"
+                                                    name="surchargeRate" id="surchargeRate" value="1">
                                             </div>
 
                                             <div class="modal-footer p-0">
@@ -245,26 +490,73 @@
                     <div id="room-category"
                         class="position-relative authorization-table-1 rounded overflow-auto shadowCustom bg-white rounded-3 mb-3">
                         <h1 class="text-center py-2">Tham số</h1>
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Tham số</th>
-                                    <th scope="col">Giá trị</th>
-                                    <th scope="col">Thao tác</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>test</td>
-                                    <td>test</td>
-                                    <td>
-                                        <button data-bs-toggle="modal" id="fix-btn" class="btn btn-info">
-                                            <i class="lni lni-pencil-alt"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div style="height: 300px; max-height: 300px; overflow-y: scroll; position: relative;">
+                            <table class="table table-hover">
+                                <thead style="position: sticky; top: -1px; z-index: 2; background-color: white;">
+                                    <tr>
+                                        <th scope="col">Tham số</th>
+                                        <th scope="col">Giá trị</th>
+                                        <th scope="col">Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <th:block th:each="setting : ${settings}">
+                                        <tr>
+                                            <td th:text="${setting.settingName}"></td>
+                                            <td th:text="${setting.value}"></td>
+                                            <td>
+                                                <button data-bs-toggle="modal"
+                                                    th:data-bs-target="'#' + ${setting.settingName} + 'updateModalParam'"
+                                                    id="fix-btn" class="btn btn-info">
+                                                    <i class="lni lni-pencil-alt"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <div class="modal fade" th:id="${setting.settingName} + 'updateModalParam'"
+                                            tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Sửa thông
+                                                            tin tham số
+                                                        </h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form
+                                                            th:action="@{/regulations/settings/{id}(id=${setting.settingName})}"
+                                                            method="post">
+                                                            <div class="mb-3">
+                                                                <label for="paramName" class="col-form-label">Tên tham
+                                                                    số:</label>
+                                                                <input type="text" class="form-control" name="paramName"
+                                                                    id="paramName" th:value="${setting.settingName}"
+                                                                    readonly>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="paramValue" class="col-form-label">Giá
+                                                                    trị:</label>
+                                                                <input type="number" min="1" step="1"
+                                                                    class="form-control" id="paramValue"
+                                                                    name="paramValue" th:value="${setting.value}">
+                                                            </div>
+
+                                                            <div class="modal-footer p-0">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-bs-dismiss="modal">Đóng</button>
+                                                                <button type="submit" class="btn btn-info fw-bold">Cập
+                                                                    nhật</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </th:block>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
