@@ -24,7 +24,7 @@ import lombok.Setter;
 public class RentalReceipts extends BaseEntity implements Serializable {
 
     @Id
-    @Column(name = "ID")
+    @Column(name = "RentalReceiptID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id; // MA PHIEU THUE
 

@@ -51,6 +51,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
+				.antMatchers("/resources/**").permitAll()
+				.antMatchers("/webjars/**").permitAll()
+				.antMatchers("/home").permitAll()
+				.antMatchers("/login").permitAll()
+				.antMatchers("/signup").permitAll()
+				.antMatchers("/regulations").permitAll()
+				.antMatchers("/room-categories").permitAll() // Cho phép truy cập công khai vào /room-category để kiểm
+				.antMatchers("/receipts").permitAll()		
+				.antMatchers("/receipts/**").permitAll()								// tra HTML
 			 .antMatchers("/resources/**").permitAll()
         .antMatchers("/webjars/**").permitAll()
         .antMatchers("/home").permitAll()
