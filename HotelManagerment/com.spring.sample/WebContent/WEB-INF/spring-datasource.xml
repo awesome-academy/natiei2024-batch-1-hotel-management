@@ -4,15 +4,10 @@
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="
-        http://www.springframework.org/schema/beans
-        https://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/tx
-        https://www.springframework.org/schema/tx/spring-tx.xsd
-        http://www.springframework.org/schema/aop
-        https://www.springframework.org/schema/aop/spring-aop.xsd
-        http://www.springframework.org/schema/context
-        https://www.springframework.org/schema/context/spring-context.xsd">
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/tx https://www.springframework.org/schema/tx/spring-tx.xsd
+						http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd
+						http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 	<tx:annotation-driven proxy-target-class="true"
 		transaction-manager="transactionManager" />
 
@@ -42,16 +37,19 @@
 			</list>
 		</property>
 		<property name="hibernateProperties">
+		 <property name="dataSource" ref="dataSourceBean" />
+		 <property name="packagesToScan" value="com.spring.sample.entity" />
+		 <property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">${jdbc.dialect}</prop>
 				<prop key="hibernate.show_sql">${jdbc.show_sql}</prop>
 				<prop key="hibernate.format_sql">${jdbc.format_sql}</prop>
-				<prop key="hibernate.hbm2ddl.auto">none</prop>
+				<prop key="hibernate.hbm2ddl.auto">${jdbc.hbm2ddl.auto}</prop>
 			</props>
-		</property>
+		 </property>
 	</bean>
-
-	<!-- <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" 
+	<!-- <bean
+	class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" 
 		/> -->
 
 	<!-- HibernateTemplate là một cách tiện lợi để làm việc với Hibernate mà 

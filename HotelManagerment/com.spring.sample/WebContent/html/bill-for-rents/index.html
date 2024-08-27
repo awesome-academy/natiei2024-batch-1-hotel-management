@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html th:replace="~{templates/layout :: layout(~{::title}, ~{::body}, ~{})}" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="utf-8">
+    <title th:text="#{session.login.title}">Thuê phòng</title>
+    <meta name="description" th:attr="content=#{meta.description}" />
+    <meta name="keywords" th:attr="content=#{meta.keywords}" />
+</head>
+<body>
+	<div class="wrapper">
+		<aside id="sidebar" class="expand vh-100 sticky-top">
+            <div class="d-flex">
+                <button class="toggle-btn" type="button">
+                    <i class="lni lni-grid-alt"></i>
+                </button>
+                <div class="sidebar-logo">
+                    <a th:href="@{/room-category}">Kala Hotel</a>
+                </div>
+            </div>
+            <ul class="sidebar-nav">
+                <li class="sidebar-item"><a th:href="@{/room-category}" class="sidebar-link"> <i class="lni lni-tab"></i> <span>Danh mục phòng</span> </a></li>
+                <li class="sidebar-item"><a th:href="@{/bill-for-rent}" class="sidebar-link"> <i class="lni lni-agenda"></i> <span>Phiếu thuê phòng</span> </a></li>
+                <li class="sidebar-item"><a th:href="@{/search}" class="sidebar-link"> <i class="lni lni-search-alt"></i> <span>Tra cứu phòng</span> </a></li>
+                <li class="sidebar-item"><a th:href="@{/reciept}" class="sidebar-link"> <i class="lni lni-postcard"></i> <span>Hóa đơn thanh toán</span> </a></li>
+                <li class="sidebar-item"><a th:href="@{/revenue}" class="sidebar-link active"> <i class="lni lni-target-revenue"></i> <span>Báo cáo doanh thu</span> </a></li>
+                <li class="sidebar-item"><a th:href="@{/authorization}" class="sidebar-link"> <i class="lni lni-users"></i> <span>Phân quyền tài khoản</span> </a></li>
+                <li class="sidebar-item"><a th:href="@{/setting}" class="sidebar-link"> <i class="lni lni-cogs"></i> <span>Quy định</span> </a></li>
+            </ul>
+            <div class="sidebar-footer">
+                <a th:href="@{/logout}" class="sidebar-link">
+                    <i class="lni lni-exit"></i> <span>Đăng xuất</span>
+                </a>
+            </div>
+        </aside>
+ 		<div class="main p-3 bg-white-1">
+ 			<div class="shadowCustom overflow-hidden rounded d-flex justify-content-between align-items-center mb-4 p-3 bg-white ">
+ 				<h1 style="margin: 0; font-size: 30px">Phiếu thuê phòng</h1>
+            	<h1 style="margin: 0;">Xin chào,</h1>
+ 			</div>
+ 			<div class="container">
+ 				<div class="row">
+ 					<div class="col-7 h-100">
+ 						<div id="bill-rent-setting" class="h-100 rounded overflow-auto shadowCustom bg-white rounded-3 px-1">
+ 							<h1 class="p-2" style="font-size: 25px; margin-bottom: 5px">Thông tin phiếu thuê phòng</h1>
+ 							<form id="rentForm" th:action="@{/bill-for-rents}">
+ 								<input type="hidden" th:name="ACTION" th:value="INSERT_ROOMBILL"/>
+
+ 								<div class="mx-3">
+ 									<label for="label-room-category" class="form-label">Chọn phòng</label>
+ 									<select id="label-room-category" name="roomName" class="form-select" aria-label="Default select example" required>
+ 										<option value="" disabled selected>Chọn phòng của bạn</option>
+ 										<option th:each="room : ${listAvailableRooms}" th:value="${room.roomName}" th:text="${room.roomName}"></option>
+ 									</select>
+ 								</div>
+ 								<div class="mx-3">
+ 									<label for="dateRentTextField" class="form-label">Ngày thuê</label>
+ 									<input type="datetime-local" class="form-control" name="roomDateRent" id="dateRentTextField" th:value="${roomBill?.roomDateRent}" required>
+ 								</div>
+ 								<div class="mx-3">
+ 									<label for="dateReturnTextField" class="form-label">Ngày kết thúc</label>
+ 									<input type="datetime-local" class="form-control" name="roomDateReturn" id="dateReturnTextField" th:value="${roomBill?.roomDateReturn}" required>
+ 								</div>
+ 							</form>
+ 							<input type="submit" value="Thêm phiếu thuê" class="btn btn-info d-block m-3">
+ 						</div>
+ 						<div id="bill-rent-display" class="rounded overflow-auto shadowCustom bg-white rounded-3 px-1 mt-3">
+ 							<h1 class="p-2" style="font-size: 25px;">Danh sách phiếu thuê phòng</h1>
+ 							<div style="height: 200px; overflow: auto;">
+ 								<table class="table table-hover">
+ 									<thead>
+ 										<tr>
+ 											<th scope="col">STT</th>
+ 											<th scope="col">Phòng</th>
+ 											<th scope="col">Ngày thuê</th>
+	                     					<th scope="col">Ngày trả</th>
+	                     					<th scope="col">Tình trạng</th>
+	                     					<th scope="col">Thao tác</th>
+ 										</tr>
+ 									</thead>
+
+ 									<tbody>
+ 										<td>1</td>
+                   						<td>Phòng 1</td>
+                   						<td>2024-08-12</td>
+                   						<td>2024-08-15</td>
+                   						<td>
+                   							<span class="status unpaid"><i class="lni lni-close" style="color: red; font-weight: bold;"></i>
+                   								Chưa thanh toán
+                   							</span>
+                       						<span class="status pending"><i class="lni lni-timer" style="color: orange; font-weight: bold;"></i>
+                       							Chờ thanh toán</span>
+                       						<span class="status paid"><i class="lni lni-checkmark" style="color: green; font-weight: bold;"></i>
+                       							Đã thanh toán
+                       						</span>
+                   						</td>
+                   						<td>
+                   							<button class="btn btn-secondary"><i class="lni lni-information"></i></button>
+                       						<button class="btn btn-info"><i class="lni lni-pencil-alt"></i></button>
+                       						<button class="btn btn-danger"><i class="lni lni-trash-can"></i></button>
+                   						</td>
+
+ 									</tbody>
+ 								</table>
+ 							</div>
+ 						</div>
+ 					</div>
+ 					<div class="col-5">
+						<div id="room-category-info"
+							class="rounded overflow-auto shadowCustom bg-white rounded-3 px-1">
+							<h1 class="p-3" style="font-size: 20px">Danh sách phòng</h1>
+							<div style="height: 400px; overflow: auto;">
+								<table class="table table-hover overflow-y">
+									<thead>
+										<tr>
+											<th scope="col">STT</th>
+											<th scope="col">Phòng</th>
+											<th scope="col">Loại Phòng</th>
+											<th scope="col">Đơn giá</th>
+											<th scope="col">Ghi chú</th>
+											<th scope="col">Tình trạng</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<th scope="row">1</th>
+											<td>Room Name</td>
+											<td>Type of Room</td>
+											<td>Price</td>
+											<td class="ghi-chu" data-bs-toggle="tooltip" title=""
+												data-bs-original-title="Note">Note
+											</td>
+											<td data-bs-toggle="tooltip">
+												<i class="lni lni-close" style="color: red; font-weight: bold;"></i> Đã thuê
+												<i class="lni lni-checkmark" style="color: green; font-weight: bold;"></i> Trống 
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+ 				</div>
+ 			</div>
+ 		</div>
+	</div>
+
+
+
+</body>
+</html>

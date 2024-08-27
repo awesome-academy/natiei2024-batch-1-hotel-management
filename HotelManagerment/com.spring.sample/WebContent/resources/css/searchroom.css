@@ -1,0 +1,133 @@
+:root {
+    --content-width: 1200px;
+    --primary-blue: #19376d;
+    --secondary-blue: #7eb9e3;
+    --yellow: #ffc436;
+}
+body {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.title-and-search-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: #fff;
+    z-index: 99999;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.title-and-search-bar .name-page h2 {
+    margin: 0;
+}
+.search-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 3px solid var(--secondary-blue);
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: white;
+}
+.search-bar input {
+    margin: 0;
+    min-width: 100px;
+    border: none;
+    outline: none;
+    padding: 0 12px;
+    font-size: 16px;
+    caret-color: var(--primary-blue);
+    background-color: transparent;
+}
+.search-bar i {
+    font-size: 20px;
+    cursor: pointer;
+    color: grey;
+}
+.room-container {
+    flex: 1;
+    background-color: rgba(194, 181, 181, 0.148);
+    padding: 30px 12px;
+    border-radius: 5px;
+    box-shadow: rgba(100, 100, 111, 0.2) 20px 7px 29px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.room-table {
+    flex: 1;
+    border-radius: 6px;
+    overflow: hidden;
+}
+table {
+    width: 100%;
+    border-spacing: 0;
+    text-align: center;
+}
+thead tr:first-child {
+    background-color: #bfcfdb;
+}
+table tr:nth-child(even) {
+    background: #e7e9eb;
+}
+table th,
+table td {
+    padding: 15px;
+}
+.room-name-sub {
+    display: flex;
+    gap: 30px;
+}
+.room-info-detail {
+    display: flex;
+    gap: 30px;
+}
+.sub-room-search {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.sub-room-search.small-gap {
+    gap: 12px;
+}
+.form-select select {
+    height: 30px;
+}
+select {
+    height: 30px;
+    border-radius: 5px;
+}
+main {
+    padding: 16px;
+}
+.room-button button,
+.room-button a {
+	width: 100px;
+    margin-top: auto;
+}
+
+/* override css */
+.container {
+    max-width: unset !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    height: 100%;
+}
+.inner-container {
+    height: 100%;
+    display: flex;
+}
+nav.sidebar-nav {
+    box-sizing: border-box;
+    position: unset;
+    max-width: 210px;
+}
+.inner-container main {
+    flex: 1;
+    max-height: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}

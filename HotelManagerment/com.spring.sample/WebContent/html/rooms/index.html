@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html
+    th:replace="~{templates/layout :: layout(~{::title}, ~{::body}, ~{})}"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+    <head>
+        <meta charset="utf-8" />
+        <title>Kala Hotel | Tra cứu phòng</title>
+        <meta name="description" th:attr="content=#{meta.description}" />
+        <meta name="keywords" th:attr="content=#{meta.keywords}" />
+
+        <!-- Common styles and scripts -->
+        <link th:href="@{/html/templates/_header.html}" />
+    </head>
+    <body>
+        <div class="inner-container">
+            <aside id="sidebar" class="expand vh-100 sticky-top">
+                <div class="d-flex">
+                    <button class="toggle-btn" type="button">
+                        <i class="lni lni-grid-alt"></i>
+                    </button>
+                    <div class="sidebar-logo">
+                        <a th:href="@{/room-category}">Kala Hotel</a>
+                    </div>
+                </div>
+                <ul class="sidebar-nav">
+                    <li class="sidebar-item">
+                        <a th:href="@{/room-category}" class="sidebar-link">
+                            <i class="lni lni-tab"></i>
+                            <span>Danh mục phòng</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a th:href="@{/BillForRent}" class="sidebar-link">
+                            <i class="lni lni-agenda"></i>
+                            <span>Phiếu thuê phòng</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a th:href="@{/rooms}" class="sidebar-link active">
+                            <i class="lni lni-search-alt"></i>
+                            <span>Tra cứu phòng</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a th:href="@{/reciept}" class="sidebar-link">
+                            <i class="lni lni-postcard"></i>
+                            <span>Hóa đơn thanh toán</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a th:href="@{/revenue}" class="sidebar-link">
+                            <i class="lni lni-target-revenue"></i>
+                            <span>Báo cáo doanh thu</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a th:href="@{/authorization}" class="sidebar-link">
+                            <i class="lni lni-users"></i>
+                            <span>Phân quyền tài khoản</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a th:href="@{/setting}" class="sidebar-link">
+                            <i class="lni lni-cogs"></i> <span>Quy định</span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="sidebar-footer">
+                    <a th:href="@{/logout}" class="sidebar-link">
+                        <i class="lni lni-exit"></i> <span>Đăng xuất</span>
+                    </a>
+                </div>
+            </aside>
+            <main>
+                <div
+                    class="shadowCustom overflow-hidden rounded d-flex justify-content-between align-items-center p-3 bg-white"
+                >
+                    <h1 style="margin: 0; font-size: 24px">Tra cứu phòng</h1>
+                    <!--<h1 style="margin: 0;">Xin chào, <c:out value="${sessionScope.user.fullName}" /></h1>-->
+                </div>
+                <div class="room-container">
+                    <div class="room-info">
+                        <form
+                            th:action="@{/rooms}"
+                            method="GET"
+                            class="room-info-detail"
+                        >
+                            <div class="sub-room-search">
+                                <label class="" for="roomSearch"
+                                    >Tìm kiếm phòng</label
+                                >
+                                <div class="search-bar">
+                                    <input
+                                        type="text"
+                                        placeholder="Mã phòng..."
+                                        id="roomId"
+                                        th:name="roomId"
+                                        th:value="${searchedRoomId}"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="sub-room-search">
+                                <label class="" for="typeSelect"
+                                    >Loại phòng</label
+                                >
+                                <select
+                                    class="form-select"
+                                    name="roomType"
+                                    id="roomType"
+                                >
+                                    <option th:value="-1" th:selected="${searchedRoomType == -1}">Tất cả</option>
+                                    <th:block
+                                        th:if="${!#lists.isEmpty(roomTypes)}"
+                                    >
+                                        <option
+                                            th:each="type : ${roomTypes}"
+                                            th:value="${type.roomTypeName}"
+                                            th:text="${type.roomTypeName}"
+                                            th:selected="${type.roomTypeName == searchedRoomType}"
+                                        ></option>
+                                    </th:block>
+                                </select>
+                            </div>
+
+                            <div class="sub-room-search">
+                                <label class="" for="statusSelect"
+                                    >Tình trạng</label
+                                >
+                                <select
+                                    class="form-select"
+                                    name="roomStatus"
+                                    id="roomStatus"
+                                >
+                                    <option th:value="-1" th:selected="${searchedRoomStatus == -1}">Tất cả</option>
+                                    <option th:value="0" th:selected="${searchedRoomStatus == 0}">Trống</option>
+                                    <option th:value="1" th:selected="${searchedRoomStatus == 1}">Đã thuê</option>
+                                </select>
+                            </div>
+
+                            <div class="sub-room-search room-button flex-row small-gap">
+                                <button type="submit" class="btn btn-primary">
+                                    Tìm kiếm
+                                </button>
+                                <a th:href="@{/rooms}">
+									<button type="button" class="btn btn-danger">
+	                                    Đặt lại
+	                                </button>
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="room-table">
+                        <div
+                            id="room-search"
+                            class="rounded overflow-auto shadowCustom bg-white rounded-3"
+                        >
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">STT</th>
+                                        <th scope="col">Mã phòng</th>
+                                        <th scope="col">Phòng</th>
+                                        <th scope="col">Loại Phòng</th>
+                                        <th scope="col">Đơn giá</th>
+                                        <th scope="col">Tình trạng</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <th:block th:if="${#lists.isEmpty(rooms)}">
+                                        <tr>
+                                            <td
+                                                colspan="6"
+                                                class="text-center"
+                                                style="
+                                                    padding: 40px;
+                                                    font-weight: bold;
+                                                "
+                                            >
+                                                Không có kết quả nào
+
+                                                <div
+                                                    th:if="${errorMessage != null}"
+                                                >
+                                                    <p
+                                                        th:text="${errorMessage}"
+                                                        style="color: red"
+                                                    ></p>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </th:block>
+
+                                    <th:block
+                                        th:if="${!#lists.isEmpty(rooms)}"
+                                        th:each="room, iterStat: ${rooms}"
+                                    >
+                                        <tr>
+                                            <th
+                                                scope="row"
+                                                th:text="${iterStat.count}"
+                                            ></th>
+                                            <td th:text="${room.roomID}"></td>
+                                            <td th:text="${room.roomName}"></td>
+                                            <td
+                                                th:text="${room.roomType.roomTypeName}"
+                                            ></td>
+                                            <td
+                                                th:text="${room.roomType.price}"
+                                            ></td>
+                                            <td>
+                                                <span
+                                                    th:classappend="${room.status == 0 ? 'text-success fw-bold' : 'text-danger fw-bold'}"
+                                                >
+                                                    <!-- Icon and status text for 'Trống' -->
+                                                    <i
+                                                        class="lni lni-checkmark"
+                                                        th:if="${room.status == 0}"
+                                                        style="
+                                                            color: green;
+                                                            font-weight: bold;
+                                                        "
+                                                    ></i>
+                                                    <span
+                                                        th:if="${room.status == 0}"
+                                                        >Trống</span
+                                                    >
+
+                                                    <!-- Status text for 'Đã thuê' -->
+                                                    <i
+                                                        class="lni lni-close"
+                                                        th:if="${room.status == 1}"
+                                                        style="
+                                                            color: red;
+                                                            font-weight: bold;
+                                                        "
+                                                    ></i>
+                                                    <span
+                                                        th:if="${room.status == 1}"
+                                                        >Đã thuê</span
+                                                    >
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </th:block>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </body>
+</html>

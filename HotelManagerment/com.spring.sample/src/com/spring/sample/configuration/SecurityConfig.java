@@ -60,42 +60,36 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/room-categories").permitAll() // Cho phép truy cập công khai vào /room-category để kiểm
 				.antMatchers("/receipts").permitAll()		
 				.antMatchers("/receipts/**").permitAll()								// tra HTML
+			 .antMatchers("/resources/**").permitAll()
+        .antMatchers("/webjars/**").permitAll()
+        .antMatchers("/home").permitAll()
+        .antMatchers("/login").permitAll()
+        .antMatchers("/signup").permitAll()
+        .antMatchers("/regulations").permitAll()
+        .antMatchers("/room-categories").permitAll() // Cho phép truy cập công khai vào /room-category để kiểm
+        .antMatchers("/room-categories/**").permitAll()
+        .antMatchers("/rooms").permitAll()
+        .antMatchers("/rooms/**").permitAll()
+        .antMatchers("/bill-for-rents").permitAll() // Cho phép truy cập công khai vào /bill-for-rents để kiểm tra
+        // Có thể thêm các dòng khác nếu cần
 				.antMatchers("/revenues").permitAll() // Thay đổi từ HEAD
-				.antMatchers("/authorizations").permitAll()
-				.antMatchers(HttpMethod.POST, "/users").permitAll()
-				.antMatchers("/error").permitAll()
-				.antMatchers("/access_denied").permitAll()
-				.antMatchers("/admin/**").hasAuthority(Role.ADMIN.name())
-				.antMatchers(HttpMethod.GET, "/users").hasAnyAuthority(Role.USER.name(), Role.ADMIN.name())
-				.anyRequest().hasAnyAuthority(Role.USER.name(), Role.ADMIN.name())
-				.and().formLogin()
-				.loginPage("/login")
-				.failureUrl("/login?error=true")
-				.usernameParameter("email")
-				.passwordParameter("password")
-				.successHandler(authenticationSuccessHandler)
-				.loginProcessingUrl("/login")
-				.defaultSuccessUrl("/users")
-				.permitAll()
-				.and().logout()
-				.invalidateHttpSession(true)
-				.clearAuthentication(true)
-				.deleteCookies("JSESSIONID")
-				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-				.logoutSuccessUrl("/login?logout")
-				.permitAll()
-				.and().rememberMe()
-				.rememberMeParameter("remember-me")
-				.tokenValiditySeconds(60 * 60)
-				.useSecureCookie(true)
-				.tokenRepository(userService)
-				.userDetailsService(userService)
-				.and().exceptionHandling()
-				.accessDeniedHandler(accessDeniedHandler)
-				.and().csrf()
-				.and().headers()
-				.contentSecurityPolicy(
+				.antMatchers("/revenues/**").permitAll().antMatchers("/authorizations").permitAll()
+				.antMatchers("/authorizations/**").permitAll().antMatchers(HttpMethod.POST, "/users").permitAll()
+				.antMatchers("/error").permitAll().antMatchers("/access_denied").permitAll().antMatchers("/admin/**")
+				.hasAuthority(Role.ADMIN.name()).antMatchers(HttpMethod.GET, "/users")
+				.hasAnyAuthority(Role.USER.name(), Role.ADMIN.name()).anyRequest()
+				.hasAnyAuthority(Role.USER.name(), Role.ADMIN.name()).and().formLogin().loginPage("/login")
+				.failureUrl("/login?error=true").usernameParameter("email").passwordParameter("password")
+				.successHandler(authenticationSuccessHandler).loginProcessingUrl("/login").defaultSuccessUrl("/users")
+				.permitAll().and().logout().invalidateHttpSession(true).clearAuthentication(true)
+				.deleteCookies("JSESSIONID").logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+				.logoutSuccessUrl("/login?logout").permitAll().and().rememberMe().rememberMeParameter("remember-me")
+				.tokenValiditySeconds(60 * 60).useSecureCookie(true).tokenRepository(userService)
+				.userDetailsService(userService).and().exceptionHandling().accessDeniedHandler(accessDeniedHandler)
+				.and().csrf().and().headers().contentSecurityPolicy(
 						"script-src 'self' https://trustedscripts.example.com; object-src https://trustedplugins.example.com; report-uri /csp-report-endpoint/");
+
+		// .httpBasic();
 	}
 
 	// Khi muốn custom handle access denied

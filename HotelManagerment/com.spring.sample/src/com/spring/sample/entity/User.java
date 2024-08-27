@@ -3,93 +3,117 @@ package com.spring.sample.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-@SuppressWarnings("serial")
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity(name = "user") // DUMMY ENTITY, DO NOT USE
 public class User extends BaseEntity implements Serializable {
 
-	private Integer id;
-	private String name;
-	private String email;
-	private String password;
-	private String series;
-	private String token;
-	private Date lastUsed;
-	private Integer role;
+    @Id
+    @GenericGenerator(name = "native-generator", strategy = "native")
+    @GeneratedValue(generator = "native-generator")
+    private Integer id;
 
-	public User() {
+    @Column
+    private String name;
 
-	}
+    @Column(unique = true, length = 20)
+    private String email;
 
-	public User(Integer id) {
-		this.id = id;
-	}
+    @Column(length = 20)
+    private String password;
 
-	public User(String email, String password) {
-		this.email = email;
-		this.password = password;
-	}
+    @Column
+    private String series;
 
-	public Integer getId() {
-		return id;
-	}
+    @Column
+    private String token;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    @Column
+    private Date lastUsed;
 
-	public String getName() {
-		return name;
-	}
+    @Column
+    private Integer role;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public User() {
 
-	public String getEmail() {
-		return email;
-	}
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public User(Integer id) {
+        this.id = id;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public String getSeries() {
-		return series;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public void setSeries(String series) {
-		this.series = series;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getToken() {
-		return token;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setToken(String token) {
-		this.token = token;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public Date getLastUsed() {
-		return lastUsed;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public void setLastUsed(Date lastUsed) {
-		this.lastUsed = lastUsed;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public Integer getRole() {
-		return role;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public void setRole(Integer role) {
-		this.role = role;
-	}
+    public String getSeries() {
+        return series;
+    }
+
+    public void setSeries(String series) {
+        this.series = series;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public Date getLastUsed() {
+        return lastUsed;
+    }
+
+    public void setLastUsed(Date lastUsed) {
+        this.lastUsed = lastUsed;
+    }
+
+    public Integer getRole() {
+        return role;
+    }
+
+    public void setRole(Integer role) {
+        this.role = role;
+    }
 
 }

@@ -4,20 +4,39 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.spring.sample.dao.ReceiptDAO;
 import com.spring.sample.dao.RentalReceiptDetailDAO;
+import com.spring.sample.dao.PermissionDAO;
 import com.spring.sample.dao.RoomDAO;
 import com.spring.sample.dao.RoomTypeDAO;
+import com.spring.sample.dao.SettingDAO;
+import com.spring.sample.dao.SurchargeRateDAO;
+import com.spring.sample.dao.RevenuesDAO;
+// import com.spring.sample.dao.TypeRoomsDAO;
 import com.spring.sample.dao.UserDAO;
+import com.spring.sample.dao.UsersDAO;
 
-public class BaseServiceImpl {
-
+public class BaseServiceImpl{
+    
 	@Autowired
 	protected UserDAO userDAO;
 
 	@Autowired
 	protected RoomDAO roomDAO;
+	
+	@Autowired
+	protected UsersDAO usersDAO;
+	
+	@Autowired
+	protected PermissionDAO permissionDAO;
+	
+	@Autowired
+	protected SurchargeRateDAO surchargeRateDAO;
+	
 
 	@Autowired
 	protected RoomTypeDAO roomTypeDAO;
+	
+	@Autowired
+	protected SettingDAO settingDAO;
 
 	@Autowired
 	protected ReceiptDAO receiptDAO;
@@ -47,6 +66,48 @@ public class BaseServiceImpl {
 
 	public void setRoomTypeDAO(RoomTypeDAO roomTypeDAO) {
 		this.roomTypeDAO = roomTypeDAO;
+	}
+	@Autowired
+	protected RevenuesDAO revenuesDAO;
+
+	public RevenuesDAO getRevenuesDAO() {
+		return revenuesDAO;
+	}
+
+	public void setRevenuesDAO(RevenuesDAO revenuesDAO) {
+		this.revenuesDAO = revenuesDAO;
+	}
+	
+	public UsersDAO getUsersDAO() {
+		return usersDAO;
+	}
+
+	public void setUsersDAO(UsersDAO usersDAO) {
+		this.usersDAO = usersDAO;
+	}
+	
+	public PermissionDAO getPermissionDAO() {
+		return permissionDAO;
+	}
+
+	public void setPermissionDAO(PermissionDAO permissionDAO) {
+		this.permissionDAO = permissionDAO;
+	}
+	
+	public SurchargeRateDAO getsurchargeRateDAO() {
+		return surchargeRateDAO;
+	}
+
+	public void setSurchargeRateDAO(SurchargeRateDAO surchargeRateDAO) {
+		this.surchargeRateDAO = surchargeRateDAO;
+	}
+	
+	public SettingDAO getsettingDAO() {
+		return settingDAO;
+	}
+
+	public void setSettingDAO(SettingDAO settingDAO) {
+		this.settingDAO = settingDAO;
 	}
 
 	public ReceiptDAO getReceiptDAO() {

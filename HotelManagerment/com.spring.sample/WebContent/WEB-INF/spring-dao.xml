@@ -20,6 +20,26 @@
 		class="com.spring.sample.dao.imp.RoomTypeDAOImp">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+	
+	<bean id="usersDAO"
+		class="com.spring.sample.dao.imp.UsersDAOImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="permissionDAO"
+		class="com.spring.sample.dao.imp.PermissionDAOImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="surchargeRateDAO"
+		class="com.spring.sample.dao.imp.SurchargeRateDAOImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="settingDAO"
+		class="com.spring.sample.dao.imp.SettingDAOImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 	 
 	<bean id="receiptDAO"
 		class="com.spring.sample.dao.imp.ReceiptDAOImp">
@@ -30,4 +50,9 @@
 		class="com.spring.sample.dao.imp.RentalReceiptDetailDAOImp">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>	 
+	
+	<bean id="revenuesDAO"
+		class="com.spring.sample.dao.imp.RevenuesDAOImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>	
 </beans>

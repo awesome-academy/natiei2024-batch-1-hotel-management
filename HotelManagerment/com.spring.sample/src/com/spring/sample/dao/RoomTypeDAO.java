@@ -6,4 +6,6 @@ import com.spring.sample.entity.RoomType;
 
 public interface RoomTypeDAO {
 	List<RoomType> getAllTypeRooms();
+
+	RoomType findById(Integer typeRoomId);
 }
