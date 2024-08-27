@@ -88,6 +88,9 @@ table td {
     flex-direction: column;
     gap: 20px;
 }
+.sub-room-search.small-gap {
+    gap: 12px;
+}
 .form-select select {
     height: 30px;
 }
@@ -98,11 +101,10 @@ select {
 main {
     padding: 16px;
 }
-.room-button button {
+.room-button button,
+.room-button a {
+	width: 100px;
     margin-top: auto;
-}
-.room-button button{
-	margin-top:auto;
 }
 
 /* override css */
