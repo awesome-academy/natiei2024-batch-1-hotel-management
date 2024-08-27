@@ -1,30 +1,71 @@
 package com.spring.sample.entity;
 
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
-import javax.persistence.Id;
-
+@Entity
+@Table(name = "RentalReceiptSummary")
 public class RentalReceiptDetail extends BaseEntity implements Serializable {
 
+    @Id
+    @Column(name = "RentalReceiptID")
     private String rentalReceiptID;
+
+    @Column(name = "CustomerName")
     private String customerName;
-    private java.util.Date issueDate;
-    private java.util.Date paymentDate;
+
+    @Column(name = "IssueDate")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date issueDate;
+
+    @Column(name = "PaymentDate")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date paymentDate;
+
+    @Column(name = "TotalAmount")
     private Float totalAmount;
+
+    @Column(name = "InvoicePaymentStatusText")
     private String invoicePaymentStatusText;
-    private java.util.Date checkInDate;
-    private java.util.Date checkOutDate;
+
+    @Column(name = "CheckInDate")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date checkInDate;
+
+    @Column(name = "CheckOutDate")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date checkOutDate;
+
+    @Column(name = "DailyRate")
     private Float dailyRate;
+
+    @Column(name = "RentalPaymentStatusText")
     private String rentalPaymentStatusText;
+
+    @Column(name = "RentalCustomerName")
     private String rentalCustomerName;
+
+    @Column(name = "RentalCustomerAddress")
     private String rentalCustomerAddress;
+
+    @Column(name = "RentalCustomerIDNumber")
     private String rentalCustomerIDNumber;
+
+    @Column(name = "CustomerTypeName")
     private String customerTypeName;
+
+    @Column(name = "SurchargeRate")
     private Float surchargeRate;
+
+    @Column(name = "TotalInvoiceAmount")
     private Float totalInvoiceAmount;
+
+    @Column(name = "TotalRentalDays")
     private Integer totalRentalDays;
 
     // Getters and Setters
+
     public String getRentalReceiptID() {
         return rentalReceiptID;
     }
@@ -41,19 +82,19 @@ public class RentalReceiptDetail extends BaseEntity implements Serializable {
         this.customerName = customerName;
     }
 
-    public java.util.Date getIssueDate() {
+    public Date getIssueDate() {
         return issueDate;
     }
 
-    public void setIssueDate(java.util.Date issueDate) {
+    public void setIssueDate(Date issueDate) {
         this.issueDate = issueDate;
     }
 
-    public java.util.Date getPaymentDate() {
+    public Date getPaymentDate() {
         return paymentDate;
     }
 
-    public void setPaymentDate(java.util.Date paymentDate) {
+    public void setPaymentDate(Date paymentDate) {
         this.paymentDate = paymentDate;
     }
 
@@ -73,19 +114,19 @@ public class RentalReceiptDetail extends BaseEntity implements Serializable {
         this.invoicePaymentStatusText = invoicePaymentStatusText;
     }
 
-    public java.util.Date getCheckInDate() {
+    public Date getCheckInDate() {
         return checkInDate;
     }
 
-    public void setCheckInDate(java.util.Date checkInDate) {
+    public void setCheckInDate(Date checkInDate) {
         this.checkInDate = checkInDate;
     }
 
-    public java.util.Date getCheckOutDate() {
+    public Date getCheckOutDate() {
         return checkOutDate;
     }
 
-    public void setCheckOutDate(java.util.Date checkOutDate) {
+    public void setCheckOutDate(Date checkOutDate) {
         this.checkOutDate = checkOutDate;
     }
 

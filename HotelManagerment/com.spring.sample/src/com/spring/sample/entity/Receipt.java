@@ -1,16 +1,33 @@
 package com.spring.sample.entity;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
+@Entity
+@Table(name = "RECEIPTS")
 public class Receipt extends BaseEntity implements Serializable {
 
-    private String rentalReceiptID; // Updated from Long to String
-    private String roomID; // Updated from Long to String
+    @Id
+    @Column(name = "RentalReceiptID")
+    private String rentalReceiptID;
+
+    @Column(name = "RoomID")
+    private String roomID;
+
+    @Column(name = "CheckInDate")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date checkInDate;
+
+    @Column(name = "CheckOutDate")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date checkOutDate;
-    private Float dailyRate; // Updated from Double to Float
-    private Integer paymentStatus; // Updated from String to Integer
+
+    @Column(name = "DailyRate")
+    private Float dailyRate;
+
+    @Column(name = "PaymentStatus")
+    private Integer paymentStatus;
 
     // Getters and Setters
 
