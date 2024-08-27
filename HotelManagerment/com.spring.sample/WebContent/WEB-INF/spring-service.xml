@@ -23,6 +23,14 @@
 		</property>
 	</bean>
 	
+	<bean id="revenuesService" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.spring.sample.service.imp.RevenuesServiceImp">
+				<property name="revenuesDAO" ref="revenuesDAO" />
+			</bean>
+		</property>
+	</bean>
+	
 	<bean id="roomTypeService" parent="baseTransactionProxy">
 		<property name="target">
 			<bean class="com.spring.sample.service.imp.RoomTypeServiceImp">
@@ -62,5 +70,4 @@
 			</bean>
 		</property>
 	</bean>
-	
 </beans>

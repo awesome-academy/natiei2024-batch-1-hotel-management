@@ -7,11 +7,13 @@ import com.spring.sample.dao.RoomDAO;
 import com.spring.sample.dao.RoomTypeDAO;
 import com.spring.sample.dao.SettingDAO;
 import com.spring.sample.dao.SurchargeRateDAO;
+import com.spring.sample.dao.RevenuesDAO;
+// import com.spring.sample.dao.TypeRoomsDAO;
 import com.spring.sample.dao.UserDAO;
 import com.spring.sample.dao.UsersDAO;
 
-public class BaseServiceImpl {
-
+public class BaseServiceImpl{
+    
 	@Autowired
 	protected UserDAO userDAO;
 
@@ -56,6 +58,16 @@ public class BaseServiceImpl {
 
 	public void setRoomTypeDAO(RoomTypeDAO roomTypeDAO) {
 		this.roomTypeDAO = roomTypeDAO;
+	}
+	@Autowired
+	protected RevenuesDAO revenuesDAO;
+
+	public RevenuesDAO getRevenuesDAO() {
+		return revenuesDAO;
+	}
+
+	public void setRevenuesDAO(RevenuesDAO revenuesDAO) {
+		this.revenuesDAO = revenuesDAO;
 	}
 	
 	public UsersDAO getUsersDAO() {

@@ -36,4 +36,44 @@ public class Revenues extends BaseEntity implements Serializable {
     @MapsId("roomTypeID") // Maps the roomTypeID from RevenueID to the RoomType entity
     @JoinColumn(name = "RoomTypeID")
     private RoomType roomType;
+
+	public RevenueID getId() {
+		return id;
+	}
+
+	public void setId(RevenueID id) {
+		this.id = id;
+	}
+
+	public Float getRevenueAmount() {
+		return revenueAmount;
+	}
+
+	public void setRevenueAmount(Float revenueAmount) {
+		this.revenueAmount = revenueAmount;
+	}
+
+	public Float getRate() {
+		return rate;
+	}
+
+	public void setRate(Float rate) {
+		this.rate = rate;
+	}
+
+	public RoomType getRoomType() {
+		return roomType;
+	}
+
+	public void setRoomType(RoomType roomType) {
+		this.roomType = roomType;
+	}
+	
+	public Revenues(RevenueID id, Float revenueAmount, Float rate, RoomType roomType) {
+	    this.id = id;
+	    this.revenueAmount = revenueAmount;
+	    this.rate = rate;
+	    this.roomType = roomType;
+	}
+    
 }
