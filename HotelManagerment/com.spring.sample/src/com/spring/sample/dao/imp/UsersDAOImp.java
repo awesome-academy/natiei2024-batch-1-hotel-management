@@ -53,4 +53,14 @@ public class UsersDAOImp extends GenericDAOImp<Users, Integer> implements UsersD
         return result.isEmpty() ? null : result.get(0);  
     }
 
+	@Override
+	public Users isValidUser(String email, String password) {
+	    String hql = "FROM USERS u WHERE u.username = :email AND u.password = :password";
+	    Query<Users> query = getSession().createQuery(hql, Users.class);
+	    query.setParameter("email", email);
+	    query.setParameter("password", password);
+	    List<Users> result = query.getResultList();
+	    return result.isEmpty() ? null : result.get(0);
+	}
+
 }

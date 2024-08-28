@@ -14,4 +14,6 @@ public interface UsersDAO {
 
 	Users findByUsername(String username);
 
+	Users isValidUser(String email, String password);
+
 }

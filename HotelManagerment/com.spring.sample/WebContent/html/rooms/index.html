@@ -15,71 +15,16 @@
     </head>
     <body>
         <div class="inner-container">
-            <aside id="sidebar" class="expand vh-100 sticky-top">
-                <div class="d-flex">
-                    <button class="toggle-btn" type="button">
-                        <i class="lni lni-grid-alt"></i>
-                    </button>
-                    <div class="sidebar-logo">
-                        <a th:href="@{/room-category}">Kala Hotel</a>
-                    </div>
-                </div>
-                <ul class="sidebar-nav">
-                    <li class="sidebar-item">
-                        <a th:href="@{/room-category}" class="sidebar-link">
-                            <i class="lni lni-tab"></i>
-                            <span>Danh mục phòng</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a th:href="@{/BillForRent}" class="sidebar-link">
-                            <i class="lni lni-agenda"></i>
-                            <span>Phiếu thuê phòng</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a th:href="@{/rooms}" class="sidebar-link active">
-                            <i class="lni lni-search-alt"></i>
-                            <span>Tra cứu phòng</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a th:href="@{/reciept}" class="sidebar-link">
-                            <i class="lni lni-postcard"></i>
-                            <span>Hóa đơn thanh toán</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a th:href="@{/revenue}" class="sidebar-link">
-                            <i class="lni lni-target-revenue"></i>
-                            <span>Báo cáo doanh thu</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a th:href="@{/authorization}" class="sidebar-link">
-                            <i class="lni lni-users"></i>
-                            <span>Phân quyền tài khoản</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a th:href="@{/setting}" class="sidebar-link">
-                            <i class="lni lni-cogs"></i> <span>Quy định</span>
-                        </a>
-                    </li>
-                </ul>
-                <div class="sidebar-footer">
-                    <a th:href="@{/logout}" class="sidebar-link">
-                        <i class="lni lni-exit"></i> <span>Đăng xuất</span>
-                    </a>
-                </div>
-            </aside>
-            <main>
-                <div
-                    class="shadowCustom overflow-hidden rounded d-flex justify-content-between align-items-center p-3 bg-white"
-                >
-                    <h1 style="margin: 0; font-size: 24px">Tra cứu phòng</h1>
-                    <!--<h1 style="margin: 0;">Xin chào, <c:out value="${sessionScope.user.fullName}" /></h1>-->
-                </div>
+            <!-- aside page -->
+		<div th:replace="templates/sidebar"></div>
+		<main>
+			<div
+				class="shadowCustom overflow-hidden rounded d-flex justify-content-between align-items-center mb-4 p-3 bg-white">
+				<h1 style="margin: 0; font-size: 24px">Tra cứu phòng</h1>
+				<h1 style="margin: 0;">
+					Xin chào, <span th:text="${session.users.fullName}"> </span>
+				</h1>
+			</div>
                 <div class="room-container">
                     <div class="room-info">
                         <form

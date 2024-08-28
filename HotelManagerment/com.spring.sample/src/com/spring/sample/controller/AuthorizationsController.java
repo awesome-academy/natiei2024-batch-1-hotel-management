@@ -3,14 +3,15 @@ package com.spring.sample.controller;
 import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,8 +32,27 @@ public class AuthorizationsController {
 	@Autowired
 	private PermissionService permissionService;
 
+	@ModelAttribute
+	public void checkLoggedIn(HttpSession session, Model model) {
+		Users usersSession = (Users) session.getAttribute("users");
+
+		// Kiểm tra xem người dùng đã đăng nhập chưa hoặc không có quyền truy cập
+		if (usersSession == null || usersSession.getPermission().getUserManagement() == 0) {
+			model.addAttribute("errorMessage",
+					"Vui lòng đăng nhập hoặc bạn không có quyền truy cập vào chức năng này.");
+			// Chuyển hướng về trang đăng nhập
+			throw new RuntimeException("Bạn chưa đăng nhập hoặc không có quyền truy cập vào trang này"); // Ném ngoại lệ
+																											// để chuyển
+																											// hướng
+		}
+	}
+
 	@GetMapping
-	public String index(Locale locale, Model model) {
+	public String index(Locale locale, Model model, HttpSession session) {
+		Users usersSession = (Users) session.getAttribute("users");
+		if (usersSession == null) {
+			return "redirect:/login-page"; // Chuyển hướng đến trang đăng nhập nếu chưa đăng nhập
+		}
 		List<Users> users = usersService.getAllUsers();
 		List<Permission> permissions = permissionService.getAllPermissions();
 		model.addAttribute("users", users);
@@ -41,8 +61,8 @@ public class AuthorizationsController {
 	}
 
 	// Xóa user
-	@DeleteMapping("/delete")
-	public String deleteUsers(@PathVariable("username") String username, Model model) {
+	@PostMapping("/delete")
+	public String deleteUsers(@RequestParam("username") String username, Model model) {
 		try {
 			usersService.deleteByUserName(username);
 			logger.info("User với username: {} đã được xóa thành công.", username);
@@ -53,7 +73,7 @@ public class AuthorizationsController {
 		return "redirect:/authorizations";
 	}
 
-	@PostMapping("/")
+	@PostMapping("/add")
 	public String addUser(@RequestParam("fullName") String fullName, @RequestParam("userName") String username,
 			@RequestParam("password") String password, @RequestParam("roleId") int roleId, Model model) {
 		try {

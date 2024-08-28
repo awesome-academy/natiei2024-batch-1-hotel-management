@@ -14,4 +14,6 @@ public interface UsersService {
 
 	Users findByUsername(String username);
 
+	Users isValidUser(String email, String password);
+
 }
