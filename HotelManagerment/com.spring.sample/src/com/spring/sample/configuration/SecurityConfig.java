@@ -72,12 +72,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers("/rooms/**").permitAll()
         .antMatchers("/bill-for-rents").permitAll() // Cho phép truy cập công khai vào /bill-for-rents để kiểm tra
         // Có thể thêm các dòng khác nếu cần
+				.antMatchers("/rooms").permitAll()
+				.antMatchers("/rooms/**").permitAll()
+				.antMatchers("/regulations").permitAll()
+				.antMatchers("/regulations/**").permitAll()
+				.antMatchers("/room-categories").permitAll() // Cho phép truy cập công khai vào /room-category để kiểm
+				.antMatchers("/room-categories/**").permitAll()
+				.antMatchers("/bill-for-rents").permitAll()
 				.antMatchers("/revenues").permitAll() // Thay đổi từ HEAD
-				.antMatchers("/revenues/**").permitAll().antMatchers("/authorizations").permitAll()
-				.antMatchers("/authorizations/**").permitAll().antMatchers(HttpMethod.POST, "/users").permitAll()
-				.antMatchers("/error").permitAll().antMatchers("/access_denied").permitAll().antMatchers("/admin/**")
-				.hasAuthority(Role.ADMIN.name()).antMatchers(HttpMethod.GET, "/users")
-				.hasAnyAuthority(Role.USER.name(), Role.ADMIN.name()).anyRequest()
+				.antMatchers("/revenues/**").permitAll()
+				.antMatchers("/authorizations").permitAll().antMatchers("/authorizations/**").permitAll()
+				.antMatchers(HttpMethod.POST, "/users").permitAll().antMatchers("/error").permitAll()
+				.antMatchers("/access_denied").permitAll().antMatchers("/admin/**").hasAuthority(Role.ADMIN.name())
+				.antMatchers(HttpMethod.GET, "/users").hasAnyAuthority(Role.USER.name(), Role.ADMIN.name()).anyRequest()
 				.hasAnyAuthority(Role.USER.name(), Role.ADMIN.name()).and().formLogin().loginPage("/login")
 				.failureUrl("/login?error=true").usernameParameter("email").passwordParameter("password")
 				.successHandler(authenticationSuccessHandler).loginProcessingUrl("/login").defaultSuccessUrl("/users")
@@ -86,10 +93,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.logoutSuccessUrl("/login?logout").permitAll().and().rememberMe().rememberMeParameter("remember-me")
 				.tokenValiditySeconds(60 * 60).useSecureCookie(true).tokenRepository(userService)
 				.userDetailsService(userService).and().exceptionHandling().accessDeniedHandler(accessDeniedHandler)
-				.and().csrf().and().headers().contentSecurityPolicy(
-						"script-src 'self' https://trustedscripts.example.com; object-src https://trustedplugins.example.com; report-uri /csp-report-endpoint/");
+				.and().csrf().and().headers();
 
-		// .httpBasic();
+		// .contentSecurityPolicy(
+		// "script-src 'self' https://trustedscripts.example.com; object-src
+		// https://trustedplugins.example.com; report-uri /csp-report-endpoint/");
 	}
 
 	// Khi muốn custom handle access denied

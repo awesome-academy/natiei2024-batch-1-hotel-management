@@ -4,37 +4,39 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.spring.sample.dao.ReceiptDAO;
 import com.spring.sample.dao.RentalReceiptDetailDAO;
+import com.spring.sample.dao.GuestTypesDAO;
 import com.spring.sample.dao.PermissionDAO;
 import com.spring.sample.dao.RoomDAO;
 import com.spring.sample.dao.RoomTypeDAO;
 import com.spring.sample.dao.SettingDAO;
 import com.spring.sample.dao.SurchargeRateDAO;
 import com.spring.sample.dao.RevenuesDAO;
-// import com.spring.sample.dao.TypeRoomsDAO;
 import com.spring.sample.dao.UserDAO;
 import com.spring.sample.dao.UsersDAO;
 
-public class BaseServiceImpl{
-    
+public class BaseServiceImpl {
+
 	@Autowired
 	protected UserDAO userDAO;
 
 	@Autowired
 	protected RoomDAO roomDAO;
-	
+
 	@Autowired
 	protected UsersDAO usersDAO;
-	
+
 	@Autowired
 	protected PermissionDAO permissionDAO;
-	
+
 	@Autowired
 	protected SurchargeRateDAO surchargeRateDAO;
-	
+
+	@Autowired
+	protected GuestTypesDAO guestTypesDAO;
 
 	@Autowired
 	protected RoomTypeDAO roomTypeDAO;
-	
+
 	@Autowired
 	protected SettingDAO settingDAO;
 
@@ -44,6 +46,14 @@ public class BaseServiceImpl{
 	@Autowired
 	protected RentalReceiptDetailDAO rentalReceiptDetailDAO;
 	
+	public GuestTypesDAO getGuestTypesDAO() {
+		return guestTypesDAO;
+	}
+
+	public void setGuestTypesDAO(GuestTypesDAO guestTypesDAO) {
+		this.guestTypesDAO = guestTypesDAO;
+	}
+
 	public UserDAO getUserDAO() {
 		return userDAO;
 	}
@@ -67,6 +77,7 @@ public class BaseServiceImpl{
 	public void setRoomTypeDAO(RoomTypeDAO roomTypeDAO) {
 		this.roomTypeDAO = roomTypeDAO;
 	}
+
 	@Autowired
 	protected RevenuesDAO revenuesDAO;
 
@@ -77,7 +88,7 @@ public class BaseServiceImpl{
 	public void setRevenuesDAO(RevenuesDAO revenuesDAO) {
 		this.revenuesDAO = revenuesDAO;
 	}
-	
+
 	public UsersDAO getUsersDAO() {
 		return usersDAO;
 	}
@@ -85,7 +96,7 @@ public class BaseServiceImpl{
 	public void setUsersDAO(UsersDAO usersDAO) {
 		this.usersDAO = usersDAO;
 	}
-	
+
 	public PermissionDAO getPermissionDAO() {
 		return permissionDAO;
 	}
@@ -93,7 +104,7 @@ public class BaseServiceImpl{
 	public void setPermissionDAO(PermissionDAO permissionDAO) {
 		this.permissionDAO = permissionDAO;
 	}
-	
+
 	public SurchargeRateDAO getsurchargeRateDAO() {
 		return surchargeRateDAO;
 	}
@@ -101,7 +112,7 @@ public class BaseServiceImpl{
 	public void setSurchargeRateDAO(SurchargeRateDAO surchargeRateDAO) {
 		this.surchargeRateDAO = surchargeRateDAO;
 	}
-	
+
 	public SettingDAO getsettingDAO() {
 		return settingDAO;
 	}

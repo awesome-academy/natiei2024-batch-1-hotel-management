@@ -3,39 +3,37 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="
-        http://www.springframework.org/schema/beans
-        https://www.springframework.org/schema/beans/spring-beans.xsd">
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<bean id="userDAO" class="com.spring.sample.dao.imp.UserDAOImp">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-	
+
 	<bean id="roomDAO"
 		class="com.spring.sample.dao.imp.RoomDAOImp">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-	
+
 	<bean id="roomTypeDAO"
 		class="com.spring.sample.dao.imp.RoomTypeDAOImp">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-	
+
 	<bean id="usersDAO"
 		class="com.spring.sample.dao.imp.UsersDAOImp">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-	
+
 	<bean id="permissionDAO"
 		class="com.spring.sample.dao.imp.PermissionDAOImp">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-	
+
 	<bean id="surchargeRateDAO"
 		class="com.spring.sample.dao.imp.SurchargeRateDAOImp">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-	
+
 	<bean id="settingDAO"
 		class="com.spring.sample.dao.imp.SettingDAOImp">
 		<property name="sessionFactory" ref="sessionFactory" />
@@ -51,8 +49,14 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>	 
 	
+
+	<bean id="guestTypesDAO" class="com.spring.sample.dao.imp.GuestTypesDAOImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+
 	<bean id="revenuesDAO"
 		class="com.spring.sample.dao.imp.RevenuesDAOImp">
 		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>	
+	</bean>
 </beans>
