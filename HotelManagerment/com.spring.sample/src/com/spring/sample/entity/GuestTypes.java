@@ -3,6 +3,7 @@ package com.spring.sample.entity;
 import java.io.Serializable;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,7 +34,7 @@ public class GuestTypes extends BaseEntity implements Serializable {
     @Column(name = "SurchargeRate")
     private Float surchargeRate; // HE SO PHU THU
 
-    @OneToMany(mappedBy = "typeOfGuest")
+    @OneToMany(mappedBy = "typeOfGuest", cascade = CascadeType.REMOVE)
     private Set<RegisteredGuests> registeredGuests;
 
     public GuestTypes(String typeName, Float surchargeRate) {
