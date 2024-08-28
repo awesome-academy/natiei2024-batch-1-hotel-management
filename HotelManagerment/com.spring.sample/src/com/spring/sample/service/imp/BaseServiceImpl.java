@@ -2,6 +2,8 @@ package com.spring.sample.service.imp;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.spring.sample.dao.ReceiptDAO;
+import com.spring.sample.dao.RentalReceiptDetailDAO;
 import com.spring.sample.dao.GuestTypesDAO;
 import com.spring.sample.dao.PermissionDAO;
 import com.spring.sample.dao.RoomDAO;
@@ -9,7 +11,6 @@ import com.spring.sample.dao.RoomTypeDAO;
 import com.spring.sample.dao.SettingDAO;
 import com.spring.sample.dao.SurchargeRateDAO;
 import com.spring.sample.dao.RevenuesDAO;
-// import com.spring.sample.dao.TypeRoomsDAO;
 import com.spring.sample.dao.UserDAO;
 import com.spring.sample.dao.UsersDAO;
 
@@ -39,6 +40,12 @@ public class BaseServiceImpl {
 	@Autowired
 	protected SettingDAO settingDAO;
 
+	@Autowired
+	protected ReceiptDAO receiptDAO;
+	 
+	@Autowired
+	protected RentalReceiptDetailDAO rentalReceiptDetailDAO;
+	
 	public GuestTypesDAO getGuestTypesDAO() {
 		return guestTypesDAO;
 	}
@@ -114,4 +121,19 @@ public class BaseServiceImpl {
 		this.settingDAO = settingDAO;
 	}
 
+	public ReceiptDAO getReceiptDAO() {
+		return receiptDAO;
+	}
+
+	public void setReceiptDAO(ReceiptDAO receiptDAO) {
+		this.receiptDAO = receiptDAO;
+	}
+
+	public RentalReceiptDetailDAO getRentalReceiptDetailDAO() {
+		return rentalReceiptDetailDAO;
+	}
+
+	public void setRentalReceiptDetailDAO(RentalReceiptDetailDAO rentalReceiptDetailDAO) {
+		this.rentalReceiptDetailDAO = rentalReceiptDetailDAO;
+	}
 }

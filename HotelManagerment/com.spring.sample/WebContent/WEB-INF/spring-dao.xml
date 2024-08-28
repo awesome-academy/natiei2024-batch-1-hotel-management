@@ -38,6 +38,17 @@
 		class="com.spring.sample.dao.imp.SettingDAOImp">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+	 
+	<bean id="receiptDAO"
+		class="com.spring.sample.dao.imp.ReceiptDAOImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="rentalReceiptDetailDAO"
+		class="com.spring.sample.dao.imp.RentalReceiptDetailDAOImp">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>	 
+	
 
 	<bean id="guestTypesDAO" class="com.spring.sample.dao.imp.GuestTypesDAOImp">
 		<property name="sessionFactory" ref="sessionFactory" />
